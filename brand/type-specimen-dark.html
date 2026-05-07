@@ -36,7 +36,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .sketchy-filter { position: absolute; width: 0; height: 0; }
 
     /* ── Page system ── */
     .page {
@@ -91,7 +90,7 @@
       inset: -2px;
       border: 2.5px solid var(--border);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -241,7 +240,7 @@
       height: 24px;
       border-radius: 2px;
       position: relative;
-      filter: url(#sketchy);
+      
     }
 
     /* ── PAGE 3 — NUMERICS & PRICES ── */
@@ -361,7 +360,7 @@
       border: 2px solid var(--accent);
       border-radius: 2px;
       flex-shrink: 0;
-      filter: url(#sketchy);
+      
     }
     .price-features li.checked::before {
       background: var(--accent-light);
@@ -410,7 +409,7 @@
       height: 10px;
       border: 2px solid var(--muted);
       border-radius: 50%;
-      filter: url(#sketchy);
+      
       transition: background 0.2s;
     }
     .page-nav a:hover,
@@ -439,15 +438,6 @@
 <body>
 
   <!-- SVG filter -->
-  <svg class="sketchy-filter" aria-hidden="true">
-    <defs>
-      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Navigation dots -->
   <nav class="page-nav" aria-label="Page navigation">
     <a href="#page-1" title="Type Family" class="active"></a>

@@ -35,7 +35,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .sketchy-filter { position: absolute; width: 0; height: 0; }
 
     /* ── Page system ── */
     .page {
@@ -99,7 +98,7 @@
       inset: -2px;
       border: 2.5px solid var(--fg);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -121,7 +120,7 @@
       height: 10px;
       border: 2px solid var(--fg);
       border-radius: 50%;
-      filter: url(#sketchy);
+      
       transition: background 0.2s;
     }
     .page-nav a:hover,
@@ -180,7 +179,7 @@
       inset: -2px;
       border: 2.5px solid var(--fg);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -238,7 +237,7 @@
       height: 16px;
       border-radius: 50%;
       border: 1.5px solid var(--fg);
-      filter: url(#sketchy);
+      
     }
 
     /* ══════════════════════════════════
@@ -255,7 +254,7 @@
       inset: -2px;
       border: 2.5px solid;
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -292,7 +291,7 @@
       display: inline-block;
       vertical-align: middle;
       border: 2px solid;
-      filter: url(#sketchy);
+      
     }
     .token-table .token-hex { font-family: var(--font-mono); font-size: 12px; }
 
@@ -322,7 +321,7 @@
       border: 2.5px solid;
       border-radius: 3px;
       cursor: pointer;
-      filter: url(#sketchy);
+      
       transition: transform 0.15s;
     }
     .demo-btn:hover { transform: translate(-1px, -1px); }
@@ -341,7 +340,7 @@
       padding: 4px 12px;
       border-radius: 3px;
       border: 1.5px solid;
-      filter: url(#sketchy);
+      
     }
     .demo-input {
       font-family: var(--font-display);
@@ -352,7 +351,7 @@
       outline: none;
       width: 260px;
       max-width: 100%;
-      filter: url(#sketchy);
+      
     }
     .mode-panel.light .demo-input { background: #fffef9; color: #2c2a25; border-color: #e0ddd4; }
     .mode-panel.light .demo-input::placeholder { color: #c5c0b6; }
@@ -363,7 +362,7 @@
       padding: 20px;
       border: 2.5px solid;
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       max-width: 300px;
     }
     .mode-panel.light .demo-card { background: #fffef9; border-color: #e0ddd4; }
@@ -388,7 +387,7 @@
       border: 2.5px solid;
       border-radius: 2px;
       flex-shrink: 0;
-      filter: url(#sketchy);
+      
       position: relative;
     }
     .mode-panel.light .demo-todo-box { border-color: #2c2a25; }
@@ -419,7 +418,7 @@
       border-radius: 3px;
       text-align: center;
       border: 2px solid;
-      filter: url(#sketchy);
+      
     }
     .contrast-cell .ratio { font-family: var(--font-mono); font-size: 20px; font-weight: 600; display: block; }
     .contrast-cell .pair-label {
@@ -459,15 +458,6 @@
 <body>
 
   <!-- SVG filter -->
-  <svg class="sketchy-filter" aria-hidden="true">
-    <defs>
-      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Nav dots -->
   <nav class="page-nav" aria-label="Page navigation">
     <a href="#page-1" title="Brand Colors" class="active"></a>

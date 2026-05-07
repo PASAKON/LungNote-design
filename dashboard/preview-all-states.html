@@ -18,11 +18,10 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;min-height:100vh;max-width:480px;margin:0 auto;position:relative;overflow-x:hidden}
-    .sketchy-filter{position:absolute;width:0;height:0}
 
     /* ── Shared ── */
     .sketch-box{position:relative;background:var(--surface)}
-    .sketch-box::before{content:'';position:absolute;inset:-2px;border:2.5px solid var(--fg);border-radius:3px;filter:url(#sketchy);pointer-events:none;z-index:1}
+    .sketch-box::before{content:'';position:absolute;inset:-2px;border:2.5px solid var(--fg);border-radius:3px;pointer-events:none;z-index:1}
     .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
 
     /* ── App States ── */
@@ -33,31 +32,31 @@
        STATE 1: LOGIN / CONNECTING
        ══════════════════════════════════ */
     .login-state{align-items:center;justify-content:center;padding:40px 24px;text-align:center;gap:24px}
-    .login-logo svg{filter:url(#sketchy)}
+    .login-logo svg{}
     .login-title{font-family:var(--font-display);font-size:36px;font-weight:700}
     .login-title span{color:var(--accent)}
     .login-subtitle{font-size:15px;color:var(--muted);max-width:280px}
 
     /* Spinner */
     .spinner-wrap{position:relative;width:64px;height:64px;margin:16px 0}
-    .spinner{width:64px;height:64px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;filter:url(#sketchy)}
+    .spinner{width:64px;height:64px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
     @keyframes spin{to{transform:rotate(360deg)}}
     .spinner-text{font-family:var(--font-display);font-size:20px;color:var(--muted);margin-top:8px}
 
     /* Success state */
-    .success-icon{width:80px;height:80px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;filter:url(#sketchy);animation:popIn .4s ease}
+    .success-icon{width:80px;height:80px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:popIn .4s ease}
     .success-icon svg{width:40px;height:40px;color:var(--accent)}
     @keyframes popIn{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
     .success-msg{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--accent)}
 
     /* Error state */
-    .error-icon{width:80px;height:80px;background:var(--red-light);border-radius:50%;display:flex;align-items:center;justify-content:center;filter:url(#sketchy)}
+    .error-icon{width:80px;height:80px;background:var(--red-light);border-radius:50%;display:flex;align-items:center;justify-content:center;}
     .error-icon span{font-size:40px;font-weight:700;color:var(--red)}
     .error-msg{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--red)}
     .error-detail{font-size:14px;color:var(--muted);max-width:280px}
     .error-code{font-family:var(--font-mono);font-size:11px;color:var(--red);background:var(--red-light);padding:4px 10px;border-radius:3px}
 
-    .btn-main{font-family:var(--font-display);font-size:22px;font-weight:600;padding:14px 32px;border:2.5px solid var(--fg);border-radius:3px;cursor:pointer;filter:url(#sketchy);transition:background .15s,transform .15s;text-decoration:none;display:inline-block}
+    .btn-main{font-family:var(--font-display);font-size:22px;font-weight:600;padding:14px 32px;border:2.5px solid var(--fg);border-radius:3px;cursor:pointer;transition:background .15s,transform .15s;text-decoration:none;display:inline-block}
     .btn-main:hover{transform:translate(-1px,-1px)}
     .btn-main.primary{background:var(--accent);color:var(--surface);border-color:var(--accent)}
     .btn-main.secondary{background:var(--surface);color:var(--fg)}
@@ -68,9 +67,9 @@
        ══════════════════════════════════ */
     .empty-state{align-items:center;justify-content:center;padding:40px 24px;text-align:center;gap:20px}
     .empty-illustration{width:160px;height:160px;position:relative}
-    .empty-notebook{width:120px;height:140px;background:var(--surface);border:3px solid var(--fg);border-radius:3px;filter:url(#sketchy);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-5deg)}
+    .empty-notebook{width:120px;height:140px;background:var(--surface);border:3px solid var(--fg);border-radius:3px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-5deg)}
     .empty-notebook::after{content:'';position:absolute;top:20px;left:15px;right:15px;height:2px;background:var(--border);box-shadow:0 20px 0 var(--border),0 40px 0 var(--border),0 60px 0 var(--border)}
-    .empty-plus{position:absolute;bottom:10px;right:10px;width:44px;height:44px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;filter:url(#sketchy);color:#fff;font-size:28px;font-weight:700;border:3px solid var(--fg)}
+    .empty-plus{position:absolute;bottom:10px;right:10px;width:44px;height:44px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:700;border:3px solid var(--fg)}
     .empty-title{font-family:var(--font-display);font-size:32px;font-weight:700}
     .empty-desc{font-size:15px;color:var(--muted);max-width:280px}
 
@@ -86,7 +85,7 @@
     .topbar-logo-text{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--fg)}
     .topbar-logo-text span{color:var(--accent)}
     .topbar-actions{display:flex;gap:8px}
-    .topbar-btn{width:36px;height:36px;border:2px solid var(--border);border-radius:3px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;filter:url(#sketchy);color:var(--fg)}
+    .topbar-btn{width:36px;height:36px;border:2px solid var(--border);border-radius:3px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--fg)}
     .topbar-btn svg{width:18px;height:18px}
 
     /* Greeting */
@@ -96,7 +95,7 @@
 
     /* Search */
     .search-bar{margin:0 20px 20px;position:relative}
-    .search-bar input{width:100%;font-family:var(--font-display);font-size:18px;padding:12px 16px 12px 40px;border:2.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--fg);outline:none;filter:url(#sketchy)}
+    .search-bar input{width:100%;font-family:var(--font-display);font-size:18px;padding:12px 16px 12px 40px;border:2.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--fg);outline:none;}
     .search-bar input:focus{border-color:var(--accent)}
     .search-bar input::placeholder{color:var(--muted)}
     .search-bar svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
@@ -136,12 +135,12 @@
     /* Todo list */
     .todo-section{padding:0 20px;margin-bottom:24px}
     .todo-card{padding:16px}
-    .todo-progress-bar{height:8px;background:var(--border);border-radius:4px;margin-bottom:14px;overflow:hidden;filter:url(#sketchy)}
+    .todo-progress-bar{height:8px;background:var(--border);border-radius:4px;margin-bottom:14px;overflow:hidden;}
     .todo-progress-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .4s ease}
     .todo-progress-text{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:12px;display:flex;justify-content:space-between}
     .todo-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
     .todo-item:last-child{border-bottom:none}
-    .todo-box{width:20px;height:20px;border:2.5px solid var(--muted);border-radius:2px;flex-shrink:0;cursor:pointer;filter:url(#sketchy);display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;background:var(--surface)}
+    .todo-box{width:20px;height:20px;border:2.5px solid var(--muted);border-radius:2px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;background:var(--surface)}
     .todo-box:checked{background:var(--accent-light);border-color:var(--accent)}
     .todo-box:checked+.todo-text{text-decoration:line-through;text-decoration-style:wavy;color:var(--muted)}
     .todo-text{font-family:var(--font-display);font-size:18px;flex:1}
@@ -183,7 +182,7 @@
     .bottom-tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:var(--surface);border-top:2.5px solid var(--border);padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));z-index:100}
     .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer;position:relative;border:none;background:none;color:var(--muted);font-family:var(--font-body);font-size:10px;font-weight:500;transition:color .15s}
     .tab-item.active{color:var(--accent)}
-    .tab-item.active::before{content:'';position:absolute;top:-2px;left:20%;right:20%;height:3px;background:var(--accent);border-radius:0 0 3px 3px;filter:url(#sketchy)}
+    .tab-item.active::before{content:'';position:absolute;top:-2px;left:20%;right:20%;height:3px;background:var(--accent);border-radius:0 0 3px 3px;}
     .tab-item svg{width:22px;height:22px}
     .tab-badge{position:absolute;top:2px;right:calc(50% - 18px);min-width:16px;height:16px;background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:600;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 
@@ -195,8 +194,6 @@
   </style>
 </head>
 <body>
-<svg class="sketchy-filter" aria-hidden="true"><defs><filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
-
 <!-- Demo state switcher -->
 <div class="demo-bar">
   <button class="demo-btn" data-state="login-connecting">Connecting</button>

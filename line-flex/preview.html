@@ -19,7 +19,6 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;padding:40px 24px}
-    .sketchy-filter{position:absolute;width:0;height:0}
     .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
     .page-header{max-width:1200px;margin:0 auto 48px;text-align:center}
     .page-label{font-family:var(--font-display);font-size:20px;color:var(--accent);font-weight:600;margin-bottom:4px}
@@ -88,7 +87,6 @@
   </style>
 </head>
 <body>
-<svg class="sketchy-filter" aria-hidden="true"><defs><filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 <div class="page-header">
   <div class="page-label">LungNote LINE OA</div>
   <h1 class="page-title"><span class="highlight-tape">Flex Message Templates</span></h1>

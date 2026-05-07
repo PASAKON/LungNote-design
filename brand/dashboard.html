@@ -24,7 +24,6 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
-    .sketchy-filter{position:absolute;width:0;height:0}
 
     /* ── Layout ── */
     .dash-shell{display:grid;grid-template-columns:260px 1fr;grid-template-rows:auto 1fr;min-height:100vh}
@@ -45,7 +44,7 @@
     .nav-item .badge{margin-left:auto;font-family:var(--font-mono);font-size:10px;font-weight:600;background:var(--accent);color:var(--surface);padding:2px 6px;border-radius:8px}
     .sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
     .user-info{display:flex;align-items:center;gap:10px;padding:8px 0}
-    .user-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-light);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent);filter:url(#sketchy)}
+    .user-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-light);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent);}
     .user-name{font-family:var(--font-display);font-size:20px;font-weight:700}
     .user-role{font-size:12px;color:var(--muted)}
 
@@ -55,18 +54,18 @@
     .topbar-right{display:flex;align-items:center;gap:12px}
     .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
     .theme-toggle{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
-    .toggle-track{width:44px;height:24px;border-radius:12px;border:2.5px solid var(--fg);background:var(--surface);position:relative;cursor:pointer;filter:url(#sketchy);transition:background .3s}
+    .toggle-track{width:44px;height:24px;border-radius:12px;border:2.5px solid var(--fg);background:var(--surface);position:relative;cursor:pointer;transition:background .3s}
     .toggle-thumb{width:16px;height:16px;border-radius:50%;background:var(--fg);position:absolute;top:2px;left:2px;transition:transform .3s}
     [data-theme="dark"] .toggle-thumb{transform:translateX(20px)}
     [data-theme="dark"] .toggle-track{background:var(--accent-light)}
-    .notif-btn{width:40px;height:40px;border:2px solid var(--border);border-radius:3px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;filter:url(#sketchy);position:relative;color:var(--fg);transition:background .15s}
+    .notif-btn{width:40px;height:40px;border:2px solid var(--border);border-radius:3px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--fg);transition:background .15s}
     .notif-btn:hover{background:var(--accent-light)}
     .notif-btn svg{width:20px;height:20px}
     .notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--red)}
 
     /* ── Sketch box ── */
     .sketch-box{position:relative;background:var(--surface);transition:background .3s}
-    .sketch-box::before{content:'';position:absolute;inset:-2px;border:2.5px solid var(--fg);border-radius:3px;filter:url(#sketchy);pointer-events:none;z-index:1}
+    .sketch-box::before{content:'';position:absolute;inset:-2px;border:2.5px solid var(--fg);border-radius:3px;pointer-events:none;z-index:1}
     [data-theme="dark"] .sketch-box::before{border-color:var(--border)}
 
     /* ── Stats ── */
@@ -111,7 +110,7 @@
     .activity-chart{padding:20px}
     .chart-bars{display:flex;align-items:flex-end;gap:8px;height:140px;padding-top:8px}
     .chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%}
-    .chart-bar{width:100%;border-radius:3px 3px 0 0;background:var(--accent);transition:opacity .15s;min-height:4px;margin-top:auto;filter:url(#sketchy);position:relative}
+    .chart-bar{width:100%;border-radius:3px 3px 0 0;background:var(--accent);transition:opacity .15s;min-height:4px;margin-top:auto;position:relative}
     .chart-bar:hover{opacity:.8}
     .chart-bar-val{font-family:var(--font-mono);font-size:10px;color:var(--muted);opacity:0;transition:opacity .2s;position:absolute;top:-16px;left:50%;transform:translateX(-50%)}
     .chart-bar:hover .chart-bar-val{opacity:1}
@@ -133,7 +132,7 @@
     .progress-stats .ps-value{font-family:var(--font-display);font-size:22px;font-weight:700}
     .todo-mini-list{display:flex;flex-direction:column;gap:6px}
     .todo-mini{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:18px;padding:6px 0}
-    .todo-mini-box{width:16px;height:16px;border:2.5px solid var(--muted);border-radius:2px;flex-shrink:0;cursor:pointer;filter:url(#sketchy);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;background:var(--surface)}
+    .todo-mini-box{width:16px;height:16px;border:2.5px solid var(--muted);border-radius:2px;flex-shrink:0;cursor:pointer;transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;background:var(--surface)}
     .todo-mini-box:checked{background:var(--accent-light);border-color:var(--accent)}
     .todo-mini-box:checked+span{text-decoration:line-through;text-decoration-style:wavy;color:var(--muted)}
     .todo-mini-pri{font-family:var(--font-display);font-size:14px;font-weight:700;margin-left:auto}
@@ -145,7 +144,7 @@
     .deadline-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);position:relative}
     .deadline-item:last-child{border-bottom:none}
     .deadline-dot-line{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;width:20px}
-    .deadline-dot{width:12px;height:12px;border-radius:50%;border:2.5px solid;filter:url(#sketchy);flex-shrink:0}
+    .deadline-dot{width:12px;height:12px;border-radius:50%;border:2.5px solid;flex-shrink:0}
     .deadline-dot.urgent{border-color:var(--red);background:var(--red-light)}
     .deadline-dot.soon{border-color:var(--orange);background:var(--orange-light)}
     .deadline-dot.ok{border-color:var(--accent);background:var(--accent-light)}
@@ -160,7 +159,7 @@
 
     /* ── Quick actions ── */
     .quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-    .qa-btn{display:flex;align-items:center;gap:8px;padding:12px 14px;font-family:var(--font-display);font-size:18px;font-weight:600;border:2.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--fg);cursor:pointer;filter:url(#sketchy);transition:background .15s,transform .15s}
+    .qa-btn{display:flex;align-items:center;gap:8px;padding:12px 14px;font-family:var(--font-display);font-size:18px;font-weight:600;border:2.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--fg);cursor:pointer;transition:background .15s,transform .15s}
     .qa-btn:hover{background:var(--accent-light);transform:translate(-1px,-1px)}
     .qa-btn svg{width:18px;height:18px;flex-shrink:0;color:var(--accent)}
 
@@ -170,14 +169,14 @@
 
     /* ── Bottom Tab Bar (mobile only) ── */
     .bottom-tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--surface);border-top:2.5px solid var(--border);padding:6px 0 env(safe-area-inset-bottom,8px);transition:background .3s}
-    .bottom-tab-bar::before{content:'';position:absolute;inset:-2px -2px auto -2px;border-top:2.5px solid var(--fg);filter:url(#sketchy);pointer-events:none}
+    .bottom-tab-bar::before{content:'';position:absolute;inset:-2px -2px auto -2px;border-top:2.5px solid var(--fg);pointer-events:none}
     [data-theme="dark"] .bottom-tab-bar::before{border-color:var(--border)}
     .tab-items{display:flex;justify-content:space-around;align-items:center;max-width:480px;margin:0 auto}
     .tab-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 12px;border:none;background:none;cursor:pointer;color:var(--muted);transition:color .15s;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative}
     .tab-item svg{width:22px;height:22px}
     .tab-item span{font-family:var(--font-display);font-size:12px;font-weight:600;line-height:1}
     .tab-item.active{color:var(--accent)}
-    .tab-item.active::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--accent);border-radius:2px;filter:url(#sketchy)}
+    .tab-item.active::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--accent);border-radius:2px;}
     .tab-item .tab-badge{position:absolute;top:0;right:4px;font-family:var(--font-mono);font-size:8px;font-weight:600;background:var(--accent);color:var(--surface);padding:1px 4px;border-radius:6px;line-height:1.2}
 
     /* ── Responsive ── */
@@ -204,8 +203,6 @@
 </head>
 <body>
 
-<svg class="sketchy-filter" aria-hidden="true"><defs><filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
-
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="dash-shell">
@@ -213,7 +210,7 @@
   <aside class="dash-sidebar" id="sidebar">
     <button class="sidebar-close" id="sidebarClose">&times;</button>
     <a href="#" class="sidebar-logo">
-      <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><g filter="url(#sketchy)"><rect x="6" y="6" width="36" height="36" rx="4" stroke="currentColor" stroke-width="3" fill="none"/><path d="M14 24 L21 31 L34 16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><g><rect x="6" y="6" width="36" height="36" rx="4" stroke="currentColor" stroke-width="3" fill="none"/><path d="M14 24 L21 31 L34 16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>
       <span class="sidebar-logo-text">Lung<span>Note</span></span>
     </a>
 

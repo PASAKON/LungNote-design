@@ -35,7 +35,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .sketchy-filter { position: absolute; width: 0; height: 0; }
     .wrap { max-width: var(--max-w); margin: 0 auto; padding-left: var(--px); padding-right: var(--px); }
 
     .sketch-box {
@@ -48,7 +47,7 @@
       inset: -2px;
       border: 2.5px solid var(--fg);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -111,7 +110,7 @@
       border-radius: 3px;
       text-decoration: none;
       cursor: pointer;
-      filter: url(#sketchy);
+      
       transition: background 0.15s, transform 0.15s;
       position: relative;
     }
@@ -149,9 +148,9 @@
 
     /* ── Notebook Preview ── */
     .notebook-preview { max-width: 580px; margin: 48px auto 0; background: var(--surface); position: relative; padding: 0; }
-    .notebook-preview::before { content: ''; position: absolute; inset: -3px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; z-index: 1; }
+    .notebook-preview::before { content: ''; position: absolute; inset: -3px; border: 2.5px solid var(--fg); border-radius: 2px;  pointer-events: none; z-index: 1; }
     .spiral-holes { position: absolute; left: 32px; top: 0; bottom: 0; width: 2px; z-index: 2; }
-    .spiral-hole { width: 14px; height: 14px; border: 2px solid var(--muted); border-radius: 50%; background: var(--bg); position: absolute; left: -6px; filter: url(#sketchy); }
+    .spiral-hole { width: 14px; height: 14px; border: 2px solid var(--muted); border-radius: 50%; background: var(--bg); position: absolute; left: -6px;  }
     .notebook-header { display: flex; align-items: center; gap: 8px; padding: 14px 20px 14px 52px; border-bottom: 2px solid var(--border); font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--muted); }
     .notebook-body {
       padding: 20px 24px 20px 52px; font-family: var(--font-display); font-size: 22px; line-height: 2.1; color: var(--fg); min-height: 240px;
@@ -159,7 +158,7 @@
       background-size: 100% 46px; background-position: 0 25px;
     }
     .todo-item { display: flex; align-items: baseline; gap: 12px; }
-    .todo-box { display: inline-block; width: 18px; height: 18px; border: 2.5px solid var(--fg); border-radius: 2px; flex-shrink: 0; position: relative; top: 4px; filter: url(#sketchy); }
+    .todo-box { display: inline-block; width: 18px; height: 18px; border: 2.5px solid var(--fg); border-radius: 2px; flex-shrink: 0; position: relative; top: 4px;  }
     .todo-box.done { background: var(--accent-light); }
     .todo-box.done::after { content: ''; position: absolute; left: 2px; top: -1px; width: 10px; height: 14px; border: solid var(--accent); border-width: 0 3px 3px 0; transform: rotate(42deg); }
     .todo-done-text { text-decoration: line-through; text-decoration-style: wavy; text-decoration-color: var(--muted); color: var(--muted); }
@@ -171,7 +170,7 @@
     .features-header .section-desc { margin: 0 auto; }
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .feature-card { background: var(--surface); position: relative; padding: 28px 24px; }
-    .feature-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .feature-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px;  pointer-events: none; }
     .feature-doodle { width: 56px; height: 56px; margin-bottom: 16px; }
     .feature-doodle svg { width: 56px; height: 56px; color: var(--fg); }
     .feature-card h3 { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 8px; }
@@ -189,7 +188,7 @@
     }
     .step { text-align: center; position: relative; z-index: 1; }
     .step-circle { width: 72px; height: 72px; margin: 0 auto 20px; position: relative; display: flex; align-items: center; justify-content: center; background: var(--surface); }
-    .step-circle::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 50%; filter: url(#sketchy); }
+    .step-circle::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 50%;  }
     .step-circle span { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--accent); }
     .step h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 8px; }
     .step p { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 260px; margin: 0 auto; }
@@ -200,7 +199,7 @@
     .testimonials-header .section-desc { margin: 0 auto; }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .testimonial-card { background: var(--surface); position: relative; padding: 28px 24px; }
-    .testimonial-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .testimonial-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px;  pointer-events: none; }
     .testimonial-quote {
       font-family: var(--font-display); font-size: 44px; font-weight: 700; color: var(--accent);
       line-height: 1; margin-bottom: 8px; display: block;
@@ -211,7 +210,7 @@
       width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--fg);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-display); font-size: 20px; font-weight: 700;
-      background: var(--accent-light); color: var(--accent); filter: url(#sketchy);
+      background: var(--accent-light); color: var(--accent); 
     }
     .author-info { display: flex; flex-direction: column; }
     .author-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
@@ -222,7 +221,7 @@
     .download-card {
       background: var(--yellow-light); position: relative; padding: 56px 40px; max-width: 720px; margin: 0 auto;
     }
-    .download-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .download-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px;  pointer-events: none; }
     .download-card h2 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 52px); font-weight: 700; margin-bottom: 12px; }
     .download-card p { font-size: 17px; color: var(--muted); margin-bottom: 32px; }
     .download-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
@@ -231,7 +230,7 @@
       font-family: var(--font-display); font-size: 20px; font-weight: 600;
       color: var(--fg); background: var(--surface); padding: 14px 28px;
       border: 2.5px solid var(--fg); border-radius: 3px; text-decoration: none;
-      cursor: pointer; filter: url(#sketchy); transition: background 0.15s, transform 0.15s;
+      cursor: pointer;  transition: background 0.15s, transform 0.15s;
     }
     .btn-download:hover { background: var(--accent-light); transform: translate(-1px, -1px); }
     .btn-download svg { width: 24px; height: 24px; flex-shrink: 0; }
@@ -242,7 +241,7 @@
     .faq-header { text-align: center; margin-bottom: 48px; }
     .faq-list { max-width: 640px; margin: 0 auto; }
     .faq-item { position: relative; margin-bottom: 16px; background: var(--surface); padding: 0; }
-    .faq-item::before { content: ''; position: absolute; inset: -2px; border: 2px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .faq-item::before { content: ''; position: absolute; inset: -2px; border: 2px solid var(--fg); border-radius: 2px;  pointer-events: none; }
     .faq-q {
       width: 100%; background: none; border: none; padding: 18px 20px;
       font: 600 17px/1.5 var(--font-body); color: var(--fg); text-align: left;
@@ -284,21 +283,12 @@
 <body>
 
   <!-- SVG filter -->
-  <svg class="sketchy-filter" aria-hidden="true">
-    <defs>
-      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Nav -->
   <header class="wrap">
     <nav class="top-nav">
       <a href="#" class="logo">
         <svg class="logo-icon" width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="6" y="6" width="36" height="36" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
             <path d="M14 24 L21 31 L34 16" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -318,14 +308,14 @@
   <!-- Hero -->
   <section class="hero wrap" data-od-id="hero">
     <svg class="doodle-star" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#2c2a25" stroke-width="2">
-      <path d="M24 4 L28 18 L42 18 L30 26 L34 40 L24 31 L14 40 L18 26 L6 18 L20 18 Z" stroke-linejoin="round" filter="url(#sketchy)" />
+      <path d="M24 4 L28 18 L42 18 L30 26 L34 40 L24 31 L14 40 L18 26 L6 18 L20 18 Z" stroke-linejoin="round" />
     </svg>
     <svg class="doodle-circle" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#6aab8e" stroke-width="2">
-      <circle cx="20" cy="20" r="16" filter="url(#sketchy)" />
+      <circle cx="20" cy="20" r="16" />
     </svg>
     <svg class="doodle-arrow" width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="#2c2a25" stroke-width="2" stroke-linecap="round">
-      <path d="M4 30 Q20 8 52 12" filter="url(#sketchy)" />
-      <path d="M44 6 L52 12 L44 18" filter="url(#sketchy)" />
+      <path d="M4 30 Q20 8 52 12" />
+      <path d="M44 6 L52 12 L44 18" />
     </svg>
 
     <div class="hero-eyebrow">Note-taking for students</div>
@@ -367,10 +357,10 @@
       <div class="feature-card">
         <div class="feature-doodle">
           <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 42 L14 14 L38 14" filter="url(#sketchy)" />
-            <path d="M18 22 Q24 20 30 22 T42 22" filter="url(#sketchy)" />
-            <path d="M18 30 Q22 28 26 30" filter="url(#sketchy)" />
-            <path d="M18 38 Q26 36 34 38 T40 38" filter="url(#sketchy)" />
+            <path d="M14 42 L14 14 L38 14" />
+            <path d="M18 22 Q24 20 30 22 T42 22" />
+            <path d="M18 30 Q22 28 26 30" />
+            <path d="M18 38 Q26 36 34 38 T40 38" />
             <circle cx="40" cy="10" r="4" fill="#f0d87a" stroke="none" />
           </svg>
         </div>
@@ -380,8 +370,8 @@
       <div class="feature-card">
         <div class="feature-doodle">
           <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="10" y="10" width="36" height="36" rx="2" filter="url(#sketchy)" />
-            <path d="M18 28 L24 34 L38 20" stroke-width="3" filter="url(#sketchy)" />
+            <rect x="10" y="10" width="36" height="36" rx="2" />
+            <path d="M18 28 L24 34 L38 20" stroke-width="3" />
           </svg>
         </div>
         <h3>เช็คลิสต์ & Todo</h3>
@@ -390,7 +380,7 @@
       <div class="feature-card">
         <div class="feature-doodle">
           <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 44 L8 14 C8 12 10 10 12 10 L22 10 L26 16 L44 16 C46 16 48 18 48 20 L48 44 C48 46 46 48 44 48 L12 48 C10 48 8 46 8 44Z" filter="url(#sketchy)" />
+            <path d="M8 44 L8 14 C8 12 10 10 12 10 L22 10 L26 16 L44 16 C46 16 48 18 48 20 L48 44 C48 46 46 48 44 48 L12 48 C10 48 8 46 8 44Z" />
             <circle cx="28" cy="34" r="3" fill="#6aab8e" stroke="none" />
           </svg>
         </div>
@@ -572,7 +562,7 @@
     <div class="wrap">
       <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">
         <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="6" y="6" width="36" height="36" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
             <path d="M14 24 L21 31 L34 16" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
