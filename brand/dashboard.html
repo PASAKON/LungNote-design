@@ -1,0 +1,460 @@
+
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#faf8f4;--surface:#fffef9;--border:#e0ddd4;--muted:#8a8578;--fg:#2c2a25;
+      --accent:#6aab8e;--accent-light:#e8f4ed;--yellow:#f0d87a;--yellow-light:#fdf6dc;
+      --red:#d4685a;--red-light:#fce8e5;--orange:#e8a946;--orange-light:#fdf6dc;
+      --font-display:'Caveat',cursive;
+      --font-body:'Sarabun',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    }
+    [data-theme="dark"]{
+      --bg:#1e1e1c;--surface:#2a2a28;--border:#3a3835;--muted:#8a8578;--fg:#e8e6e0;
+      --accent:#6aab8e;--accent-light:#1a3328;--yellow:#b8a550;--yellow-light:#3d3a2a;
+      --red:#e07868;--red-light:#3d2525;--orange:#e8a946;--orange-light:#3d3a2a;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+    .sketchy-filter{position:absolute;width:0;height:0}
+
+    /* ── Layout ── */
+    .dash-shell{display:grid;grid-template-columns:260px 1fr;grid-template-rows:auto 1fr;min-height:100vh}
+    .dash-sidebar{grid-row:1/3;background:var(--surface);border-right:2px solid var(--border);padding:24px 20px;display:flex;flex-direction:column;gap:8px;transition:background .3s}
+    .dash-topbar{grid-column:2;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:2px solid var(--border)}
+    .dash-main{grid-column:2;padding:32px;overflow-y:auto}
+
+    /* ── Sidebar ── */
+    .sidebar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;margin-bottom:24px}
+    .sidebar-logo svg{flex-shrink:0}
+    .sidebar-logo-text{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--fg)}
+    .sidebar-logo-text span{color:var(--accent)}
+    .nav-section{font-family:var(--font-mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin:20px 0 8px;padding-left:12px}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:3px;font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;cursor:pointer;transition:background .15s,color .15s;border:none;background:none;width:100%;text-align:left}
+    .nav-item:hover{background:var(--bg);color:var(--fg)}
+    .nav-item.active{background:var(--accent-light);color:var(--accent);font-weight:600}
+    .nav-item svg{width:20px;height:20px;flex-shrink:0}
+    .nav-item .badge{margin-left:auto;font-family:var(--font-mono);font-size:10px;font-weight:600;background:var(--accent);color:var(--surface);padding:2px 6px;border-radius:8px}
+    .sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+    .user-info{display:flex;align-items:center;gap:10px;padding:8px 0}
+    .user-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-light);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--accent);filter:url(#sketchy)}
+    .user-name{font-family:var(--font-display);font-size:20px;font-weight:700}
+    .user-role{font-size:12px;color:var(--muted)}
+
+    /* ── Topbar ── */
+    .topbar-left h2{font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1.1}
+    .topbar-left p{font-size:14px;color:var(--muted)}
+    .topbar-right{display:flex;align-items:center;gap:12px}
+    .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
+    .theme-toggle{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+    .toggle-track{width:44px;height:24px;border-radius:12px;border:2.5px solid var(--fg);background:var(--surface);position:relative;cursor:pointer;filter:url(#sketchy);transition:background .3s}
+    .toggle-thumb{width:16px;height:16px;border-radius:50%;background:var(--fg);position:absolute;top:2px;left:2px;transition:transform .3s}
+    [data-theme="dark"] .toggle-thumb{transform:translateX(20px)}
+    [data-theme="dark"] .toggle-track{background:var(--accent-light)}
+    .notif-btn{width:40px;height:40px;border:2px solid var(--border);border-radius:3px;background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;filter:url(#sketchy);position:relative;color:var(--fg);transition:background .15s}
+    .notif-btn:hover{background:var(--accent-light)}
+    .notif-btn svg{width:20px;height:20px}
+    .notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+
+    /* ── Sketch box ── */
+    .sketch-box{position:relative;background:var(--surface);transition:background .3s}
+    .sketch-box::before{content:'';position:absolute;inset:-2px;border:2.5px solid var(--fg);border-radius:3px;filter:url(#sketchy);pointer-events:none;z-index:1}
+    [data-theme="dark"] .sketch-box::before{border-color:var(--border)}
+
+    /* ── Stats ── */
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+    .stat-card{padding:20px;display:flex;align-items:flex-start;gap:14px}
+    .stat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .stat-icon svg{width:22px;height:22px}
+    .stat-icon.notes{background:var(--accent-light);color:var(--accent)}
+    .stat-icon.todos{background:var(--yellow-light);color:var(--orange)}
+    .stat-icon.streak{background:var(--red-light);color:var(--red)}
+    .stat-icon.folders{background:color-mix(in oklch,var(--accent) 15%,var(--bg));color:var(--accent)}
+    .stat-value{font-family:var(--font-display);font-size:36px;font-weight:700;line-height:1}
+    .stat-label{font-size:13px;color:var(--muted)}
+    .stat-change{font-family:var(--font-mono);font-size:10px;font-weight:500;margin-top:2px}
+    .stat-change.up{color:var(--accent)}
+    .stat-change.down{color:var(--red)}
+
+    /* ── Content grid ── */
+    .content-grid{display:grid;grid-template-columns:1fr 340px;gap:24px}
+
+    /* ── Recent notes ── */
+    .widget{margin-bottom:24px}
+    .widget-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .widget-title{font-family:var(--font-display);font-size:26px;font-weight:700}
+    .widget-link{font-family:var(--font-display);font-size:16px;color:var(--accent);text-decoration:underline;text-decoration-style:wavy;text-underline-offset:3px;cursor:pointer}
+    .note-list{display:flex;flex-direction:column;gap:8px}
+    .note-row{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;transition:background .15s}
+    .note-row:hover{background:color-mix(in oklch,var(--accent) 5%,var(--surface))}
+    .note-color{width:6px;height:40px;border-radius:3px;flex-shrink:0}
+    .note-color.chem{background:var(--accent)}
+    .note-color.eng{background:var(--orange)}
+    .note-color.phys{background:var(--red)}
+    .note-color.proj{background:#8b7ec8}
+    .note-color.math{background:var(--yellow)}
+    .note-info{flex:1;min-width:0}
+    .note-title{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .note-meta{font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:center}
+    .note-cat{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:2px 6px;border-radius:2px;background:var(--bg);border:1px solid var(--border)}
+    .note-date{font-family:var(--font-mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+    /* ── Activity chart ── */
+    .activity-chart{padding:20px}
+    .chart-bars{display:flex;align-items:flex-end;gap:8px;height:140px;padding-top:8px}
+    .chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%}
+    .chart-bar{width:100%;border-radius:3px 3px 0 0;background:var(--accent);transition:opacity .15s;min-height:4px;margin-top:auto;filter:url(#sketchy);position:relative}
+    .chart-bar:hover{opacity:.8}
+    .chart-bar-val{font-family:var(--font-mono);font-size:10px;color:var(--muted);opacity:0;transition:opacity .2s;position:absolute;top:-16px;left:50%;transform:translateX(-50%)}
+    .chart-bar:hover .chart-bar-val{opacity:1}
+    .chart-day{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase}
+    .chart-legend{display:flex;gap:16px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+    .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+    .legend-dot{width:10px;height:10px;border-radius:2px}
+
+    /* ── Todo progress ── */
+    .todo-widget{padding:20px}
+    .progress-ring-wrap{display:flex;align-items:center;gap:20px;margin-bottom:20px}
+    .progress-ring{position:relative;width:80px;height:80px;flex-shrink:0}
+    .progress-ring svg{transform:rotate(-90deg)}
+    .progress-ring-bg{fill:none;stroke:var(--border);stroke-width:8}
+    .progress-ring-fill{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+    .progress-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--accent)}
+    .progress-stats{display:flex;flex-direction:column;gap:4px}
+    .progress-stats .ps-label{font-size:14px;color:var(--muted)}
+    .progress-stats .ps-value{font-family:var(--font-display);font-size:22px;font-weight:700}
+    .todo-mini-list{display:flex;flex-direction:column;gap:6px}
+    .todo-mini{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:18px;padding:6px 0}
+    .todo-mini-box{width:16px;height:16px;border:2.5px solid var(--muted);border-radius:2px;flex-shrink:0;cursor:pointer;filter:url(#sketchy);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;background:var(--surface)}
+    .todo-mini-box:checked{background:var(--accent-light);border-color:var(--accent)}
+    .todo-mini-box:checked+span{text-decoration:line-through;text-decoration-style:wavy;color:var(--muted)}
+    .todo-mini-pri{font-family:var(--font-display);font-size:14px;font-weight:700;margin-left:auto}
+    .todo-mini-pri.high{color:var(--red)}.todo-mini-pri.med{color:var(--orange)}.todo-mini-pri.low{color:var(--accent)}
+
+    /* ── Deadlines ── */
+    .deadlines-widget{padding:20px}
+    .deadline-list{display:flex;flex-direction:column;gap:0}
+    .deadline-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);position:relative}
+    .deadline-item:last-child{border-bottom:none}
+    .deadline-dot-line{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;width:20px}
+    .deadline-dot{width:12px;height:12px;border-radius:50%;border:2.5px solid;filter:url(#sketchy);flex-shrink:0}
+    .deadline-dot.urgent{border-color:var(--red);background:var(--red-light)}
+    .deadline-dot.soon{border-color:var(--orange);background:var(--orange-light)}
+    .deadline-dot.ok{border-color:var(--accent);background:var(--accent-light)}
+    .deadline-line{width:2px;flex:1;background:var(--border);min-height:20px}
+    .deadline-info{flex:1}
+    .deadline-title{font-family:var(--font-display);font-size:18px;font-weight:700;line-height:1.2}
+    .deadline-meta{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;margin-top:2px}
+    .deadline-time{font-family:var(--font-mono);font-size:11px;font-weight:500}
+    .deadline-time.urgent{color:var(--red)}
+    .deadline-time.soon{color:var(--orange)}
+    .deadline-time.ok{color:var(--accent)}
+
+    /* ── Quick actions ── */
+    .quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+    .qa-btn{display:flex;align-items:center;gap:8px;padding:12px 14px;font-family:var(--font-display);font-size:18px;font-weight:600;border:2.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--fg);cursor:pointer;filter:url(#sketchy);transition:background .15s,transform .15s}
+    .qa-btn:hover{background:var(--accent-light);transform:translate(-1px,-1px)}
+    .qa-btn svg{width:18px;height:18px;flex-shrink:0;color:var(--accent)}
+
+    /* ── Mobile hamburger (hidden by default, only for sidebar on mobile if needed) ── */
+    .mobile-menu-btn{display:none}
+    .sidebar-close{display:none}
+
+    /* ── Bottom Tab Bar (mobile only) ── */
+    .bottom-tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--surface);border-top:2.5px solid var(--border);padding:6px 0 env(safe-area-inset-bottom,8px);transition:background .3s}
+    .bottom-tab-bar::before{content:'';position:absolute;inset:-2px -2px auto -2px;border-top:2.5px solid var(--fg);filter:url(#sketchy);pointer-events:none}
+    [data-theme="dark"] .bottom-tab-bar::before{border-color:var(--border)}
+    .tab-items{display:flex;justify-content:space-around;align-items:center;max-width:480px;margin:0 auto}
+    .tab-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 12px;border:none;background:none;cursor:pointer;color:var(--muted);transition:color .15s;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative}
+    .tab-item svg{width:22px;height:22px}
+    .tab-item span{font-family:var(--font-display);font-size:12px;font-weight:600;line-height:1}
+    .tab-item.active{color:var(--accent)}
+    .tab-item.active::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--accent);border-radius:2px;filter:url(#sketchy)}
+    .tab-item .tab-badge{position:absolute;top:0;right:4px;font-family:var(--font-mono);font-size:8px;font-weight:600;background:var(--accent);color:var(--surface);padding:1px 4px;border-radius:6px;line-height:1.2}
+
+    /* ── Responsive ── */
+    @media(max-width:1024px){
+      .content-grid{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:768px){
+      .dash-shell{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+      .dash-sidebar{display:none}
+      .sidebar-overlay{display:none}
+      .dash-topbar{grid-column:1}
+      .dash-main{grid-column:1;padding:20px 16px 100px}
+      .bottom-tab-bar{display:block}
+      .stats-grid{grid-template-columns:1fr 1fr;gap:12px}
+      .stat-card{padding:14px}
+      .stat-value{font-size:28px}
+      .content-grid{grid-template-columns:1fr;gap:16px}
+      .chart-bars{height:100px}
+      .quick-actions{grid-template-columns:1fr}
+      .topbar-left h2{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+
+<svg class="sketchy-filter" aria-hidden="true"><defs><filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="dash-shell">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebarClose">&times;</button>
+    <a href="#" class="sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><g filter="url(#sketchy)"><rect x="6" y="6" width="36" height="36" rx="4" stroke="currentColor" stroke-width="3" fill="none"/><path d="M14 24 L21 31 L34 16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>
+      <span class="sidebar-logo-text">Lung<span>Note</span></span>
+    </a>
+
+    <span class="nav-section">หลัก</span>
+    <button class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      โน้ตทั้งหมด
+      <span class="badge">42</span>
+    </button>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Todo List
+      <span class="badge">7</span>
+    </button>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      โฟลเดอร์
+    </button>
+
+    <span class="nav-section">อื่นๆ</span>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      ค้นหา
+    </button>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      ถังขยะ
+    </button>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      ตั้งค่า
+    </button>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">พ</div>
+        <div>
+          <div class="user-name">พลอย</div>
+          <div class="user-role">นักศึกษาปี 2</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Topbar -->
+  <div class="dash-topbar">
+    <div class="topbar-left">
+      <h2>สวัสดี, <span class="highlight-tape">พลอย</span></h2>
+      <p>วันพฤหัสบดีที่ 8 พฤษภาคม 2569 — มีงาน 4 อย่างรอทำ</p>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-toggle">
+        <span>☀</span>
+        <div class="toggle-track" id="themeToggle" role="switch" tabindex="0"><div class="toggle-thumb"></div></div>
+        <span>☽</span>
+      </div>
+      <button class="notif-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="dash-main">
+    <!-- Stats -->
+    <div class="stats-grid" data-od-id="stats">
+      <div class="sketch-box stat-card">
+        <div class="stat-icon notes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div><div class="stat-value">42</div><div class="stat-label">โน้ตทั้งหมด</div><div class="stat-change up">+5 สัปดาห์นี้</div></div>
+      </div>
+      <div class="sketch-box stat-card">
+        <div class="stat-icon todos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div><div class="stat-value">18<span style="font-size:20px;color:var(--muted)">/25</span></div><div class="stat-label">Todo เสร็จแล้ว</div><div class="stat-change up">72% complete</div></div>
+      </div>
+      <div class="sketch-box stat-card">
+        <div class="stat-icon streak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div><div class="stat-value">12</div><div class="stat-label">วัน Streak</div><div class="stat-change up">ยาวสุดเลย!</div></div>
+      </div>
+      <div class="sketch-box stat-card">
+        <div class="stat-icon folders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="stat-value">8</div><div class="stat-label">โฟลเดอร์</div><div class="stat-change" style="color:var(--muted)">5 วิชาเรียน</div></div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <!-- Left column -->
+      <div>
+        <!-- Recent notes -->
+        <div class="widget" data-od-id="recent-notes">
+          <div class="widget-header">
+            <span class="widget-title">โน้ตล่าสุด</span>
+            <span class="widget-link">ดูทั้งหมด →</span>
+          </div>
+          <div class="sketch-box note-list">
+            <div class="note-row"><div class="note-color chem"></div><div class="note-info"><div class="note-title">สรุปบทที่ 5 — พันธะเคมี</div><div class="note-meta"><span class="note-cat">เคมี</span><span class="note-date">วันนี้ 14:30</span></div></div></div>
+            <div class="note-row"><div class="note-color eng"></div><div class="note-info"><div class="note-title">ทบทวนศัพท์ Unit 8 — Vocabulary</div><div class="note-meta"><span class="note-cat">อังกฤษ</span><span class="note-date">วันนี้ 10:15</span></div></div></div>
+            <div class="note-row"><div class="note-color proj"></div><div class="note-info"><div class="note-title">ไอเดียแอป — ระบบจัดตารางเรียน</div><div class="note-meta"><span class="note-cat">โปรเจค</span><span class="note-date">เมื่อวาน</span></div></div></div>
+            <div class="note-row"><div class="note-color phys"></div><div class="note-info"><div class="note-title">รายงานทดลองฟิสิกส์ Lab 4</div><div class="note-meta"><span class="note-cat">ฟิสิกส์</span><span class="note-date">6 พ.ค.</span></div></div></div>
+            <div class="note-row"><div class="note-color math"></div><div class="note-info"><div class="note-title">สรุป Calculus บทที่ 3</div><div class="note-meta"><span class="note-cat">คณิต</span><span class="note-date">5 พ.ค.</span></div></div></div>
+          </div>
+        </div>
+
+        <!-- Activity chart -->
+        <div class="widget" data-od-id="activity-chart">
+          <div class="widget-header">
+            <span class="widget-title">กิจกรรมสัปดาห์นี้</span>
+          </div>
+          <div class="sketch-box activity-chart">
+            <div class="chart-bars">
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:35%"><span class="chart-bar-val">3</span></div><span class="chart-day">จ</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:60%"><span class="chart-bar-val">5</span></div><span class="chart-day">อ</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:45%"><span class="chart-bar-val">4</span></div><span class="chart-day">พ</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:85%;background:var(--accent)"><span class="chart-bar-val">8</span></div><span class="chart-day" style="font-weight:600;color:var(--accent)">พฤ</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:20%;background:var(--border)"><span class="chart-bar-val">—</span></div><span class="chart-day">ศ</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:20%;background:var(--border)"><span class="chart-bar-val">—</span></div><span class="chart-day">ส</span></div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="height:20%;background:var(--border)"><span class="chart-bar-val">—</span></div><span class="chart-day">อา</span></div>
+            </div>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>โน้ตที่เขียน</span>
+              <span class="legend-item"><span class="legend-dot" style="background:var(--border)"></span>ยังไม่ถึง</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column / sidebar -->
+      <div>
+        <!-- Todo progress -->
+        <div class="widget" data-od-id="todo-progress">
+          <div class="widget-header">
+            <span class="widget-title">Todo วันนี้</span>
+          </div>
+          <div class="sketch-box todo-widget">
+            <div class="progress-ring-wrap">
+              <div class="progress-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle class="progress-ring-bg" cx="40" cy="40" r="32" />
+                  <circle class="progress-ring-fill" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="56" />
+                </svg>
+                <div class="progress-center">72%</div>
+              </div>
+              <div class="progress-stats">
+                <div><span class="ps-value">18</span><span class="ps-label"> เสร็จ</span></div>
+                <div><span class="ps-value" style="color:var(--orange)">7</span><span class="ps-label"> เหลือ</span></div>
+              </div>
+            </div>
+            <div class="todo-mini-list">
+              <label class="todo-mini"><input type="checkbox" class="todo-mini-box" checked /><span>อ่านบท 5 ฟิสิกส์</span><span class="todo-mini-pri high">!</span></label>
+              <label class="todo-mini"><input type="checkbox" class="todo-mini-box" checked /><span>ส่งรายงานกลุ่ม</span><span class="todo-mini-pri high">!</span></label>
+              <label class="todo-mini"><input type="checkbox" class="todo-mini-box" /><span>ทบทวนศัพท์ 20 คำ</span><span class="todo-mini-pri med">!!</span></label>
+              <label class="todo-mini"><input type="checkbox" class="todo-mini-box" /><span>เตรียมพรีเซนต์</span><span class="todo-mini-pri med">!!</span></label>
+              <label class="todo-mini"><input type="checkbox" class="todo-mini-box" /><span>อ่านนิยาย 1984</span><span class="todo-mini-pri low">...</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deadlines -->
+        <div class="widget" data-od-id="deadlines">
+          <div class="widget-header">
+            <span class="widget-title">กำหนดส่ง</span>
+          </div>
+          <div class="sketch-box deadlines-widget">
+            <div class="deadline-list">
+              <div class="deadline-item">
+                <div class="deadline-dot-line"><div class="deadline-dot urgent"></div><div class="deadline-line"></div></div>
+                <div class="deadline-info"><div class="deadline-title">รายงาน Lab ฟิสิกส์ 4</div><div class="deadline-meta"><span class="deadline-time urgent">เลยกำหนด 3 วัน</span><span>·</span><span>ฟิสิกส์</span></div></div>
+              </div>
+              <div class="deadline-item">
+                <div class="deadline-dot-line"><div class="deadline-dot soon"></div><div class="deadline-line"></div></div>
+                <div class="deadline-info"><div class="deadline-title">ทบทวนศัพท์ Unit 8</div><div class="deadline-meta"><span class="deadline-time soon">พรุ่งนี้</span><span>·</span><span>อังกฤษ</span></div></div>
+              </div>
+              <div class="deadline-item">
+                <div class="deadline-dot-line"><div class="deadline-dot soon"></div><div class="deadline-line"></div></div>
+                <div class="deadline-info"><div class="deadline-title">พรีเซนต์โปรเจคจบ</div><div class="deadline-meta"><span class="deadline-time soon">อีก 4 วัน</span><span>·</span><span>โปรเจค</span></div></div>
+              </div>
+              <div class="deadline-item">
+                <div class="deadline-dot-line"><div class="deadline-dot ok"></div></div>
+                <div class="deadline-info"><div class="deadline-title">อ่านนิยาย 1984</div><div class="deadline-meta"><span class="deadline-time ok">อีก 7 วัน</span><span>·</span><span>อ่านเพิ่ม</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="quick-actions" data-od-id="quick-actions">
+          <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>โน้ตใหม่</button>
+          <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Todo ใหม่</button>
+          <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>ค้นหา</button>
+          <button class="qa-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>โฟลเดอร์</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Bottom Tab Bar (mobile) -->
+<nav class="bottom-tab-bar" aria-label="Mobile navigation">
+  <div class="tab-items">
+    <button class="tab-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span>หน้าหลัก</span>
+    </button>
+    <button class="tab-item" style="position:relative;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <span>โน้ต</span>
+      <span class="tab-badge">42</span>
+    </button>
+    <button class="tab-item" style="position:relative;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>Todo</span>
+      <span class="tab-badge">7</span>
+    </button>
+    <button class="tab-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span>ค้นหา</span>
+    </button>
+    <button class="tab-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>ตั้งค่า</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Theme toggle
+  const toggle=document.getElementById('themeToggle'),html=document.documentElement;
+  if(localStorage.getItem('lungnote-dash-theme')==='dark')html.setAttribute('data-theme','dark');
+  toggle.addEventListener('click',()=>{const d=html.getAttribute('data-theme')==='dark';if(d){html.removeAttribute('data-theme');localStorage.setItem('lungnote-dash-theme','light')}else{html.setAttribute('data-theme','dark');localStorage.setItem('lungnote-dash-theme','dark')}});
+
+  // Bottom tab bar — active state toggle
+  document.querySelectorAll('.tab-item').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

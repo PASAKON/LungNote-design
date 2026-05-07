@@ -1,0 +1,348 @@
+
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote — LINE Flex Message Templates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#faf8f4;--surface:#fffef9;--border:#e0ddd4;--muted:#8a8578;--fg:#2c2a25;
+      --accent:#6aab8e;--accent-light:#e8f4ed;--yellow:#f0d87a;--yellow-light:#fdf6dc;
+      --red:#d4685a;--red-light:#fce8e5;--orange:#e8a946;--orange-light:#fdf6dc;
+      --font-display:'Caveat',cursive;
+      --font-body:'Sarabun',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;padding:40px 24px}
+    .sketchy-filter{position:absolute;width:0;height:0}
+    .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
+    .page-header{max-width:1200px;margin:0 auto 48px;text-align:center}
+    .page-label{font-family:var(--font-display);font-size:20px;color:var(--accent);font-weight:600;margin-bottom:4px}
+    .page-title{font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:700;line-height:1.1;margin-bottom:8px}
+    .page-desc{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto}
+    .templates-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+    @media(max-width:900px){.templates-grid{grid-template-columns:1fr}}
+    .template-block{display:flex;flex-direction:column;gap:16px}
+    .template-label{font-family:var(--font-display);font-size:28px;font-weight:700}
+    .template-desc{font-size:14px;color:var(--muted);margin-bottom:8px}
+    .phone-frame{width:375px;max-width:100%;margin:0 auto;background:#7b8b9a;border-radius:32px;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,.15)}
+    .phone-screen{background:#8cabd9;border-radius:22px;overflow:hidden;min-height:480px;display:flex;flex-direction:column}
+    .phone-status{height:44px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;background:rgba(0,0,0,.1)}
+    .phone-header{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(0,0,0,.1);color:#fff}
+    .phone-header .back-arrow{font-size:20px;opacity:.7}
+    .phone-header .chat-name{font-size:15px;font-weight:600}
+    .phone-chat{flex:1;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px}
+    .flex-bubble{background:#fff;border-radius:16px;overflow:hidden;max-width:300px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+    .flex-bubble.full-width{max-width:100%}
+    .fb-hero{position:relative;overflow:hidden}
+    .hero-placeholder{height:160px;display:flex;align-items:center;justify-content:center}
+    .fb-header{padding:16px 16px 0}
+    .fb-header-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:8px}
+    .fb-header-title{font-size:18px;font-weight:700;line-height:1.3;margin-bottom:4px}
+    .fb-header-sub{font-size:13px;color:#8a8578;line-height:1.4}
+    .fb-body{padding:12px 16px}
+    .fb-body p{font-size:14px;line-height:1.6;color:#2c2a25}
+    .fb-body .body-muted{color:#8a8578}
+    .fb-separator{height:1px;background:#e0ddd4;margin:0 16px}
+    .fb-info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 16px}
+    .fb-info-row .info-label{font-size:12px;color:#8a8578}
+    .fb-info-row .info-value{font-size:13px;font-weight:600;color:#2c2a25}
+    .fb-footer{padding:12px 16px 16px;display:flex;flex-direction:column;gap:8px}
+    .fb-btn{display:block;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:opacity .15s}
+    .fb-btn:hover{opacity:.85}
+    .fb-btn.primary{background:#6aab8e;color:#fff}
+    .fb-btn.secondary{background:#e8f4ed;color:#6aab8e}
+    .fb-btn.outline{background:transparent;border:1.5px solid #e0ddd4;color:#8a8578}
+    .fb-btn.danger{background:#fce8e5;color:#d4685a}
+    .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+    .status-dot.success{background:#6aab8e}
+    .status-dot.warning{background:#e8a946}
+    .status-dot.error{background:#d4685a}
+    .fb-stats{display:flex;gap:0;padding:0 16px 12px}
+    .fb-stat{flex:1;text-align:center;padding:12px 8px;position:relative}
+    .fb-stat+.fb-stat::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:#e0ddd4}
+    .fb-stat-val{font-size:22px;font-weight:700;color:#2c2a25;line-height:1}
+    .fb-stat-label{font-size:11px;color:#8a8578;margin-top:4px}
+    .fb-todo{display:flex;align-items:center;gap:10px;padding:6px 16px}
+    .fb-todo-box{width:16px;height:16px;border:2px solid #6aab8e;border-radius:3px;flex-shrink:0}
+    .fb-todo-box.done{background:#e8f4ed}
+    .fb-todo-box.done::after{content:'';display:block;width:6px;height:10px;border:solid #6aab8e;border-width:0 2px 2px 0;transform:rotate(42deg);margin:0 auto;margin-top:-1px}
+    .fb-todo-text{font-size:13px;color:#2c2a25}
+    .fb-todo-text.done{text-decoration:line-through;color:#c5c0b6}
+    .error-icon{width:64px;height:64px;border-radius:50%;background:#fce8e5;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+    .error-icon span{font-size:32px;color:#d4685a;font-weight:700}
+    .json-panel{position:relative;margin-top:12px}
+    .json-toggle{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--accent);cursor:pointer;border:none;background:none;padding:8px 0}
+    .json-toggle:hover{color:var(--fg)}
+    .json-content{display:none;background:var(--surface);border:2px solid var(--border);border-radius:4px;padding:16px;overflow-x:auto;max-height:400px;overflow-y:auto;position:relative}
+    .json-content.open{display:block}
+    .json-content pre{font-family:var(--font-mono);font-size:11px;line-height:1.5;color:var(--fg);white-space:pre;tab-size:2}
+    .copy-btn{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border:1.5px solid var(--border);border-radius:3px;background:var(--bg);color:var(--muted);cursor:pointer;transition:background .15s,color .15s}
+    .copy-btn:hover{background:var(--accent-light);color:var(--accent)}
+    .chat-time{font-size:11px;color:rgba(255,255,255,.5);text-align:right;margin-top:4px}
+  </style>
+</head>
+<body>
+<svg class="sketchy-filter" aria-hidden="true"><defs><filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+<div class="page-header">
+  <div class="page-label">LungNote LINE OA</div>
+  <h1 class="page-title"><span class="highlight-tape">Flex Message Templates</span></h1>
+  <p class="page-desc">4 templates พร้อมใช้ — welcome, dashboard link, notification, error. คลิก "Show JSON" เพื่อ copy ไปใช้ได้เลย</p>
+</div>
+<div class="templates-grid">
+  <!-- 1. WELCOME -->
+  <div class="template-block">
+    <div><div class="template-label">1. Welcome Card</div><div class="template-desc">ส่งเมื่อผู้ใช้เพิ่มเพื่อนหรือ login สำเร็จ</div></div>
+    <div class="phone-frame"><div class="phone-screen"><div class="phone-status">9:41</div><div class="phone-header"><span class="back-arrow">‹</span><span class="chat-name">LungNote</span></div><div class="phone-chat">
+      <div class="flex-bubble full-width">
+        <div class="fb-hero"><div class="hero-placeholder" style="background:linear-gradient(135deg,#e8f4ed 0%,#6aab8e 100%);height:140px;flex-direction:column;gap:4px;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" stroke="#fff" stroke-width="3" fill="none"/><path d="M14 24 L21 31 L34 16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <span style="font-family:'Caveat',cursive;font-size:28px;font-weight:700;color:#fff;">LungNote</span>
+        </div></div>
+        <div class="fb-header"><div class="fb-header-tag" style="background:#e8f4ed;color:#6aab8e;">Welcome</div><div class="fb-header-title">ยินดีต้อนรับสู่ LungNote!</div><div class="fb-header-sub">จดโน้ต เช็คลิสต์ และจัดระเบียบชีวิต — ทุกอย่างอยู่ในที่เดียว เริ่มต้นได้เลยวันนี้</div></div>
+        <div class="fb-body" style="padding:12px 16px 4px;"><p class="body-muted" style="font-size:12px;">✎ จดโน้ตด้วยฟอนต์ลายมือ &nbsp; ☑ Todo List &nbsp; 📁 จัดโฟลเดอร์</p></div>
+        <div class="fb-footer"><button class="fb-btn primary">เริ่มใช้งาน LungNote</button><button class="fb-btn secondary">ดูวิธีใช้งาน</button></div>
+      </div><div class="chat-time">14:30</div>
+    </div></div></div>
+    <div class="json-panel"><button class="json-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▶ Show JSON</button><div class="json-content"><button class="copy-btn" onclick="copyJson(this)">Copy</button>
+<pre>{
+  "type": "flex",
+  "altText": "ยินดีต้อนรับสู่ LungNote!",
+  "contents": {
+    "type": "bubble",
+    "size": "giga",
+    "hero": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "image",
+          "url": "https://lungnote.app/assets/line/welcome-hero.png",
+          "size": "full",
+          "aspectRatio": "20:9",
+          "aspectMode": "cover"
+        }
+      ]
+    },
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [{ "type": "text", "text": "WELCOME", "size": "xxs", "color": "#6aab8e", "weight": "bold" }],
+          "backgroundColor": "#e8f4ed", "cornerRadius": "sm", "paddingAll": "4px", "paddingStart": "8px", "paddingEnd": "8px", "width": "80px"
+        },
+        { "type": "text", "text": "ยินดีต้อนรับสู่ LungNote!", "weight": "bold", "size": "xl", "margin": "md", "color": "#2c2a25" },
+        { "type": "text", "text": "จดโน้ต เช็คลิสต์ และจัดระเบียบชีวิต — ทุกอย่างอยู่ในที่เดียว เริ่มต้นได้เลยวันนี้", "size": "sm", "color": "#8a8578", "wrap": true, "margin": "sm" }
+      ],
+      "paddingAll": "16px", "paddingBottom": "0px"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [{ "type": "text", "text": "✎ จดโน้ตด้วยฟอนต์ลายมือ  ☑ Todo List  📁 จัดโฟลเดอร์", "size": "xs", "color": "#8a8578", "wrap": true }],
+      "paddingAll": "16px", "paddingTop": "8px"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        { "type": "button", "style": "primary", "color": "#6aab8e", "action": { "type": "uri", "label": "เริ่มใช้งาน LungNote", "uri": "https://liff.line.me/YOUR_LIFF_ID" }, "height": "md" },
+        { "type": "button", "style": "secondary", "color": "#e8f4ed", "action": { "type": "uri", "label": "ดูวิธีใช้งาน", "uri": "https://lungnote.app/help" }, "height": "md" }
+      ],
+      "paddingAll": "16px"
+    },
+    "styles": { "hero": { "backgroundColor": "#e8f4ed" }, "footer": { "separator": false } }
+  }
+}</pre></div></div>
+  </div>
+
+  <!-- 2. DASHBOARD LINK -->
+  <div class="template-block">
+    <div><div class="template-label">2. Dashboard Link Card</div><div class="template-desc">สรุปสถิติย่อ + ลิงก์เข้า Dashboard</div></div>
+    <div class="phone-frame"><div class="phone-screen"><div class="phone-status">9:41</div><div class="phone-header"><span class="back-arrow">‹</span><span class="chat-name">LungNote</span></div><div class="phone-chat">
+      <div class="flex-bubble full-width">
+        <div class="fb-header"><div class="fb-header-tag" style="background:#e8f4ed;color:#6aab8e;">Dashboard</div><div class="fb-header-title">สรุปโน้ตของคุณ</div><div class="fb-header-sub">อัพเดทล่าสุด วันนี้ 14:30</div></div>
+        <div class="fb-stats"><div class="fb-stat"><div class="fb-stat-val" style="color:#6aab8e;">42</div><div class="fb-stat-label">โน้ต</div></div><div class="fb-stat"><div class="fb-stat-val" style="color:#e8a946;">7</div><div class="fb-stat-label">Todo เหลือ</div></div><div class="fb-stat"><div class="fb-stat-val" style="color:#2c2a25;">12</div><div class="fb-stat-label">วัน Streak</div></div></div>
+        <div class="fb-separator"></div>
+        <div style="padding:8px 0;"><div class="fb-todo"><div class="fb-todo-box done"></div><span class="fb-todo-text done">อ่านบท 5 ฟิสิกส์</span></div><div class="fb-todo"><div class="fb-todo-box done"></div><span class="fb-todo-text done">ส่งรายงานกลุ่ม</span></div><div class="fb-todo"><div class="fb-todo-box"></div><span class="fb-todo-text">ทบทวนศัพท์ 20 คำ</span></div></div>
+        <div class="fb-footer"><button class="fb-btn primary">เปิด Dashboard</button><button class="fb-btn outline">สร้างโน้ตใหม่</button></div>
+      </div><div class="chat-time">14:30</div>
+    </div></div></div>
+    <div class="json-panel"><button class="json-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▶ Show JSON</button><div class="json-content"><button class="copy-btn" onclick="copyJson(this)">Copy</button>
+<pre>{
+  "type": "flex",
+  "altText": "สรุปโน้ตของคุณ — LungNote Dashboard",
+  "contents": {
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "DASHBOARD", "size": "xxs", "color": "#6aab8e", "weight": "bold" }], "backgroundColor": "#e8f4ed", "cornerRadius": "sm", "paddingAll": "4px", "paddingStart": "8px", "paddingEnd": "8px", "width": "95px" },
+        { "type": "text", "text": "สรุปโน้ตของคุณ", "weight": "bold", "size": "xl", "margin": "md", "color": "#2c2a25" },
+        { "type": "text", "text": "อัพเดทล่าสุด วันนี้ 14:30", "size": "xs", "color": "#8a8578", "margin": "sm" }
+      ],
+      "paddingAll": "16px", "paddingBottom": "12px"
+    },
+    "body": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "box", "layout": "horizontal", "contents": [
+          { "type": "box", "layout": "vertical", "contents": [{ "type": "text", "text": "42", "size": "xxl", "weight": "bold", "color": "#6aab8e", "align": "center" }, { "type": "text", "text": "โน้ต", "size": "xxs", "color": "#8a8578", "align": "center" }], "flex": 1 },
+          { "type": "separator", "color": "#e0ddd4" },
+          { "type": "box", "layout": "vertical", "contents": [{ "type": "text", "text": "7", "size": "xxl", "weight": "bold", "color": "#e8a946", "align": "center" }, { "type": "text", "text": "Todo เหลือ", "size": "xxs", "color": "#8a8578", "align": "center" }], "flex": 1 },
+          { "type": "separator", "color": "#e0ddd4" },
+          { "type": "box", "layout": "vertical", "contents": [{ "type": "text", "text": "12", "size": "xxl", "weight": "bold", "color": "#2c2a25", "align": "center" }, { "type": "text", "text": "วัน Streak", "size": "xxs", "color": "#8a8578", "align": "center" }], "flex": 1 }
+        ], "paddingBottom": "12px" },
+        { "type": "separator", "color": "#e0ddd4" },
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "☑", "size": "sm", "flex": 0 }, { "type": "text", "text": "อ่านบท 5 ฟิสิกส์", "size": "sm", "color": "#c5c0b6", "decoration": "line-through", "margin": "sm" }], "margin": "md", "paddingTop": "8px" },
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "☑", "size": "sm", "flex": 0 }, { "type": "text", "text": "ส่งรายงานกลุ่ม", "size": "sm", "color": "#c5c0b6", "decoration": "line-through", "margin": "sm" }], "margin": "sm" },
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "☐", "size": "sm", "flex": 0, "color": "#6aab8e" }, { "type": "text", "text": "ทบทวนศัพท์ 20 คำ", "size": "sm", "color": "#2c2a25", "margin": "sm" }], "margin": "sm" }
+      ],
+      "paddingAll": "16px", "paddingTop": "0px"
+    },
+    "footer": {
+      "type": "box", "layout": "vertical", "spacing": "sm",
+      "contents": [
+        { "type": "button", "style": "primary", "color": "#6aab8e", "action": { "type": "uri", "label": "เปิด Dashboard", "uri": "https://liff.line.me/YOUR_LIFF_ID/dashboard" }, "height": "md" },
+        { "type": "button", "style": "link", "color": "#8a8578", "action": { "type": "uri", "label": "สร้างโน้ตใหม่", "uri": "https://liff.line.me/YOUR_LIFF_ID/new" }, "height": "sm" }
+      ],
+      "paddingAll": "16px"
+    }
+  }
+}</pre></div></div>
+  </div>
+
+  <!-- 3. NOTIFICATION -->
+  <div class="template-block">
+    <div><div class="template-label">3. Notification Card</div><div class="template-desc">แจ้งเตือน Todo ใกล้ครบ / เลยกำหนด</div></div>
+    <div class="phone-frame"><div class="phone-screen"><div class="phone-status">9:41</div><div class="phone-header"><span class="back-arrow">‹</span><span class="chat-name">LungNote</span></div><div class="phone-chat">
+      <div class="flex-bubble full-width">
+        <div class="fb-header" style="padding-bottom:8px;"><div class="fb-header-tag" style="background:#fdf6dc;color:#e8a946;">Reminder</div><div class="fb-header-title">มีงานใกล้ครบกำหนด!</div><div class="fb-header-sub">2 รายการต้องทำภายในสัปดาห์นี้</div></div>
+        <div class="fb-separator"></div>
+        <div style="padding:12px 16px;">
+          <div class="fb-info-row" style="padding:8px 0;border-bottom:1px solid #e0ddd4;"><div><div style="font-size:14px;font-weight:600;color:#2c2a25;"><span class="status-dot warning"></span>ทบทวนศัพท์ Unit 8</div><div style="font-size:12px;color:#8a8578;margin-top:2px;">อังกฤษ · กำหนด: พรุ่งนี้</div></div><span style="font-size:12px;font-weight:600;color:#e8a946;">เหลือ 1 วัน</span></div>
+          <div class="fb-info-row" style="padding:8px 0;"><div><div style="font-size:14px;font-weight:600;color:#2c2a25;"><span class="status-dot error"></span>รายงาน Lab ฟิสิกส์ 4</div><div style="font-size:12px;color:#8a8578;margin-top:2px;">ฟิสิกส์ · กำหนด: 5 พ.ค.</div></div><span style="font-size:12px;font-weight:600;color:#d4685a;">เลย 3 วัน</span></div>
+        </div>
+        <div class="fb-footer"><button class="fb-btn primary">ดูรายละเอียด</button><button class="fb-btn outline">ปิดการแจ้งเตือน</button></div>
+      </div><div class="chat-time">08:00</div>
+    </div></div></div>
+    <div class="json-panel"><button class="json-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▶ Show JSON</button><div class="json-content"><button class="copy-btn" onclick="copyJson(this)">Copy</button>
+<pre>{
+  "type": "flex",
+  "altText": "มีงานใกล้ครบกำหนด! — LungNote",
+  "contents": {
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "REMINDER", "size": "xxs", "color": "#e8a946", "weight": "bold" }], "backgroundColor": "#fdf6dc", "cornerRadius": "sm", "paddingAll": "4px", "paddingStart": "8px", "paddingEnd": "8px", "width": "85px" },
+        { "type": "text", "text": "มีงานใกล้ครบกำหนด!", "weight": "bold", "size": "xl", "margin": "md", "color": "#2c2a25" },
+        { "type": "text", "text": "2 รายการต้องทำภายในสัปดาห์นี้", "size": "xs", "color": "#8a8578", "margin": "sm" }
+      ],
+      "paddingAll": "16px", "paddingBottom": "12px"
+    },
+    "body": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "separator", "color": "#e0ddd4" },
+        { "type": "box", "layout": "horizontal", "contents": [
+          { "type": "box", "layout": "vertical", "contents": [
+            { "type": "text", "text": "⚠ ทบทวนศัพท์ Unit 8", "size": "sm", "weight": "bold", "color": "#2c2a25" },
+            { "type": "text", "text": "อังกฤษ · กำหนด: พรุ่งนี้", "size": "xxs", "color": "#8a8578", "margin": "xs" }
+          ], "flex": 4 },
+          { "type": "text", "text": "เหลือ 1 วัน", "size": "xxs", "weight": "bold", "color": "#e8a946", "align": "end", "flex": 2, "gravity": "center" }
+        ], "margin": "lg", "paddingBottom": "12px" },
+        { "type": "separator", "color": "#e0ddd4" },
+        { "type": "box", "layout": "horizontal", "contents": [
+          { "type": "box", "layout": "vertical", "contents": [
+            { "type": "text", "text": "🔴 รายงาน Lab ฟิสิกส์ 4", "size": "sm", "weight": "bold", "color": "#2c2a25" },
+            { "type": "text", "text": "ฟิสิกส์ · กำหนด: 5 พ.ค.", "size": "xxs", "color": "#8a8578", "margin": "xs" }
+          ], "flex": 4 },
+          { "type": "text", "text": "เลย 3 วัน", "size": "xxs", "weight": "bold", "color": "#d4685a", "align": "end", "flex": 2, "gravity": "center" }
+        ], "margin": "lg" }
+      ],
+      "paddingAll": "16px", "paddingTop": "0px"
+    },
+    "footer": {
+      "type": "box", "layout": "vertical", "spacing": "sm",
+      "contents": [
+        { "type": "button", "style": "primary", "color": "#6aab8e", "action": { "type": "uri", "label": "ดูรายละเอียด", "uri": "https://liff.line.me/YOUR_LIFF_ID/todos" }, "height": "md" },
+        { "type": "button", "style": "link", "color": "#8a8578", "action": { "type": "postback", "label": "ปิดการแจ้งเตือน", "data": "action=dismiss_reminder" }, "height": "sm" }
+      ],
+      "paddingAll": "16px"
+    }
+  }
+}</pre></div></div>
+  </div>
+
+  <!-- 4. ERROR -->
+  <div class="template-block">
+    <div><div class="template-label">4. Error Card</div><div class="template-desc">แจ้งเมื่อเกิดข้อผิดพลาด — login fail, sync error</div></div>
+    <div class="phone-frame"><div class="phone-screen"><div class="phone-status">9:41</div><div class="phone-header"><span class="back-arrow">‹</span><span class="chat-name">LungNote</span></div><div class="phone-chat">
+      <div class="flex-bubble full-width">
+        <div class="fb-header" style="text-align:center;padding-top:24px;">
+          <div class="error-icon"><span>!</span></div>
+          <div class="fb-header-tag" style="background:#fce8e5;color:#d4685a;margin:0 auto 8px;">Error</div>
+          <div class="fb-header-title" style="text-align:center;">เชื่อมต่อไม่สำเร็จ</div>
+          <div class="fb-header-sub" style="text-align:center;">ไม่สามารถ sync โน้ตของคุณได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง</div>
+        </div>
+        <div class="fb-body" style="padding-top:8px;">
+          <div class="fb-info-row" style="padding:6px 0;"><span class="info-label">Error Code</span><span class="info-value" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#d4685a;">SYNC_TIMEOUT_408</span></div>
+          <div class="fb-info-row" style="padding:6px 0;"><span class="info-label">เวลา</span><span class="info-value">8 พ.ค. 69, 14:32</span></div>
+        </div>
+        <div class="fb-footer"><button class="fb-btn primary">ลองใหม่อีกครั้ง</button><button class="fb-btn danger">แจ้งปัญหา</button></div>
+      </div><div class="chat-time">14:32</div>
+    </div></div></div>
+    <div class="json-panel"><button class="json-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▶ Show JSON</button><div class="json-content"><button class="copy-btn" onclick="copyJson(this)">Copy</button>
+<pre>{
+  "type": "flex",
+  "altText": "เชื่อมต่อไม่สำเร็จ — LungNote",
+  "contents": {
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "box", "layout": "vertical", "contents": [{ "type": "text", "text": "!", "size": "3xl", "weight": "bold", "color": "#d4685a", "align": "center" }], "width": "64px", "height": "64px", "backgroundColor": "#fce8e5", "cornerRadius": "50px", "justifyContent": "center", "alignItems": "center", "offsetStart": "calc(50% - 32px)" },
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "ERROR", "size": "xxs", "color": "#d4685a", "weight": "bold" }], "backgroundColor": "#fce8e5", "cornerRadius": "sm", "paddingAll": "4px", "paddingStart": "8px", "paddingEnd": "8px", "width": "60px", "margin": "md", "offsetStart": "calc(50% - 30px)" },
+        { "type": "text", "text": "เชื่อมต่อไม่สำเร็จ", "weight": "bold", "size": "xl", "margin": "md", "color": "#2c2a25", "align": "center" },
+        { "type": "text", "text": "ไม่สามารถ sync โน้ตของคุณได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง", "size": "sm", "color": "#8a8578", "wrap": true, "margin": "sm", "align": "center" }
+      ],
+      "paddingAll": "20px", "paddingTop": "24px"
+    },
+    "body": {
+      "type": "box", "layout": "vertical",
+      "contents": [
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "Error Code", "size": "xs", "color": "#8a8578", "flex": 3 }, { "type": "text", "text": "SYNC_TIMEOUT_408", "size": "xs", "weight": "bold", "color": "#d4685a", "align": "end", "flex": 4 }], "paddingBottom": "8px" },
+        { "type": "box", "layout": "horizontal", "contents": [{ "type": "text", "text": "เวลา", "size": "xs", "color": "#8a8578", "flex": 3 }, { "type": "text", "text": "8 พ.ค. 69, 14:32", "size": "xs", "weight": "bold", "color": "#2c2a25", "align": "end", "flex": 4 }] }
+      ],
+      "paddingAll": "16px", "paddingTop": "8px"
+    },
+    "footer": {
+      "type": "box", "layout": "vertical", "spacing": "sm",
+      "contents": [
+        { "type": "button", "style": "primary", "color": "#6aab8e", "action": { "type": "postback", "label": "ลองใหม่อีกครั้ง", "data": "action=retry_sync" }, "height": "md" },
+        { "type": "button", "style": "secondary", "color": "#fce8e5", "action": { "type": "uri", "label": "แจ้งปัญหา", "uri": "https://lungnote.app/support" }, "height": "md" }
+      ],
+      "paddingAll": "16px"
+    }
+  }
+}</pre></div></div>
+  </div>
+</div>
+<script>
+function copyJson(btn){const pre=btn.parentElement.querySelector('pre');navigator.clipboard.writeText(pre.textContent).then(()=>{btn.textContent='Copied!';btn.style.background='#e8f4ed';btn.style.color='#6aab8e';setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color=''},2000)})}
+</script>
+</body>
+</html>

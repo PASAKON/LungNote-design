@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2500" height="1686" viewBox="0 0 2500 1686">
+  <defs>
+    <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="4" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2500" height="1686" fill="#faf8f4"/>
+
+  <!-- Grid lines (cell borders) -->
+  <g opacity="0.15" stroke="#2c2a25" stroke-width="2">
+    <line x1="0" y1="843" x2="2500" y2="843"/>
+    <line x1="833" y1="0" x2="833" y2="1686"/>
+    <line x1="1667" y1="0" x2="1667" y2="1686"/>
+  </g>
+
+  <!-- Decorative ruled lines (subtle notebook lines) -->
+  <g opacity="0.05" stroke="#2c2a25" stroke-width="1">
+    <line x1="0" y1="140" x2="2500" y2="140"/>
+    <line x1="0" y1="200" x2="2500" y2="200"/>
+    <line x1="0" y1="260" x2="2500" y2="260"/>
+    <line x1="0" y1="320" x2="2500" y2="320"/>
+    <line x1="0" y1="500" x2="2500" y2="500"/>
+    <line x1="0" y1="560" x2="2500" y2="560"/>
+    <line x1="0" y1="620" x2="2500" y2="620"/>
+    <line x1="0" y1="680" x2="2500" y2="680"/>
+    <line x1="0" y1="740" x2="2500" y2="740"/>
+    <line x1="0" y1="980" x2="2500" y2="980"/>
+    <line x1="0" y1="1040" x2="2500" y2="1040"/>
+    <line x1="0" y1="1100" x2="2500" y2="1100"/>
+    <line x1="0" y1="1160" x2="2500" y2="1160"/>
+    <line x1="0" y1="1340" x2="2500" y2="1340"/>
+    <line x1="0" y1="1400" x2="2500" y2="1400"/>
+    <line x1="0" y1="1460" x2="2500" y2="1460"/>
+    <line x1="0" y1="1520" x2="2500" y2="1520"/>
+    <line x1="0" y1="1580" x2="2500" y2="1580"/>
+  </g>
+
+  <!-- Cell centers:
+       Row 1: y=421  (0-843 midpoint)
+       Row 2: y=1264 (843-1686 midpoint)
+       Col 1: x=417  (0-833 midpoint)
+       Col 2: x=1250 (833-1667 midpoint)
+       Col 3: x=2083 (1667-2500 midpoint)
+
+       Layout: icon centered at (cx, cy-40), text at (cx, cy+80)
+  -->
+
+  <!-- ══ BUTTON 1: Dashboard (top-left) ══ -->
+  <g filter="url(#sketchy)">
+    <rect x="367" y="316" width="44" height="44" rx="5" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <rect x="421" y="316" width="44" height="44" rx="5" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <rect x="367" y="370" width="44" height="44" rx="5" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <rect x="421" y="370" width="44" height="44" rx="5" stroke="#2c2a25" stroke-width="5" fill="none"/>
+  </g>
+  <text x="417" y="500" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">Dashboard</text>
+
+  <!-- ══ BUTTON 2: Notes (top-center) ══ -->
+  <g filter="url(#sketchy)">
+    <!-- Notepad with lines -->
+    <rect x="1210" y="310" width="80" height="100" rx="6" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <line x1="1222" y1="340" x2="1278" y2="340" stroke="#2c2a25" stroke-width="3.5" opacity="0.5"/>
+    <line x1="1222" y1="360" x2="1270" y2="360" stroke="#2c2a25" stroke-width="3.5" opacity="0.5"/>
+    <line x1="1222" y1="380" x2="1260" y2="380" stroke="#2c2a25" stroke-width="3.5" opacity="0.5"/>
+    <!-- Pencil -->
+    <line x1="1274" y1="306" x2="1298" y2="280" stroke="#2c2a25" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="1298" cy="278" r="4" fill="#6aab8e"/>
+  </g>
+  <text x="1250" y="500" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">Notes</text>
+
+  <!-- ══ BUTTON 3: Help (top-right) ══ -->
+  <g filter="url(#sketchy)">
+    <circle cx="2083" cy="360" r="52" stroke="#2c2a25" stroke-width="5" fill="none"/>
+  </g>
+  <text x="2083" y="378" font-family="'Sarabun', sans-serif" font-size="68" font-weight="700" fill="#2c2a25" text-anchor="middle">?</text>
+  <text x="2083" y="500" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">Help</text>
+
+  <!-- ══ BUTTON 4: Settings (bottom-left) ══ -->
+  <g filter="url(#sketchy)">
+    <circle cx="417" cy="1200" r="22" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <circle cx="417" cy="1200" r="44" stroke="#2c2a25" stroke-width="4" fill="none" stroke-dasharray="16 11"/>
+  </g>
+  <text x="417" y="1340" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">Settings</text>
+
+  <!-- ══ BUTTON 5: Web (bottom-center) ══ -->
+  <g filter="url(#sketchy)">
+    <circle cx="1250" cy="1200" r="48" stroke="#2c2a25" stroke-width="5" fill="none"/>
+    <ellipse cx="1250" cy="1200" rx="22" ry="48" stroke="#2c2a25" stroke-width="3.5" fill="none"/>
+    <line x1="1202" y1="1200" x2="1298" y2="1200" stroke="#2c2a25" stroke-width="3.5"/>
+    <line x1="1208" y1="1176" x2="1292" y2="1176" stroke="#2c2a25" stroke-width="2.5"/>
+    <line x1="1208" y1="1224" x2="1292" y2="1224" stroke="#2c2a25" stroke-width="2.5"/>
+  </g>
+  <text x="1250" y="1340" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">Web</text>
+
+  <!-- ══ BUTTON 6: About (bottom-right) ══ -->
+  <g filter="url(#sketchy)">
+    <circle cx="2083" cy="1200" r="52" stroke="#2c2a25" stroke-width="5" fill="none"/>
+  </g>
+  <text x="2083" y="1192" font-family="'Sarabun', sans-serif" font-size="32" font-weight="700" fill="#2c2a25" text-anchor="middle">LungNote</text>
+  <text x="2083" y="1224" font-family="'Sarabun', sans-serif" font-size="28" font-weight="500" fill="#8a8578" text-anchor="middle">v1.0</text>
+  <text x="2083" y="1340" font-family="'Sarabun', sans-serif" font-size="52" font-weight="600" fill="#2c2a25" text-anchor="middle">About</text>
+
+  <!-- Accent dots decoration (corners) -->
+  <circle cx="60" cy="60" r="10" fill="#6aab8e" opacity="0.25"/>
+  <circle cx="2440" cy="60" r="10" fill="#6aab8e" opacity="0.25"/>
+  <circle cx="60" cy="1626" r="10" fill="#6aab8e" opacity="0.25"/>
+  <circle cx="2440" cy="1626" r="10" fill="#6aab8e" opacity="0.25"/>
+
+  <!-- Center watermark (LungNote logo - checkbox) -->
+  <g opacity="0.06">
+    <rect x="1190" y="790" width="120" height="100" rx="10" stroke="#2c2a25" stroke-width="7" fill="none"/>
+    <path d="M1218,838 L1238,858 L1272,818" stroke="#2c2a25" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

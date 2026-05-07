@@ -1,0 +1,35 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": true,
+  "name": "LungNote Default Rich Menu",
+  "chatBarText": "เมนู LungNote",
+  "areas": [
+    {
+      "bounds": { "x": 0, "y": 0, "width": 833, "height": 843 },
+      "action": { "type": "uri", "label": "Dashboard", "uri": "https://liff.line.me/YOUR_LIFF_ID/dashboard" }
+    },
+    {
+      "bounds": { "x": 833, "y": 0, "width": 834, "height": 843 },
+      "action": { "type": "uri", "label": "Notes", "uri": "https://liff.line.me/YOUR_LIFF_ID/notes" }
+    },
+    {
+      "bounds": { "x": 1667, "y": 0, "width": 833, "height": 843 },
+      "action": { "type": "uri", "label": "Help", "uri": "https://lungnote.app/help" }
+    },
+    {
+      "bounds": { "x": 0, "y": 843, "width": 833, "height": 843 },
+      "action": { "type": "uri", "label": "Settings", "uri": "https://liff.line.me/YOUR_LIFF_ID/settings" }
+    },
+    {
+      "bounds": { "x": 833, "y": 843, "width": 834, "height": 843 },
+      "action": { "type": "uri", "label": "Web", "uri": "https://lungnote.app" }
+    },
+    {
+      "bounds": { "x": 1667, "y": 843, "width": 833, "height": 843 },
+      "action": { "type": "uri", "label": "About", "uri": "https://lungnote.app/about" }
+    }
+  ]
+}
