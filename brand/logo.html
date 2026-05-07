@@ -25,7 +25,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--fg); font: 400 17px/1.7 var(--font-body); -webkit-font-smoothing: antialiased; }
-    .sketchy-filter { position: absolute; width: 0; height: 0; }
 
     .page {
       width: 100%;
@@ -46,7 +45,7 @@
     .highlight-tape { display: inline; background: linear-gradient(to bottom, transparent 55%, var(--yellow) 55%, var(--yellow) 90%, transparent 90%); padding: 0 4px; }
 
     .sketch-box { position: relative; background: var(--surface); }
-    .sketch-box::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 3px; filter: url(#sketchy); pointer-events: none; z-index: 1; }
+    .sketch-box::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 3px;  pointer-events: none; z-index: 1; }
 
     .section-head { font-family: var(--font-display); font-size: 32px; font-weight: 700; margin-bottom: 24px; margin-top: 48px; }
     .mono-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); display: block; margin-bottom: 12px; }
@@ -97,7 +96,7 @@
       inset: -2px;
       border: 2.5px solid var(--fg);
       border-radius: 22%;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -138,14 +137,14 @@
       inset: -2px;
       border: 2.5px solid var(--fg);
       border-radius: 50%;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
 
     /* Nav dots */
     .page-nav { position: fixed; right: 24px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 100; }
-    .page-nav a { display: block; width: 10px; height: 10px; border: 2px solid var(--fg); border-radius: 50%; filter: url(#sketchy); transition: background 0.2s; }
+    .page-nav a { display: block; width: 10px; height: 10px; border: 2px solid var(--fg); border-radius: 50%;  transition: background 0.2s; }
     .page-nav a:hover, .page-nav a.active { background: var(--accent); border-color: var(--accent); }
 
     @media (max-width: 768px) {
@@ -160,15 +159,6 @@
   </style>
 </head>
 <body>
-
-<svg class="sketchy-filter" aria-hidden="true">
-  <defs>
-    <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </defs>
-</svg>
 
 <nav class="page-nav">
   <a href="#dir-1" title="Direction A" class="active"></a>
@@ -191,7 +181,7 @@
       <div class="sketch-box logo-cell">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- L with checkmark -->
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M8 8 L8 44 L28 44" stroke="#2c2a25" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M12 32 L18 38 L28 24" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -200,7 +190,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M8 8 L8 44 L28 44" stroke="#e8e6e0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M12 32 L18 38 L28 24" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -209,7 +199,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M8 8 L8 44 L28 44" stroke="#fffef9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M12 32 L18 38 L28 24" stroke="#fffef9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -222,7 +212,7 @@
     <div class="logo-row">
       <div class="sketch-box logo-cell">
         <svg width="280" height="56" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="4" y="8" width="40" height="40" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
             <path d="M14 28 L22 36 L36 18" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -231,7 +221,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="280" height="56" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="4" y="8" width="40" height="40" rx="4" stroke="#e8e6e0" stroke-width="3" fill="none"/>
             <path d="M14 28 L22 36 L36 18" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -240,7 +230,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="280" height="56" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="4" y="8" width="40" height="40" rx="4" stroke="#fffef9" stroke-width="3" fill="none"/>
             <path d="M14 28 L22 36 L36 18" stroke="#fffef9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -254,7 +244,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:120px;height:120px;background:var(--surface);">
           <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <rect x="10" y="10" width="52" height="52" rx="6" stroke="#2c2a25" stroke-width="4" fill="none"/>
               <path d="M22 36 L32 46 L52 22" stroke="#2c2a25" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>
@@ -265,7 +255,7 @@
       <div class="icon-frame">
         <div class="icon-box dark" style="width:120px;height:120px;background:#1e1e1c;">
           <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <rect x="10" y="10" width="52" height="52" rx="6" stroke="#e8e6e0" stroke-width="4" fill="none"/>
               <path d="M22 36 L32 46 L52 22" stroke="#e8e6e0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>
@@ -276,7 +266,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:64px;height:64px;background:var(--surface);">
           <svg width="40" height="40" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <rect x="10" y="10" width="52" height="52" rx="6" stroke="#2c2a25" stroke-width="4" fill="none"/>
               <path d="M22 36 L32 46 L52 22" stroke="#2c2a25" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>
@@ -287,7 +277,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:32px;height:32px;background:var(--surface);">
           <svg width="20" height="20" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <rect x="10" y="10" width="52" height="52" rx="6" stroke="#2c2a25" stroke-width="5" fill="none"/>
               <path d="M22 36 L32 46 L52 22" stroke="#2c2a25" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>
@@ -301,7 +291,7 @@
     <div class="usage-strip">
       <div class="sketch-box usage-mock nav-mock">
         <svg width="160" height="36" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="4" y="8" width="40" height="40" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
             <path d="M14 28 L22 36 L36 18" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -311,7 +301,7 @@
       </div>
       <div class="social-mock" style="background:var(--surface);">
         <svg width="48" height="48" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <rect x="10" y="10" width="52" height="52" rx="6" stroke="#2c2a25" stroke-width="4" fill="none"/>
             <path d="M22 36 L32 46 L52 22" stroke="#2c2a25" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </g>
@@ -335,7 +325,7 @@
     <div class="logo-row">
       <div class="sketch-box logo-cell">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <!-- open notebook shape as L -->
             <path d="M6 8 C6 8 6 44 6 44 L14 44 L14 8" stroke="#2c2a25" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M14 8 L14 44 L30 44 L30 8" stroke="#2c2a25" stroke-width="3" stroke-linecap="round" fill="none"/>
@@ -350,7 +340,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M6 8 C6 8 6 44 6 44 L14 44 L14 8" stroke="#e8e6e0" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M14 8 L14 44 L30 44 L30 8" stroke="#e8e6e0" stroke-width="3" stroke-linecap="round" fill="none"/>
             <line x1="17" y1="16" x2="27" y2="16" stroke="#e8e6e0" stroke-width="1.5" opacity="0.4"/>
@@ -362,7 +352,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M6 8 C6 8 6 44 6 44 L14 44 L14 8" stroke="#fffef9" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M14 8 L14 44 L30 44 L30 8" stroke="#fffef9" stroke-width="3" stroke-linecap="round" fill="none"/>
             <line x1="17" y1="16" x2="27" y2="16" stroke="#fffef9" stroke-width="1.5" opacity="0.4"/>
@@ -378,7 +368,7 @@
     <div class="logo-row">
       <div class="sketch-box logo-cell">
         <svg width="300" height="56" viewBox="0 0 300 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <!-- Bigger notebook -->
             <path d="M4 4 L4 48 L22 48 L22 4 Z" stroke="#2c2a25" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M22 4 L22 48 L44 48 L44 4 Z" stroke="#2c2a25" stroke-width="3" stroke-linecap="round" fill="none"/>
@@ -393,7 +383,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="300" height="56" viewBox="0 0 300 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M4 4 L4 48 L22 48 L22 4 Z" stroke="#e8e6e0" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M22 4 L22 48 L44 48 L44 4 Z" stroke="#e8e6e0" stroke-width="3" stroke-linecap="round" fill="none"/>
             <line x1="26" y1="14" x2="40" y2="14" stroke="#e8e6e0" stroke-width="1.5" opacity="0.3"/>
@@ -407,7 +397,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="300" height="56" viewBox="0 0 300 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M4 4 L4 48 L22 48 L22 4 Z" stroke="#fffef9" stroke-width="3" stroke-linecap="round" fill="none"/>
             <path d="M22 4 L22 48 L44 48 L44 4 Z" stroke="#fffef9" stroke-width="3" stroke-linecap="round" fill="none"/>
             <line x1="26" y1="14" x2="40" y2="14" stroke="#fffef9" stroke-width="1.5" opacity="0.3"/>
@@ -426,7 +416,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:120px;height:120px;background:var(--surface);">
           <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M12 8 L12 68 L36 68 L36 8 Z" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" fill="none"/>
               <path d="M36 8 L36 68 L64 68 L64 8 Z" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" fill="none"/>
               <line x1="42" y1="22" x2="58" y2="22" stroke="#2c2a25" stroke-width="2" opacity="0.3"/>
@@ -442,7 +432,7 @@
       <div class="icon-frame">
         <div class="icon-box dark" style="width:120px;height:120px;background:#1e1e1c;">
           <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M12 8 L12 68 L36 68 L36 8 Z" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" fill="none"/>
               <path d="M36 8 L36 68 L64 68 L64 8 Z" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" fill="none"/>
               <line x1="42" y1="22" x2="58" y2="22" stroke="#e8e6e0" stroke-width="2" opacity="0.3"/>
@@ -458,7 +448,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:64px;height:64px;background:var(--surface);">
           <svg width="44" height="44" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M12 8 L12 68 L36 68 L36 8 Z" stroke="#2c2a25" stroke-width="4" stroke-linecap="round" fill="none"/>
               <path d="M36 8 L36 68 L64 68 L64 8 Z" stroke="#2c2a25" stroke-width="4" stroke-linecap="round" fill="none"/>
               <path d="M18 28 L24 34 L32 22" stroke="#2c2a25" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -486,7 +476,7 @@
     <div class="logo-row">
       <div class="sketch-box logo-cell">
         <svg width="260" height="56" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <!-- Pencil drawing a checkmark -->
             <path d="M8 32 L16 40 L30 18" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <!-- Pencil tip at end of check -->
@@ -498,7 +488,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="260" height="56" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M8 32 L16 40 L30 18" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M28 20 L32 14 L34 16 L30 22" stroke="#e8e6e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <line x1="32" y1="14" x2="36" y2="8" stroke="#e8e6e0" stroke-width="2.5" stroke-linecap="round"/>
@@ -508,7 +498,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="260" height="56" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M8 32 L16 40 L30 18" stroke="#fffef9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M28 20 L32 14 L34 16 L30 22" stroke="#fffef9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <line x1="32" y1="14" x2="36" y2="8" stroke="#fffef9" stroke-width="2.5" stroke-linecap="round"/>
@@ -522,7 +512,7 @@
     <div class="logo-row">
       <div class="sketch-box logo-cell">
         <svg width="290" height="56" viewBox="0 0 290 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <!-- Pencil body -->
             <path d="M34 6 L42 6 L42 36 L38 44 L34 36 Z" stroke="#2c2a25" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
             <!-- Pencil tip -->
@@ -535,7 +525,7 @@
       </div>
       <div class="sketch-box logo-cell dark-bg">
         <svg width="290" height="56" viewBox="0 0 290 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M34 6 L42 6 L42 36 L38 44 L34 36 Z" stroke="#e8e6e0" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
             <path d="M34 36 L38 48 L42 36" stroke="#e8e6e0" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
             <path d="M10 32 L22 42 L36 46" stroke="#e8e6e0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="3 2"/>
@@ -545,7 +535,7 @@
       </div>
       <div class="sketch-box logo-cell mint-bg">
         <svg width="290" height="56" viewBox="0 0 290 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#sketchy)">
+          <g>
             <path d="M34 6 L42 6 L42 36 L38 44 L34 36 Z" stroke="#fffef9" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
             <path d="M34 36 L38 48 L42 36" stroke="#fffef9" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
             <path d="M10 32 L22 42 L36 46" stroke="#fffef9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="3 2"/>
@@ -560,7 +550,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:120px;height:120px;background:var(--surface);">
           <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M36 8 L44 8 L44 52 L40 64 L36 52 Z" stroke="#2c2a25" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
               <path d="M36 52 L40 64 L44 52" stroke="#2c2a25" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
               <path d="M12 48 L28 60 L38 62" stroke="#2c2a25" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="4 3"/>
@@ -572,7 +562,7 @@
       <div class="icon-frame">
         <div class="icon-box dark" style="width:120px;height:120px;background:#1e1e1c;">
           <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M36 8 L44 8 L44 52 L40 64 L36 52 Z" stroke="#e8e6e0" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
               <path d="M36 52 L40 64 L44 52" stroke="#e8e6e0" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
               <path d="M12 48 L28 60 L38 62" stroke="#e8e6e0" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="4 3"/>
@@ -584,7 +574,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:64px;height:64px;background:var(--surface);">
           <svg width="44" height="44" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M36 8 L44 8 L44 52 L40 64 L36 52 Z" stroke="#2c2a25" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
               <path d="M12 48 L28 60 L38 62" stroke="#2c2a25" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>
@@ -595,7 +585,7 @@
       <div class="icon-frame">
         <div class="icon-box" style="width:32px;height:32px;background:var(--surface);">
           <svg width="20" height="20" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#sketchy)">
+            <g>
               <path d="M36 8 L44 8 L44 52 L40 64 L36 52 Z" stroke="#2c2a25" stroke-width="6" stroke-linejoin="round" fill="none"/>
               <path d="M12 48 L28 60 L38 62" stroke="#2c2a25" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </g>

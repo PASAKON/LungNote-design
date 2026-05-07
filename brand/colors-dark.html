@@ -34,7 +34,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .sketchy-filter { position: absolute; width: 0; height: 0; }
 
     /* ── Page system ── */
     .page {
@@ -96,7 +95,7 @@
       inset: -2px;
       border: 2.5px solid var(--border);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -118,7 +117,7 @@
       height: 10px;
       border: 2px solid var(--muted);
       border-radius: 50%;
-      filter: url(#sketchy);
+      
       transition: background 0.2s;
     }
     .page-nav a:hover,
@@ -175,7 +174,7 @@
       inset: -2px;
       border: 2.5px solid var(--border);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       pointer-events: none;
       z-index: 1;
     }
@@ -233,7 +232,7 @@
       height: 16px;
       border-radius: 50%;
       border: 1.5px solid var(--border);
-      filter: url(#sketchy);
+      
     }
 
     /* ── TOKEN TABLE ── */
@@ -265,7 +264,7 @@
       display: inline-block;
       vertical-align: middle;
       border: 2px solid var(--border);
-      filter: url(#sketchy);
+      
     }
     .token-table .token-hex { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
 
@@ -295,7 +294,7 @@
       border: 2.5px solid var(--border);
       border-radius: 3px;
       cursor: pointer;
-      filter: url(#sketchy);
+      
       transition: transform 0.15s;
     }
     .demo-btn:hover { transform: translate(-1px, -1px); }
@@ -311,7 +310,7 @@
       padding: 4px 12px;
       border-radius: 3px;
       border: 1.5px solid;
-      filter: url(#sketchy);
+      
     }
     .demo-input {
       font-family: var(--font-display);
@@ -322,7 +321,7 @@
       outline: none;
       width: 260px;
       max-width: 100%;
-      filter: url(#sketchy);
+      
       background: #2a2a28;
       color: #e8e6e0;
     }
@@ -332,7 +331,7 @@
       padding: 20px;
       border: 2.5px solid var(--border);
       border-radius: 3px;
-      filter: url(#sketchy);
+      
       max-width: 300px;
       background: #2a2a28;
     }
@@ -356,7 +355,7 @@
       border: 2.5px solid #5a5750;
       border-radius: 2px;
       flex-shrink: 0;
-      filter: url(#sketchy);
+      
       position: relative;
     }
     .demo-todo-box.checked { background: #1a3328; }
@@ -388,7 +387,7 @@
       border-radius: 3px;
       text-align: center;
       border: 2px solid;
-      filter: url(#sketchy);
+      
     }
     .contrast-cell .ratio { font-family: var(--font-mono); font-size: 20px; font-weight: 600; display: block; }
     .contrast-cell .pair-label {
@@ -427,15 +426,6 @@
 <body>
 
   <!-- SVG filter -->
-  <svg class="sketchy-filter" aria-hidden="true">
-    <defs>
-      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
   <!-- Nav dots -->
   <nav class="page-nav" aria-label="Page navigation">
     <a href="#page-1" title="Dark Brand Colors" class="active"></a>
@@ -760,7 +750,7 @@
       </div>
 
       <!-- Side-by-side comparison hint -->
-      <div style="margin-top:48px;text-align:center;padding:32px;border:2px dashed var(--border);border-radius:3px;filter:url(#sketchy);">
+      <div style="margin-top:48px;text-align:center;padding:32px;border:2px dashed var(--border);border-radius:3px;">
         <p style="font-family:var(--font-display);font-size:28px;font-weight:700;margin-bottom:8px;">Light ↔ Dark</p>
         <p style="font-size:15px;color:var(--muted);max-width:400px;margin:0 auto;">accent (#6AAB8E) คงที่ทั้งสองโหมด<br>ให้ brand recognition ไม่เปลี่ยน เมื่อสลับ theme</p>
       </div>
