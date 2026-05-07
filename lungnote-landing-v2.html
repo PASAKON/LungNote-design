@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote — จดโน้ต เช็คลิสต์ จัดระเบียบชีวิต</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #faf8f4;
+      --surface: #fffef9;
+      --border:  #e0ddd4;
+      --muted:   #8a8578;
+      --fg:      #2c2a25;
+      --accent:  #6aab8e;
+      --accent-light: #e8f4ed;
+      --yellow:  #f0d87a;
+      --yellow-light: #fdf6dc;
+
+      --font-display: 'Caveat', cursive;
+      --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+      --max-w: 1080px;
+      --px: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 17px/1.7 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sketchy-filter { position: absolute; width: 0; height: 0; }
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding-left: var(--px); padding-right: var(--px); }
+
+    .sketch-box {
+      position: relative;
+      background: var(--surface);
+    }
+    .sketch-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2.5px solid var(--fg);
+      border-radius: 3px;
+      filter: url(#sketchy);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .highlight-tape {
+      display: inline;
+      background: linear-gradient(to bottom, transparent 55%, var(--yellow) 55%, var(--yellow) 90%, transparent 90%);
+      padding: 0 4px;
+    }
+
+    /* ── Nav ── */
+    nav.top-nav {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .logo-text span { color: var(--accent); }
+    nav.top-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      font-size: 15px;
+      font-weight: 500;
+      align-items: center;
+    }
+    nav.top-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav.top-nav a:hover { color: var(--fg); }
+
+    /* ── Sketchy button ── */
+    .btn-sketchy {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--fg);
+      background: var(--yellow-light);
+      padding: 12px 32px;
+      border: 2.5px solid var(--fg);
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      filter: url(#sketchy);
+      transition: background 0.15s, transform 0.15s;
+      position: relative;
+    }
+    .btn-sketchy:hover { background: var(--yellow); transform: translate(-1px, -1px); }
+    .btn-sketchy:active { transform: translate(0, 0); }
+    .btn-nav { font-size: 16px; padding: 8px 20px; font-family: var(--font-display); font-weight: 600; }
+
+    /* ── Section shared ── */
+    .section-label { font-family: var(--font-display); font-size: 22px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(36px, 6vw, 52px); font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+    .section-desc { font-size: 17px; color: var(--muted); max-width: 520px; line-height: 1.65; }
+
+    /* ── Wavy divider ── */
+    .wavy-divider { width: 100%; height: 24px; display: block; color: var(--border); }
+
+    /* ── Doodles ── */
+    .doodle-star, .doodle-arrow, .doodle-circle { position: absolute; pointer-events: none; opacity: 0.35; }
+    .doodle-star { top: 60px; right: 8%; }
+    .doodle-arrow { bottom: 120px; left: 5%; }
+    .doodle-circle { top: 120px; left: 10%; }
+
+    /* ── Hero ── */
+    .hero { padding: 72px 0 80px; text-align: center; position: relative; }
+    .hero-eyebrow {
+      font-family: var(--font-display); font-size: 20px; font-weight: 500;
+      color: var(--accent); margin-bottom: 12px; position: relative; display: inline-block;
+    }
+    .hero-eyebrow::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 6px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='6'%3E%3Cpath d='M0 3 Q10 0 20 3 T40 3 T60 3 T80 3' fill='none' stroke='%236aab8e' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+      background-size: 80px 6px;
+    }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(52px, 9vw, 88px); font-weight: 700; line-height: 1.05; color: var(--fg); margin-bottom: 20px; }
+    .hero .subtitle { font-size: 19px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; line-height: 1.65; }
+
+    /* ── Notebook Preview ── */
+    .notebook-preview { max-width: 580px; margin: 48px auto 0; background: var(--surface); position: relative; padding: 0; }
+    .notebook-preview::before { content: ''; position: absolute; inset: -3px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; z-index: 1; }
+    .spiral-holes { position: absolute; left: 32px; top: 0; bottom: 0; width: 2px; z-index: 2; }
+    .spiral-hole { width: 14px; height: 14px; border: 2px solid var(--muted); border-radius: 50%; background: var(--bg); position: absolute; left: -6px; filter: url(#sketchy); }
+    .notebook-header { display: flex; align-items: center; gap: 8px; padding: 14px 20px 14px 52px; border-bottom: 2px solid var(--border); font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--muted); }
+    .notebook-body {
+      padding: 20px 24px 20px 52px; font-family: var(--font-display); font-size: 22px; line-height: 2.1; color: var(--fg); min-height: 240px;
+      background-image: repeating-linear-gradient(to bottom, transparent, transparent 45px, #d5d0c6 45px, #d5d0c6 46px);
+      background-size: 100% 46px; background-position: 0 25px;
+    }
+    .todo-item { display: flex; align-items: baseline; gap: 12px; }
+    .todo-box { display: inline-block; width: 18px; height: 18px; border: 2.5px solid var(--fg); border-radius: 2px; flex-shrink: 0; position: relative; top: 4px; filter: url(#sketchy); }
+    .todo-box.done { background: var(--accent-light); }
+    .todo-box.done::after { content: ''; position: absolute; left: 2px; top: -1px; width: 10px; height: 14px; border: solid var(--accent); border-width: 0 3px 3px 0; transform: rotate(42deg); }
+    .todo-done-text { text-decoration: line-through; text-decoration-style: wavy; text-decoration-color: var(--muted); color: var(--muted); }
+    .note-line { color: var(--muted); font-size: 18px; font-style: italic; }
+
+    /* ── Features ── */
+    .features { padding: 80px 0; }
+    .features-header { text-align: center; margin-bottom: 56px; }
+    .features-header .section-desc { margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .feature-card { background: var(--surface); position: relative; padding: 28px 24px; }
+    .feature-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .feature-doodle { width: 56px; height: 56px; margin-bottom: 16px; }
+    .feature-doodle svg { width: 56px; height: 56px; color: var(--fg); }
+    .feature-card h3 { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* ── How it works ── */
+    .how-it-works { padding: 80px 0; position: relative; }
+    .how-header { text-align: center; margin-bottom: 64px; }
+    .how-header .section-desc { margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; top: 40px; left: 16%; right: 16%; height: 2.5px;
+      background: repeating-linear-gradient(to right, var(--fg) 0, var(--fg) 8px, transparent 8px, transparent 16px);
+      opacity: 0.25; z-index: 0;
+    }
+    .step { text-align: center; position: relative; z-index: 1; }
+    .step-circle { width: 72px; height: 72px; margin: 0 auto 20px; position: relative; display: flex; align-items: center; justify-content: center; background: var(--surface); }
+    .step-circle::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 50%; filter: url(#sketchy); }
+    .step-circle span { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--accent); }
+    .step h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 260px; margin: 0 auto; }
+
+    /* ── Testimonials ── */
+    .testimonials { padding: 80px 0; }
+    .testimonials-header { text-align: center; margin-bottom: 56px; }
+    .testimonials-header .section-desc { margin: 0 auto; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .testimonial-card { background: var(--surface); position: relative; padding: 28px 24px; }
+    .testimonial-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .testimonial-quote {
+      font-family: var(--font-display); font-size: 44px; font-weight: 700; color: var(--accent);
+      line-height: 1; margin-bottom: 8px; display: block;
+    }
+    .testimonial-text { font-size: 16px; line-height: 1.7; color: var(--fg); margin-bottom: 20px; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--fg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      background: var(--accent-light); color: var(--accent); filter: url(#sketchy);
+    }
+    .author-info { display: flex; flex-direction: column; }
+    .author-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+    .author-role { font-size: 13px; color: var(--muted); }
+
+    /* ── Download CTA ── */
+    .download-cta { padding: 80px 0; text-align: center; }
+    .download-card {
+      background: var(--yellow-light); position: relative; padding: 56px 40px; max-width: 720px; margin: 0 auto;
+    }
+    .download-card::before { content: ''; position: absolute; inset: -2px; border: 2.5px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .download-card h2 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 52px); font-weight: 700; margin-bottom: 12px; }
+    .download-card p { font-size: 17px; color: var(--muted); margin-bottom: 32px; }
+    .download-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-display); font-size: 20px; font-weight: 600;
+      color: var(--fg); background: var(--surface); padding: 14px 28px;
+      border: 2.5px solid var(--fg); border-radius: 3px; text-decoration: none;
+      cursor: pointer; filter: url(#sketchy); transition: background 0.15s, transform 0.15s;
+    }
+    .btn-download:hover { background: var(--accent-light); transform: translate(-1px, -1px); }
+    .btn-download svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .download-note { font-size: 14px; color: var(--muted); margin-top: 16px; }
+
+    /* ── FAQ ── */
+    .faq { padding: 80px 0; }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-list { max-width: 640px; margin: 0 auto; }
+    .faq-item { position: relative; margin-bottom: 16px; background: var(--surface); padding: 0; }
+    .faq-item::before { content: ''; position: absolute; inset: -2px; border: 2px solid var(--fg); border-radius: 2px; filter: url(#sketchy); pointer-events: none; }
+    .faq-q {
+      width: 100%; background: none; border: none; padding: 18px 20px;
+      font: 600 17px/1.5 var(--font-body); color: var(--fg); text-align: left;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-q .arrow { width: 20px; height: 20px; flex-shrink: 0; transition: transform 0.25s ease; color: var(--muted); }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a p { font-size: 16px; color: var(--muted); line-height: 1.7; padding: 0 20px 18px; }
+
+    /* ── Footer ── */
+    footer { padding: 32px 0; text-align: center; font-size: 14px; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: underline; text-decoration-style: wavy; text-underline-offset: 3px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .features-grid, .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .steps::before { display: none; }
+      .hero { padding: 48px 0 56px; }
+      .features, .how-it-works, .testimonials, .download-cta, .faq { padding: 56px 0; }
+      nav.top-nav ul { display: none; }
+      .notebook-body { padding: 16px 16px 16px 48px; font-size: 19px; }
+      .download-card { padding: 36px 20px; }
+      .doodle-star, .doodle-arrow, .doodle-circle { display: none; }
+      .download-buttons { flex-direction: column; align-items: center; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid .feature-card:last-child,
+      .testimonials-grid .testimonial-card:last-child {
+        grid-column: 1 / -1; max-width: 50%; margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SVG filter -->
+  <svg class="sketchy-filter" aria-hidden="true">
+    <defs>
+      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Nav -->
+  <header class="wrap">
+    <nav class="top-nav">
+      <a href="#" class="logo">
+        <svg class="logo-icon" width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#sketchy)">
+            <rect x="6" y="6" width="36" height="36" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
+            <path d="M14 24 L21 31 L34 16" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </g>
+        </svg>
+        <span class="logo-text">Lung<span>Note</span></span>
+      </a>
+      <ul>
+        <li><a href="#features">จุดเด่น</a></li>
+        <li><a href="#how">วิธีใช้</a></li>
+        <li><a href="#reviews">รีวิว</a></li>
+        <li><a href="#faq">คำถาม</a></li>
+        <li><a href="#download" class="btn-sketchy btn-nav">ดาวน์โหลด</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero wrap" data-od-id="hero">
+    <svg class="doodle-star" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#2c2a25" stroke-width="2">
+      <path d="M24 4 L28 18 L42 18 L30 26 L34 40 L24 31 L14 40 L18 26 L6 18 L20 18 Z" stroke-linejoin="round" filter="url(#sketchy)" />
+    </svg>
+    <svg class="doodle-circle" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#6aab8e" stroke-width="2">
+      <circle cx="20" cy="20" r="16" filter="url(#sketchy)" />
+    </svg>
+    <svg class="doodle-arrow" width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="#2c2a25" stroke-width="2" stroke-linecap="round">
+      <path d="M4 30 Q20 8 52 12" filter="url(#sketchy)" />
+      <path d="M44 6 L52 12 L44 18" filter="url(#sketchy)" />
+    </svg>
+
+    <div class="hero-eyebrow">Note-taking for students</div>
+    <h1>จดทุกอย่าง<br>ด้วย<span class="highlight-tape">ลายมือ</span>ของคุณ</h1>
+    <p class="subtitle">โน้ต เช็คลิสต์ และไอเดีย — ทุกอย่างอยู่ในที่เดียว<br>เรียบง่ายเหมือนเปิดสมุดโน้ตเล่มใหม่</p>
+    <a href="#download" class="btn-sketchy">เริ่มจดฟรี →</a>
+
+    <div class="notebook-preview">
+      <div class="spiral-holes">
+        <div class="spiral-hole" style="top:28px"></div>
+        <div class="spiral-hole" style="top:76px"></div>
+        <div class="spiral-hole" style="top:124px"></div>
+        <div class="spiral-hole" style="top:172px"></div>
+        <div class="spiral-hole" style="top:220px"></div>
+        <div class="spiral-hole" style="top:268px"></div>
+      </div>
+      <div class="notebook-header">บันทึกของฉัน — วันนี้</div>
+      <div class="notebook-body">
+        <div class="todo-item"><span class="todo-box done"></span><span class="todo-done-text">อ่านบท 5 วิชาฟิสิกส์</span></div>
+        <div class="todo-item"><span class="todo-box done"></span><span class="todo-done-text">ส่งรายงานกลุ่ม</span></div>
+        <div class="todo-item"><span class="todo-box"></span><span>ทบทวนศัพท์ภาษาอังกฤษ 20 คำ</span></div>
+        <div class="todo-item"><span class="todo-box"></span><span>เตรียมพรีเซนต์วันพุธ</span></div>
+        <div class="note-line" style="margin-top:8px;">อย่าลืมถามอาจารย์เรื่องเกรด...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wavy divider -->
+  <div class="wrap"><svg class="wavy-divider" viewBox="0 0 1080 24" preserveAspectRatio="none"><path d="M0 12 Q67 2 135 12 T270 12 T405 12 T540 12 T675 12 T810 12 T945 12 T1080 12" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></div>
+
+  <!-- Features -->
+  <section class="features wrap" id="features" data-od-id="features">
+    <div class="features-header">
+      <div class="section-label">~ จุดเด่น ~</div>
+      <h2 class="section-title">ทุกอย่างที่ต้องการ<br>ไม่มีอะไรเกินจำเป็น</h2>
+      <p class="section-desc">ออกแบบมาให้เรียบง่ายสำหรับนักเรียน — จดโน้ต ทำเช็คลิสต์ จัดระเบียบ โดยไม่ต้องเรียนรู้อะไรซับซ้อน</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-doodle">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 42 L14 14 L38 14" filter="url(#sketchy)" />
+            <path d="M18 22 Q24 20 30 22 T42 22" filter="url(#sketchy)" />
+            <path d="M18 30 Q22 28 26 30" filter="url(#sketchy)" />
+            <path d="M18 38 Q26 36 34 38 T40 38" filter="url(#sketchy)" />
+            <circle cx="40" cy="10" r="4" fill="#f0d87a" stroke="none" />
+          </svg>
+        </div>
+        <h3>จดโน้ตด้วยลายมือ</h3>
+        <p>พิมพ์โน้ตแบบอิสระ รองรับภาษาไทยเต็มรูปแบบ ฟอนต์ลายมือสวยงามทำให้การจดรู้สึกเป็นธรรมชาติ</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-doodle">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="10" width="36" height="36" rx="2" filter="url(#sketchy)" />
+            <path d="M18 28 L24 34 L38 20" stroke-width="3" filter="url(#sketchy)" />
+          </svg>
+        </div>
+        <h3>เช็คลิสต์ & Todo</h3>
+        <p>สร้างรายการสิ่งที่ต้องทำ ติ๊กเสร็จทีละข้อ ดูสถานะงานที่เหลือได้ในปุ่มเดียว ไม่มีหลุด</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-doodle">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 44 L8 14 C8 12 10 10 12 10 L22 10 L26 16 L44 16 C46 16 48 18 48 20 L48 44 C48 46 46 48 44 48 L12 48 C10 48 8 46 8 44Z" filter="url(#sketchy)" />
+            <circle cx="28" cy="34" r="3" fill="#6aab8e" stroke="none" />
+          </svg>
+        </div>
+        <h3>จัดระเบียบด้วยโฟลเดอร์</h3>
+        <p>แยกโน้ตตามวิชา ตามโปรเจค ตามอะไรก็ได้ ลากวางง่าย ค้นหาเร็ว หาเจอทุกอัน</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wavy divider -->
+  <div class="wrap"><svg class="wavy-divider" viewBox="0 0 1080 24" preserveAspectRatio="none"><path d="M0 12 Q67 2 135 12 T270 12 T405 12 T540 12 T675 12 T810 12 T945 12 T1080 12" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></div>
+
+  <!-- How it works -->
+  <section class="how-it-works wrap" id="how" data-od-id="how-it-works">
+    <div class="how-header">
+      <div class="section-label">~ วิธีใช้ ~</div>
+      <h2 class="section-title">เริ่มจดได้ใน 3 ขั้นตอน</h2>
+      <p class="section-desc">ไม่ต้องสมัครสมาชิกยุ่งยาก ไม่ต้องตั้งค่าอะไรเยอะ เปิดมาก็จดได้เลย</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-circle"><span>1</span></div>
+        <h3>สร้างสมุดโน้ต</h3>
+        <p>ตั้งชื่อสมุดเล่มแรกของคุณ เลือกสีปก ตั้งหมวดหมู่ ใช้เวลาไม่ถึง 10 วินาที</p>
+      </div>
+      <div class="step">
+        <div class="step-circle"><span>2</span></div>
+        <h3>จดทุกอย่าง</h3>
+        <p>เขียนโน้ต สร้าง Todo List จดไอเดียที่ผุดขึ้นมา ทุกอย่างบันทึกอัตโนมัติ</p>
+      </div>
+      <div class="step">
+        <div class="step-circle"><span>3</span></div>
+        <h3>จัดระเบียบ & ค้นหา</h3>
+        <p>แท็ก ค้นหา กรองตามวัน — กลับมาหาโน้ตเก่าได้เสมอ ไม่มีหายไปไหน</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wavy divider -->
+  <div class="wrap"><svg class="wavy-divider" viewBox="0 0 1080 24" preserveAspectRatio="none"><path d="M0 12 Q67 2 135 12 T270 12 T405 12 T540 12 T675 12 T810 12 T945 12 T1080 12" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></div>
+
+  <!-- Testimonials -->
+  <section class="testimonials wrap" id="reviews" data-od-id="testimonials">
+    <div class="testimonials-header">
+      <div class="section-label">~ รีวิวจากผู้ใช้ ~</div>
+      <h2 class="section-title">เพื่อนๆ นักเรียนพูดถึงเรา</h2>
+      <p class="section-desc">ลองฟังจากคนที่ใช้จริง — นักเรียน นักศึกษา และคนทำงานที่จดโน้ตทุกวัน</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">ใช้มาหลายแอปแล้ว LungNote เป็นตัวเดียวที่เปิดมาก็จดได้เลย ไม่ต้องนั่งตั้งค่า ไม่ต้องเรียนรู้ระบบอะไรยุ่งยาก ฟอนต์ลายมือสวยมากด้วย</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">พ</div>
+          <div class="author-info">
+            <span class="author-name">พลอย</span>
+            <span class="author-role">นักศึกษาปี 2 คณะอักษรศาสตร์ จุฬาฯ</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">ชอบที่มันเรียบง่ายจริงๆ ไม่มีฟีเจอร์เยอะจนสับสน Todo List ช่วยจัดระเบียบการบ้านได้ดีมาก ติ๊กเสร็จทีละข้อรู้สึกดี</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ก</div>
+          <div class="author-info">
+            <span class="author-name">กันต์</span>
+            <span class="author-role">นักเรียน ม.5 โรงเรียนเตรียมอุดมฯ</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Sync ข้ามอุปกรณ์ดีมาก จดบนมือถือตอนนั่งรถ กลับบ้านเปิดคอมก็เจอโน้ตเหมือนเดิม ไม่เคยมีโน้ตหายเลยแม้แต่ครั้งเดียว</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ม</div>
+          <div class="author-info">
+            <span class="author-name">มิ้นท์</span>
+            <span class="author-role">นักศึกษาปี 3 คณะวิศวกรรมฯ มจธ.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wavy divider -->
+  <div class="wrap"><svg class="wavy-divider" viewBox="0 0 1080 24" preserveAspectRatio="none"><path d="M0 12 Q67 2 135 12 T270 12 T405 12 T540 12 T675 12 T810 12 T945 12 T1080 12" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></div>
+
+  <!-- Download CTA -->
+  <section class="download-cta wrap" id="download" data-od-id="download-cta">
+    <div class="download-card">
+      <h2>ดาวน์โหลด <span class="highlight-tape">LungNote</span></h2>
+      <p>ใช้ได้ทุกอุปกรณ์ ฟรีไม่มีค่าใช้จ่าย เปิดสมุดเล่มแรกได้วันนี้</p>
+      <div class="download-buttons">
+        <a href="#" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+            <path d="M15 8.5c0-1.4-1.1-2.5-2.5-2.5S10 7.1 10 8.5c0 2.5 2 2.5 2 5"/>
+            <circle cx="12" cy="16" r=".5" fill="currentColor"/>
+          </svg>
+          App Store
+        </a>
+        <a href="#" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Google Play
+        </a>
+        <a href="#" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          เปิดบนเว็บ
+        </a>
+      </div>
+      <p class="download-note">ฟรีตลอด ไม่ต้องใส่บัตรเครดิต</p>
+    </div>
+  </section>
+
+  <!-- Wavy divider -->
+  <div class="wrap"><svg class="wavy-divider" viewBox="0 0 1080 24" preserveAspectRatio="none"><path d="M0 12 Q67 2 135 12 T270 12 T405 12 T540 12 T675 12 T810 12 T945 12 T1080 12" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></div>
+
+  <!-- FAQ -->
+  <section class="faq wrap" id="faq" data-od-id="faq">
+    <div class="faq-header">
+      <div class="section-label">~ คำถามที่พบบ่อย ~</div>
+      <h2 class="section-title">มีคำถามไหม?</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          LungNote ใช้ฟรีจริงไหม?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>ฟรีจริง สร้างสมุดโน้ตได้ไม่จำกัด จดได้ไม่จำกัด ฟีเจอร์หลักทั้งหมดใช้ได้ฟรี มีแพลน Pro สำหรับคนที่ต้องการ sync ข้ามอุปกรณ์และ backup อัตโนมัติ</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          ใช้ได้บนอุปกรณ์อะไรบ้าง?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>ใช้ได้ทั้งบน iOS, Android, และ Web browser เปิดจดได้ทุกที่ ทั้งบนมือถือ แท็บเล็ต และคอมพิวเตอร์</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          โน้ตจะหายไหมถ้าเปลี่ยนมือถือ?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>ไม่หาย สมัคร LungNote ด้วยอีเมลหรือ Google Account แล้วโน้ตทั้งหมดจะ sync อัตโนมัติ เปลี่ยนเครื่องก็ login แล้วเจอทุกอย่างเหมือนเดิม</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          ต่างจากแอปจดโน้ตอื่นยังไง?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>LungNote ออกแบบมาเฉพาะสำหรับนักเรียนไทย — รองรับภาษาไทย 100% ฟอนต์ลายมือสวย ไม่มีฟีเจอร์รกรุงรัง เปิดมาก็จดได้เลย ไม่ต้องเสียเวลาเรียนรู้</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          ข้อมูลปลอดภัยไหม?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>ปลอดภัย โน้ตทั้งหมดเข้ารหัสระหว่างส่งข้อมูล (TLS) และเก็บบน cloud ที่มีการเข้ารหัสแบบ at-rest เราไม่อ่านโน้ตของคุณ ไม่ขายข้อมูล ไม่มีโฆษณา</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          มีแพลนสำหรับโรงเรียนไหม?
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>มี! แพลน Education สำหรับโรงเรียนและมหาวิทยาลัย ครูจัดการห้องเรียนได้ นักเรียนแชร์โน้ตกันได้ ติดต่อทีมขายได้ที่ school@lungnote.app</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">
+        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#sketchy)">
+            <rect x="6" y="6" width="36" height="36" rx="4" stroke="#2c2a25" stroke-width="3" fill="none"/>
+            <path d="M14 24 L21 31 L34 16" stroke="#2c2a25" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </g>
+        </svg>
+        <span style="font-family:var(--font-display);font-size:28px;font-weight:700;">Lung<span style="color:var(--accent)">Note</span></span>
+      </div>
+      <p>สร้างด้วยความตั้งใจ สำหรับนักเรียนที่ชอบจดโน้ต</p>
+      <p style="margin-top:8px;">© 2026 LungNote · <a href="#">ข้อกำหนด</a> · <a href="#">ความเป็นส่วนตัว</a> · <a href="#">ติดต่อเรา</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>

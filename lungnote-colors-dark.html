@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote — Color System (Dark)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #1e1e1c;
+      --surface: #2a2a28;
+      --border:  #3a3835;
+      --muted:   #8a8578;
+      --fg:      #e8e6e0;
+      --accent:  #6aab8e;
+      --accent-light: #1a3328;
+      --yellow:  #b8a550;
+      --yellow-light: #3d3a2a;
+
+      --font-display: 'Caveat', cursive;
+      --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 17px/1.7 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sketchy-filter { position: absolute; width: 0; height: 0; }
+
+    /* ── Page system ── */
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 48px;
+      position: relative;
+    }
+    .page + .page { border-top: 2.5px dashed var(--border); }
+    .page-inner { max-width: 1080px; margin: 0 auto; width: 100%; }
+    .page-num {
+      position: absolute;
+      top: 32px;
+      right: 48px;
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--border);
+    }
+
+    .page-label {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 7vw, 64px);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 48px;
+    }
+    .highlight-tape {
+      display: inline;
+      background: linear-gradient(to bottom, transparent 55%, var(--yellow) 55%, var(--yellow) 90%, transparent 90%);
+      padding: 0 4px;
+    }
+    .section-head {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      margin-top: 48px;
+    }
+    .section-head:first-of-type { margin-top: 0; }
+
+    .sketch-box {
+      position: relative;
+      background: var(--surface);
+    }
+    .sketch-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      filter: url(#sketchy);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Nav dots ── */
+    .page-nav {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+    .page-nav a {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--muted);
+      border-radius: 50%;
+      filter: url(#sketchy);
+      transition: background 0.2s;
+    }
+    .page-nav a:hover,
+    .page-nav a.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── SWATCH SYSTEM ── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .swatch-grid.large {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .swatch-card { padding: 0; overflow: hidden; }
+    .swatch-color { height: 100px; }
+    .swatch-color.tall { height: 140px; }
+    .swatch-info { padding: 16px; }
+    .swatch-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .swatch-role {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .swatch-values { display: flex; flex-direction: column; gap: 2px; }
+    .swatch-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Primary strip ── */
+    .primary-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .primary-strip::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      filter: url(#sketchy);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .strip-cell {
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 120px;
+    }
+    .strip-cell .strip-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .strip-cell .strip-hex {
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    /* ── Semantic ── */
+    .semantic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .semantic-card { padding: 0; overflow: hidden; }
+    .semantic-bar { height: 8px; }
+    .semantic-body { padding: 20px; }
+    .semantic-body .sem-label {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .semantic-body .sem-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .semantic-body .sem-values { display: flex; gap: 16px; }
+    .sem-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .sem-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      filter: url(#sketchy);
+    }
+
+    /* ── TOKEN TABLE ── */
+    .token-section {
+      margin-top: 48px;
+    }
+    .token-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+    .token-table th {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      color: var(--accent);
+    }
+    .token-table td {
+      padding: 12px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .token-table .token-name { font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+    .token-table .token-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      border: 2px solid var(--border);
+      filter: url(#sketchy);
+    }
+    .token-table .token-hex { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+    /* ── UI demos ── */
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .demo-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      width: 80px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .demo-btn {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      filter: url(#sketchy);
+      transition: transform 0.15s;
+    }
+    .demo-btn:hover { transform: translate(-1px, -1px); }
+    .demo-btn.primary { background: #6aab8e; color: #1e1e1c; }
+    .demo-btn.secondary { background: #3d3a2a; color: #e8e6e0; }
+    .demo-btn.ghost { background: transparent; color: #e8e6e0; }
+
+    .demo-tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 3px;
+      border: 1.5px solid;
+      filter: url(#sketchy);
+    }
+    .demo-input {
+      font-family: var(--font-display);
+      font-size: 20px;
+      padding: 10px 16px;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      outline: none;
+      width: 260px;
+      max-width: 100%;
+      filter: url(#sketchy);
+      background: #2a2a28;
+      color: #e8e6e0;
+    }
+    .demo-input::placeholder { color: #5a5750; }
+
+    .demo-card {
+      padding: 20px;
+      border: 2.5px solid var(--border);
+      border-radius: 3px;
+      filter: url(#sketchy);
+      max-width: 300px;
+      background: #2a2a28;
+    }
+    .demo-card h4 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .demo-card p { font-size: 14px; line-height: 1.6; color: #8a8578; }
+
+    .demo-todo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 22px;
+    }
+    .demo-todo-box {
+      width: 18px; height: 18px;
+      border: 2.5px solid #5a5750;
+      border-radius: 2px;
+      flex-shrink: 0;
+      filter: url(#sketchy);
+      position: relative;
+    }
+    .demo-todo-box.checked { background: #1a3328; }
+    .demo-todo-box.checked::after {
+      content: '';
+      position: absolute;
+      left: 2px; top: -1px;
+      width: 10px; height: 14px;
+      border: solid #6aab8e;
+      border-width: 0 3px 3px 0;
+      transform: rotate(42deg);
+    }
+    .demo-todo .done-text {
+      text-decoration: line-through;
+      text-decoration-style: wavy;
+      text-decoration-color: #5a5750;
+      color: #5a5750;
+    }
+
+    /* ── Contrast ── */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .contrast-cell {
+      padding: 16px 12px;
+      border-radius: 3px;
+      text-align: center;
+      border: 2px solid;
+      filter: url(#sketchy);
+    }
+    .contrast-cell .ratio { font-family: var(--font-mono); font-size: 20px; font-weight: 600; display: block; }
+    .contrast-cell .pair-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+      display: block;
+    }
+    .contrast-cell .wcag-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-top: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .page { padding: 56px 24px; }
+      .page-num { right: 24px; top: 20px; }
+      .swatch-grid, .swatch-grid.large { grid-template-columns: repeat(2, 1fr); }
+      .primary-strip { grid-template-columns: repeat(3, 1fr); }
+      .semantic-grid { grid-template-columns: 1fr; }
+      .contrast-grid { grid-template-columns: repeat(2, 1fr); }
+      .demo-row { flex-direction: column; align-items: flex-start; }
+      .demo-label { width: auto; }
+      .page-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SVG filter -->
+  <svg class="sketchy-filter" aria-hidden="true">
+    <defs>
+      <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Nav dots -->
+  <nav class="page-nav" aria-label="Page navigation">
+    <a href="#page-1" title="Dark Brand Colors" class="active"></a>
+    <a href="#page-2" title="Dark Tokens & Components"></a>
+    <a href="#page-3" title="Dark Contrast & Semantic"></a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 1 — DARK BRAND COLORS
+       ══════════════════════════════════════════ -->
+  <section class="page" id="page-1" data-od-id="dark-brand-colors" data-screen-label="01 Dark Brand Colors">
+    <div class="page-num">01 / 03</div>
+    <div class="page-inner">
+      <div class="page-label">LungNote Color System — Dark</div>
+      <h1 class="page-title"><span class="highlight-tape">Dark Brand Colors</span></h1>
+
+      <!-- Primary mint scale (dark context) -->
+      <h2 class="section-head">Primary — Mint (Dark Context)</h2>
+      <div class="primary-strip">
+        <div class="strip-cell" style="background:#1a3328;color:#6aab8e;">
+          <span class="strip-label">50</span>
+          <span class="strip-hex">#1A3328</span>
+        </div>
+        <div class="strip-cell" style="background:#2d5a45;color:#e8e6e0;">
+          <span class="strip-label">200</span>
+          <span class="strip-hex">#2D5A45</span>
+        </div>
+        <div class="strip-cell" style="background:#6aab8e;color:#1e1e1c;">
+          <span class="strip-label">500 — Primary</span>
+          <span class="strip-hex">#6AAB8E</span>
+        </div>
+        <div class="strip-cell" style="background:#8ec4ab;color:#1e1e1c;">
+          <span class="strip-label">700</span>
+          <span class="strip-hex">#8EC4AB</span>
+        </div>
+        <div class="strip-cell" style="background:#b5dcc8;color:#1e1e1c;">
+          <span class="strip-label">900</span>
+          <span class="strip-hex">#B5DCC8</span>
+        </div>
+      </div>
+
+      <!-- Core dark palette -->
+      <h2 class="section-head">Core Palette — Dark</h2>
+      <div class="swatch-grid large">
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color tall" style="background:#1e1e1c;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Charcoal</div>
+            <div class="swatch-role">Page background</div>
+            <div class="swatch-values">
+              <span class="swatch-val">#1E1E1C</span>
+              <span class="swatch-val">oklch(18% 0.01 80)</span>
+              <span class="swatch-val">rgb(30, 30, 28)</span>
+            </div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color tall" style="background:#2a2a28;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Surface</div>
+            <div class="swatch-role">Cards, panels, inputs</div>
+            <div class="swatch-values">
+              <span class="swatch-val">#2A2A28</span>
+              <span class="swatch-val">oklch(22% 0.01 80)</span>
+              <span class="swatch-val">rgb(42, 42, 40)</span>
+            </div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color tall" style="background:#6aab8e;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Mint</div>
+            <div class="swatch-role">Primary brand / CTA / links</div>
+            <div class="swatch-values">
+              <span class="swatch-val">#6AAB8E</span>
+              <span class="swatch-val">oklch(62% 0.14 162)</span>
+              <span class="swatch-val">rgb(106, 171, 142)</span>
+            </div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color tall" style="background:#e8e6e0;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Chalk</div>
+            <div class="swatch-role">Primary text / headings</div>
+            <div class="swatch-values">
+              <span class="swatch-val">#E8E6E0</span>
+              <span class="swatch-val">oklch(92% 0.01 80)</span>
+              <span class="swatch-val">rgb(232, 230, 224)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Neutrals -->
+      <h2 class="section-head">Neutrals — Dark</h2>
+      <div class="swatch-grid">
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#2a2a28;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Surface</div>
+            <div class="swatch-values"><span class="swatch-val">#2A2A28</span></div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#333330;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Elevated</div>
+            <div class="swatch-values"><span class="swatch-val">#333330</span></div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#3a3835;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Border</div>
+            <div class="swatch-values"><span class="swatch-val">#3A3835</span></div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#5a5750;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Placeholder</div>
+            <div class="swatch-values"><span class="swatch-val">#5A5750</span></div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#8a8578;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Muted</div>
+            <div class="swatch-values"><span class="swatch-val">#8A8578</span></div>
+          </div>
+        </div>
+        <div class="sketch-box swatch-card">
+          <div class="swatch-color" style="background:#c5c0b6;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Secondary</div>
+            <div class="swatch-values"><span class="swatch-val">#C5C0B6</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 2 — DARK TOKENS & COMPONENTS
+       ══════════════════════════════════════════ -->
+  <section class="page" id="page-2" data-od-id="dark-tokens" data-screen-label="02 Dark Tokens">
+    <div class="page-num">02 / 03</div>
+    <div class="page-inner">
+      <div class="page-label">LungNote Color System — Dark</div>
+      <h1 class="page-title"><span class="highlight-tape">Tokens & Components</span></h1>
+
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th style="width:40px;"></th>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="token-dot" style="background:#1e1e1c;"></span></td>
+            <td class="token-name">--bg</td>
+            <td class="token-hex">#1E1E1C</td>
+            <td style="color:var(--muted);">Page background</td>
+          </tr>
+          <tr>
+            <td><span class="token-dot" style="background:#2a2a28;"></span></td>
+            <td class="token-name">--surface</td>
+            <td class="token-hex">#2A2A28</td>
+            <td style="color:var(--muted);">Cards, inputs, panels</td>
+          </tr>
+          <tr>
+            <td><span class="token-dot" style="background:#3a3835;"></span></td>
+            <td class="token-name">--border</td>
+            <td class="token-hex">#3A3835</td>
+            <td style="color:var(--muted);">Borders, dividers</td>
+          </tr>
+          <tr>
+            <td><span class="token-dot" style="background:#8a8578;"></span></td>
+            <td class="token-name">--muted</td>
+            <td class="token-hex">#8A8578</td>
+            <td style="color:var(--muted);">Secondary text</td>
+          </tr>
+          <tr>
+            <td><span class="token-dot" style="background:#e8e6e0;"></span></td>
+            <td class="token-name">--fg</td>
+            <td class="token-hex">#E8E6E0</td>
+            <td style="color:var(--muted);">Primary text, headings</td>
+          </tr>
+          <tr>
+            <td><span class="token-dot" style="background:#6aab8e;"></span></td>
+            <td class="token-name">--accent</td>
+            <td class="token-hex">#6AAB8E</td>
+            <td style="color:var(--muted);">CTA, links, active states</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-family:var(--font-display);font-size:28px;font-weight:700;margin-bottom:20px;">Components</h3>
+
+      <div class="demo-row">
+        <span class="demo-label">Buttons</span>
+        <button class="demo-btn primary">เริ่มจดฟรี</button>
+        <button class="demo-btn secondary">ดูตัวอย่าง</button>
+        <button class="demo-btn ghost">ข้ามไปก่อน</button>
+      </div>
+
+      <div class="demo-row">
+        <span class="demo-label">Tags</span>
+        <span class="demo-tag" style="background:#1a3328;color:#6aab8e;border-color:#2d6a4e;">ฟิสิกส์</span>
+        <span class="demo-tag" style="background:#3d3a2a;color:#f0d87a;border-color:#a67520;">ด่วน</span>
+        <span class="demo-tag" style="background:#3d2525;color:#e07868;border-color:#a34435;">ยังไม่เสร็จ</span>
+        <span class="demo-tag" style="background:#2a2a28;color:#8a8578;border-color:#3a3835;">ทั่วไป</span>
+      </div>
+
+      <div class="demo-row">
+        <span class="demo-label">Input</span>
+        <input class="demo-input" type="text" placeholder="จดอะไรดีวันนี้..." />
+      </div>
+
+      <div class="demo-row">
+        <span class="demo-label">Todo</span>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="demo-todo" style="color:#e8e6e0;">
+            <span class="demo-todo-box checked"></span>
+            <span class="done-text">อ่านบท 5 ฟิสิกส์</span>
+          </div>
+          <div class="demo-todo" style="color:#e8e6e0;">
+            <span class="demo-todo-box"></span>
+            <span>ทบทวนศัพท์ 20 คำ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-row">
+        <span class="demo-label">Card</span>
+        <div class="demo-card">
+          <h4 style="color:#e8e6e0;">บันทึกวิชาเคมี</h4>
+          <p>สรุปบทที่ 3 เรื่องพันธะเคมี พร้อมสูตรที่ต้องจำ</p>
+          <span style="font-family:var(--font-mono);font-size:11px;color:#5a5750;margin-top:8px;display:block;">7 พ.ค. 2569</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 3 — DARK CONTRAST & SEMANTIC
+       ══════════════════════════════════════════ -->
+  <section class="page" id="page-3" data-od-id="dark-contrast" data-screen-label="03 Dark Contrast">
+    <div class="page-num">03 / 03</div>
+    <div class="page-inner">
+      <div class="page-label">LungNote Color System — Dark</div>
+      <h1 class="page-title"><span class="highlight-tape">Contrast & Semantic</span></h1>
+
+      <!-- Semantic (dark) -->
+      <h2 class="section-head">Semantic — Dark</h2>
+      <div class="semantic-grid">
+        <div class="sketch-box semantic-card">
+          <div class="semantic-bar" style="background:#6aab8e;"></div>
+          <div class="semantic-body">
+            <div class="sem-label">Success</div>
+            <div class="sem-desc">เสร็จสิ้น สำเร็จ บันทึกแล้ว</div>
+            <div class="sem-values">
+              <span class="sem-chip"><span class="sem-dot" style="background:#1a3328;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#6aab8e;"></span>FG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#8ec4ab;"></span>Light</span>
+            </div>
+          </div>
+        </div>
+        <div class="sketch-box semantic-card">
+          <div class="semantic-bar" style="background:#e8a946;"></div>
+          <div class="semantic-body">
+            <div class="sem-label">Warning</div>
+            <div class="sem-desc">แจ้งเตือน ใกล้ครบกำหนด</div>
+            <div class="sem-values">
+              <span class="sem-chip"><span class="sem-dot" style="background:#3d3a2a;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#e8a946;"></span>FG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#f0d87a;"></span>Light</span>
+            </div>
+          </div>
+        </div>
+        <div class="sketch-box semantic-card">
+          <div class="semantic-bar" style="background:#e07868;"></div>
+          <div class="semantic-body">
+            <div class="sem-label">Error</div>
+            <div class="sem-desc">ผิดพลาด ลบ เตือนภัย</div>
+            <div class="sem-values">
+              <span class="sem-chip"><span class="sem-dot" style="background:#3d2525;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#e07868;"></span>FG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#f0a090;"></span>Light</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contrast Ratios -->
+      <h2 class="section-head">Contrast Ratios</h2>
+      <div class="contrast-grid">
+        <div class="contrast-cell" style="background:#1e1e1c;color:#e8e6e0;border-color:#3a3835;">
+          <span class="ratio">13.1:1</span>
+          <span class="pair-label">fg on bg</span>
+          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AAA</span>
+        </div>
+        <div class="contrast-cell" style="background:#2a2a28;color:#8a8578;border-color:#3a3835;">
+          <span class="ratio">4.2:1</span>
+          <span class="pair-label">muted on surface</span>
+          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+        </div>
+        <div class="contrast-cell" style="background:#2a2a28;color:#6aab8e;border-color:#3a3835;">
+          <span class="ratio">5.1:1</span>
+          <span class="pair-label">accent on surface</span>
+          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+        </div>
+        <div class="contrast-cell" style="background:#6aab8e;color:#1e1e1c;border-color:#4a8a6e;">
+          <span class="ratio">5.1:1</span>
+          <span class="pair-label">bg on accent</span>
+          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+        </div>
+      </div>
+
+      <!-- Side-by-side comparison hint -->
+      <div style="margin-top:48px;text-align:center;padding:32px;border:2px dashed var(--border);border-radius:3px;filter:url(#sketchy);">
+        <p style="font-family:var(--font-display);font-size:28px;font-weight:700;margin-bottom:8px;">Light ↔ Dark</p>
+        <p style="font-size:15px;color:var(--muted);max-width:400px;margin:0 auto;">accent (#6AAB8E) คงที่ทั้งสองโหมด<br>ให้ brand recognition ไม่เปลี่ยน เมื่อสลับ theme</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const dots = document.querySelectorAll('.page-nav a');
+    const pages = document.querySelectorAll('.page');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          dots.forEach(d => d.classList.toggle('active', d.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { threshold: 0.4 });
+    pages.forEach(p => observer.observe(p));
+
+    const KEY = 'lungnote-colors-dark-scroll';
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem(KEY, window.scrollY);
+    });
+    const saved = localStorage.getItem(KEY);
+    if (saved) window.scrollTo(0, parseInt(saved, 10));
+  </script>
+
+</body>
+</html>
