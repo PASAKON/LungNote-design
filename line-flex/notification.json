@@ -1,0 +1,173 @@
+{
+  "type": "flex",
+  "altText": "มีงานใกล้ครบกำหนด! — LungNote",
+  "contents": {
+    "type": "bubble",
+    "size": "giga",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "REMINDER",
+              "size": "xxs",
+              "color": "#e8a946",
+              "weight": "bold"
+            }
+          ],
+          "backgroundColor": "#fdf6dc",
+          "cornerRadius": "sm",
+          "paddingAll": "4px",
+          "paddingStart": "8px",
+          "paddingEnd": "8px",
+          "width": "85px"
+        },
+        {
+          "type": "text",
+          "text": "มีงานใกล้ครบกำหนด!",
+          "weight": "bold",
+          "size": "xl",
+          "margin": "md",
+          "color": "#2c2a25"
+        },
+        {
+          "type": "text",
+          "text": "2 รายการต้องทำภายในสัปดาห์นี้",
+          "size": "xs",
+          "color": "#8a8578",
+          "margin": "sm"
+        }
+      ],
+      "paddingAll": "16px",
+      "paddingBottom": "12px"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "separator",
+          "color": "#e0ddd4"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "⚠ ทบทวนศัพท์ Unit 8",
+                  "size": "sm",
+                  "weight": "bold",
+                  "color": "#2c2a25"
+                },
+                {
+                  "type": "text",
+                  "text": "อังกฤษ · กำหนด: พรุ่งนี้",
+                  "size": "xxs",
+                  "color": "#8a8578",
+                  "margin": "xs"
+                }
+              ],
+              "flex": 4
+            },
+            {
+              "type": "text",
+              "text": "เหลือ 1 วัน",
+              "size": "xxs",
+              "weight": "bold",
+              "color": "#e8a946",
+              "align": "end",
+              "flex": 2,
+              "gravity": "center"
+            }
+          ],
+          "margin": "lg",
+          "paddingBottom": "12px"
+        },
+        {
+          "type": "separator",
+          "color": "#e0ddd4"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "🔴 รายงาน Lab ฟิสิกส์ 4",
+                  "size": "sm",
+                  "weight": "bold",
+                  "color": "#2c2a25"
+                },
+                {
+                  "type": "text",
+                  "text": "ฟิสิกส์ · กำหนด: 5 พ.ค.",
+                  "size": "xxs",
+                  "color": "#8a8578",
+                  "margin": "xs"
+                }
+              ],
+              "flex": 4
+            },
+            {
+              "type": "text",
+              "text": "เลย 3 วัน",
+              "size": "xxs",
+              "weight": "bold",
+              "color": "#d4685a",
+              "align": "end",
+              "flex": 2,
+              "gravity": "center"
+            }
+          ],
+          "margin": "lg"
+        }
+      ],
+      "paddingAll": "16px",
+      "paddingTop": "0px"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "primary",
+          "color": "#6aab8e",
+          "action": {
+            "type": "uri",
+            "label": "ดูรายละเอียด",
+            "uri": "https://liff.line.me/YOUR_LIFF_ID/todos"
+          },
+          "height": "md"
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "color": "#8a8578",
+          "action": {
+            "type": "postback",
+            "label": "ปิดการแจ้งเตือน",
+            "data": "action=dismiss_reminder"
+          },
+          "height": "sm"
+        }
+      ],
+      "paddingAll": "16px"
+    }
+  }
+}
