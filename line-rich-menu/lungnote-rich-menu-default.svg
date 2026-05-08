@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="1686" viewBox="0 0 2500 1686">
   <defs>
     <linearGradient id="leftPanelGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a3328"/>
-      <stop offset="100%" stop-color="#1e1e1c"/>
+      <stop offset="0%" stop-color="#3d3420"/>
+      <stop offset="100%" stop-color="#1a1810"/>
     </linearGradient>
   </defs>
 
   <!-- Full dark background -->
-  <rect width="2500" height="1686" fill="#1e1e1c"/>
+  <rect width="2500" height="1686" fill="#1a1810"/>
 
   <!-- LEFT PANEL — Brand / CTA -->
   <rect x="24" y="24" width="785" height="1638" rx="24" fill="url(#leftPanelGrad)"/>
-  <rect x="24" y="24" width="785" height="1638" rx="24" fill="none" stroke="#6aab8e" stroke-width="2" opacity="0.3"/>
+  <rect x="24" y="24" width="785" height="1638" rx="24" fill="none" stroke="#c9a040" stroke-width="2" opacity="0.3"/>
 
   <!-- Decorative notebook lines -->
-  <g opacity="0.08" stroke="#6aab8e" stroke-width="1">
+  <g opacity="0.08" stroke="#c9a040" stroke-width="1">
     <line x1="60" y1="300" x2="770" y2="300"/>
     <line x1="60" y1="360" x2="770" y2="360"/>
     <line x1="60" y1="420" x2="770" y2="420"/>
@@ -24,15 +24,15 @@
 
   <!-- LungNote Logo -->
   <g transform="translate(316, 280)">
-    <rect x="0" y="0" width="200" height="200" rx="20" stroke="#6aab8e" stroke-width="7" fill="none"/>
-    <path d="M50,100 L80,135 L155,55" stroke="#6aab8e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <rect x="0" y="0" width="200" height="200" rx="20" stroke="#c9a040" stroke-width="7" fill="none"/>
+    <path d="M50,100 L80,135 L155,55" stroke="#c9a040" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
-  <text x="416" y="560" font-family="'Caveat', 'Sarabun', cursive" font-size="80" font-weight="700" fill="#e8e6e0" text-anchor="middle">LungNote</text>
+  <text x="416" y="560" font-family="'Caveat', 'Sarabun', cursive" font-size="80" font-weight="700" fill="#e8e2d0" text-anchor="middle">LungNote</text>
 
   <!-- Mini notebook preview -->
   <g transform="translate(200, 620)" opacity="0.6">
-    <rect x="0" y="0" width="430" height="340" rx="16" fill="#2a2a28" stroke="#3a3835" stroke-width="2"/>
-    <g fill="#1e1e1c" stroke="#3a3835" stroke-width="2">
+    <rect x="0" y="0" width="430" height="340" rx="16" fill="#2a2618" stroke="#3d3828" stroke-width="2"/>
+    <g fill="#1a1810" stroke="#3d3828" stroke-width="2">
       <circle cx="60" cy="30" r="10"/>
       <circle cx="60" cy="80" r="10"/>
       <circle cx="60" cy="130" r="10"/>
@@ -40,13 +40,13 @@
       <circle cx="60" cy="230" r="10"/>
       <circle cx="60" cy="280" r="10"/>
     </g>
-    <g font-family="'Caveat', cursive" font-size="36" fill="#e8e6e0">
+    <g font-family="'Caveat', cursive" font-size="36" fill="#e8e2d0">
       <text x="95" y="55">&#x2611; &#x0E2D;&#x0E48;&#x0E32;&#x0E19;&#x0E1A;&#x0E17; 5 &#x0E1F;&#x0E34;&#x0E2A;&#x0E34;&#x0E01;&#x0E2A;&#x0E4C;</text>
       <text x="95" y="110">&#x2611; &#x0E2A;&#x0E48;&#x0E07;&#x0E23;&#x0E32;&#x0E22;&#x0E07;&#x0E32;&#x0E19;&#x0E01;&#x0E25;&#x0E38;&#x0E48;&#x0E21;</text>
-      <text x="95" y="165" fill="#6aab8e">&#x2610; &#x0E17;&#x0E1A;&#x0E17;&#x0E27;&#x0E19;&#x0E28;&#x0E31;&#x0E1E;&#x0E17;&#x0E4C;</text>
-      <text x="95" y="220" fill="#6aab8e">&#x2610; &#x0E40;&#x0E15;&#x0E23;&#x0E35;&#x0E22;&#x0E21;&#x0E1E;&#x0E23;&#x0E35;&#x0E40;&#x0E0B;&#x0E19;&#x0E15;&#x0E4C;</text>
+      <text x="95" y="165" fill="#c9a040">&#x2610; &#x0E17;&#x0E1A;&#x0E17;&#x0E27;&#x0E19;&#x0E28;&#x0E31;&#x0E1E;&#x0E17;&#x0E4C;</text>
+      <text x="95" y="220" fill="#c9a040">&#x2610; &#x0E40;&#x0E15;&#x0E23;&#x0E35;&#x0E22;&#x0E21;&#x0E1E;&#x0E23;&#x0E35;&#x0E40;&#x0E0B;&#x0E19;&#x0E15;&#x0E4C;</text>
     </g>
-    <g opacity="0.15" stroke="#6aab8e" stroke-width="1">
+    <g opacity="0.15" stroke="#c9a040" stroke-width="1">
       <line x1="90" y1="65" x2="410" y2="65"/>
       <line x1="90" y1="120" x2="410" y2="120"/>
       <line x1="90" y1="175" x2="410" y2="175"/>
@@ -56,73 +56,73 @@
   </g>
 
   <!-- Tagline -->
-  <text x="416" y="1060" font-family="'Sarabun', sans-serif" font-size="42" font-weight="400" fill="#8a8578" text-anchor="middle">&#x0E08;&#x0E14;&#x0E42;&#x0E19;&#x0E49;&#x0E15; &#x0E40;&#x0E0A;&#x0E47;&#x0E04;&#x0E25;&#x0E34;&#x0E2A;&#x0E15;&#x0E4C; &#x0E08;&#x0E31;&#x0E14;&#x0E23;&#x0E30;&#x0E40;&#x0E1A;&#x0E35;&#x0E22;&#x0E1A;</text>
+  <text x="416" y="1060" font-family="'Sarabun', sans-serif" font-size="42" font-weight="400" fill="#a08050" text-anchor="middle">&#x0E08;&#x0E14;&#x0E42;&#x0E19;&#x0E49;&#x0E15; &#x0E40;&#x0E0A;&#x0E47;&#x0E04;&#x0E25;&#x0E34;&#x0E2A;&#x0E15;&#x0E4C; &#x0E08;&#x0E31;&#x0E14;&#x0E23;&#x0E30;&#x0E40;&#x0E1A;&#x0E35;&#x0E22;&#x0E1A;</text>
 
   <!-- CTA Button -->
-  <rect x="156" y="1120" width="520" height="100" rx="16" fill="#6aab8e"/>
-  <text x="416" y="1190" font-family="'Caveat', cursive" font-size="52" font-weight="700" fill="#fffef9" text-anchor="middle">&#x0E40;&#x0E23;&#x0E34;&#x0E48;&#x0E21;&#x0E08;&#x0E14;&#x0E40;&#x0E25;&#x0E22;</text>
+  <rect x="156" y="1120" width="520" height="100" rx="16" fill="#c9a040"/>
+  <text x="416" y="1190" font-family="'Caveat', cursive" font-size="52" font-weight="700" fill="#faf5e8" text-anchor="middle">&#x0E40;&#x0E23;&#x0E34;&#x0E48;&#x0E21;&#x0E08;&#x0E14;&#x0E40;&#x0E25;&#x0E22;</text>
 
-  <text x="416" y="1290" font-family="'Sarabun', sans-serif" font-size="34" font-weight="400" fill="#5a5750" text-anchor="middle">(&#x0E44;&#x0E21;&#x0E48;&#x0E21;&#x0E35;&#x0E04;&#x0E48;&#x0E32;&#x0E43;&#x0E0A;&#x0E49;&#x0E08;&#x0E48;&#x0E32;&#x0E22;)</text>
+  <text x="416" y="1290" font-family="'Sarabun', sans-serif" font-size="34" font-weight="400" fill="#5a4a30" text-anchor="middle">(&#x0E44;&#x0E21;&#x0E48;&#x0E21;&#x0E35;&#x0E04;&#x0E48;&#x0E32;&#x0E43;&#x0E0A;&#x0E49;&#x0E08;&#x0E48;&#x0E32;&#x0E22;)</text>
 
   <!-- RIGHT CELLS (2x2 grid) -->
 
   <!-- Cell: Dashboard (top-left) -->
-  <rect x="833" y="24" width="809" height="795" rx="24" fill="#2a2a28"/>
-  <rect x="1100" y="50" width="120" height="48" rx="24" fill="#6aab8e"/>
-  <text x="1160" y="83" font-family="'Sarabun', sans-serif" font-size="28" font-weight="600" fill="#fffef9" text-anchor="middle">&#x0E2B;&#x0E19;&#x0E49;&#x0E32;&#x0E2B;&#x0E25;&#x0E31;&#x0E01;</text>
+  <rect x="833" y="24" width="809" height="795" rx="24" fill="#2a2618"/>
+  <rect x="1100" y="50" width="120" height="48" rx="24" fill="#c9a040"/>
+  <text x="1160" y="83" font-family="'Sarabun', sans-serif" font-size="28" font-weight="600" fill="#faf5e8" text-anchor="middle">&#x0E2B;&#x0E19;&#x0E49;&#x0E32;&#x0E2B;&#x0E25;&#x0E31;&#x0E01;</text>
   <!-- BIGGER Dashboard icon (4 squares) — centered in cell at ~1238, ~350 -->
   <g transform="translate(1098, 220)">
-    <rect x="0" y="0" width="120" height="120" rx="14" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <rect x="160" y="0" width="120" height="120" rx="14" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <rect x="0" y="160" width="120" height="120" rx="14" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <rect x="160" y="160" width="120" height="120" rx="14" stroke="#e8e6e0" stroke-width="7" fill="none"/>
+    <rect x="0" y="0" width="120" height="120" rx="14" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <rect x="160" y="0" width="120" height="120" rx="14" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <rect x="0" y="160" width="120" height="120" rx="14" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <rect x="160" y="160" width="120" height="120" rx="14" stroke="#e8e2d0" stroke-width="7" fill="none"/>
   </g>
-  <text x="1238" y="640" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e6e0" text-anchor="middle">Dashboard</text>
-  <text x="1238" y="700" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a5750" text-anchor="middle">&#x0E20;&#x0E32;&#x0E1E;&#x0E23;&#x0E27;&#x0E21;&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E02;&#x0E2D;&#x0E07;&#x0E04;&#x0E38;&#x0E13;</text>
+  <text x="1238" y="640" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">Dashboard</text>
+  <text x="1238" y="700" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a4a30" text-anchor="middle">&#x0E20;&#x0E32;&#x0E1E;&#x0E23;&#x0E27;&#x0E21;&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E02;&#x0E2D;&#x0E07;&#x0E04;&#x0E38;&#x0E13;</text>
 
   <!-- Cell: Notes (top-right) -->
-  <rect x="1666" y="24" width="810" height="795" rx="24" fill="#2a2a28"/>
+  <rect x="1666" y="24" width="810" height="795" rx="24" fill="#2a2618"/>
   <!-- BIGGER Notepad icon -->
   <g transform="translate(1975, 210)">
-    <rect x="0" y="30" width="160" height="210" rx="14" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <line x1="30" y1="85" x2="130" y2="85" stroke="#e8e6e0" stroke-width="4" opacity="0.4"/>
-    <line x1="30" y1="125" x2="120" y2="125" stroke="#e8e6e0" stroke-width="4" opacity="0.4"/>
-    <line x1="30" y1="165" x2="100" y2="165" stroke="#e8e6e0" stroke-width="4" opacity="0.4"/>
-    <line x1="135" y1="15" x2="180" y2="-35" stroke="#e8e6e0" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="182" cy="-38" r="8" fill="#f0d87a"/>
+    <rect x="0" y="30" width="160" height="210" rx="14" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <line x1="30" y1="85" x2="130" y2="85" stroke="#e8e2d0" stroke-width="4" opacity="0.4"/>
+    <line x1="30" y1="125" x2="120" y2="125" stroke="#e8e2d0" stroke-width="4" opacity="0.4"/>
+    <line x1="30" y1="165" x2="100" y2="165" stroke="#e8e2d0" stroke-width="4" opacity="0.4"/>
+    <line x1="135" y1="15" x2="180" y2="-35" stroke="#e8e2d0" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="182" cy="-38" r="8" fill="#d4a855"/>
   </g>
-  <text x="2071" y="640" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e6e0" text-anchor="middle">&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E02;&#x0E2D;&#x0E07;&#x0E09;&#x0E31;&#x0E19;</text>
-  <text x="2071" y="700" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a5750" text-anchor="middle">&#x0E40;&#x0E1B;&#x0E34;&#x0E14;&#x0E14;&#x0E39;&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E17;&#x0E31;&#x0E49;&#x0E07;&#x0E2B;&#x0E21;&#x0E14;</text>
+  <text x="2071" y="640" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E02;&#x0E2D;&#x0E07;&#x0E09;&#x0E31;&#x0E19;</text>
+  <text x="2071" y="700" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a4a30" text-anchor="middle">&#x0E40;&#x0E1B;&#x0E34;&#x0E14;&#x0E14;&#x0E39;&#x0E42;&#x0E19;&#x0E49;&#x0E15;&#x0E17;&#x0E31;&#x0E49;&#x0E07;&#x0E2B;&#x0E21;&#x0E14;</text>
 
   <!-- Cell: Help (bottom-left) -->
-  <rect x="833" y="843" width="809" height="819" rx="24" fill="#2a2a28"/>
+  <rect x="833" y="843" width="809" height="819" rx="24" fill="#2a2618"/>
   <rect x="1080" y="870" width="120" height="48" rx="24" fill="#e8a946"/>
-  <text x="1140" y="903" font-family="'Sarabun', sans-serif" font-size="28" font-weight="600" fill="#fffef9" text-anchor="middle">&#x0E0A;&#x0E48;&#x0E27;&#x0E22;&#x0E40;&#x0E2B;&#x0E25;&#x0E37;&#x0E2D;</text>
+  <text x="1140" y="903" font-family="'Sarabun', sans-serif" font-size="28" font-weight="600" fill="#faf5e8" text-anchor="middle">&#x0E0A;&#x0E48;&#x0E27;&#x0E22;&#x0E40;&#x0E2B;&#x0E25;&#x0E37;&#x0E2D;</text>
   <!-- BIGGER Help icon -->
   <g transform="translate(1238, 1120)">
-    <circle cx="0" cy="0" r="110" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <text x="0" y="38" font-family="'Caveat', cursive" font-size="140" font-weight="700" fill="#e8e6e0" text-anchor="middle">?</text>
+    <circle cx="0" cy="0" r="110" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <text x="0" y="38" font-family="'Caveat', cursive" font-size="140" font-weight="700" fill="#e8e2d0" text-anchor="middle">?</text>
   </g>
-  <text x="1238" y="1400" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e6e0" text-anchor="middle">Help</text>
-  <text x="1238" y="1460" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a5750" text-anchor="middle">&#x0E27;&#x0E34;&#x0E18;&#x0E35;&#x0E43;&#x0E0A;&#x0E49;&#x0E41;&#x0E25;&#x0E30;&#x0E04;&#x0E33;&#x0E16;&#x0E32;&#x0E21;</text>
+  <text x="1238" y="1400" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">Help</text>
+  <text x="1238" y="1460" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a4a30" text-anchor="middle">&#x0E27;&#x0E34;&#x0E18;&#x0E35;&#x0E43;&#x0E0A;&#x0E49;&#x0E41;&#x0E25;&#x0E30;&#x0E04;&#x0E33;&#x0E16;&#x0E32;&#x0E21;</text>
 
   <!-- Cell: Settings (bottom-right) -->
-  <rect x="1666" y="843" width="810" height="819" rx="24" fill="#2a2a28"/>
-  <rect x="1930" y="870" width="80" height="48" rx="24" fill="#6aab8e" opacity="0.7"/>
-  <text x="1970" y="903" font-family="'Sarabun', sans-serif" font-size="26" font-weight="600" fill="#fffef9" text-anchor="middle">&#x0E43;&#x0E2B;&#x0E21;&#x0E48;</text>
+  <rect x="1666" y="843" width="810" height="819" rx="24" fill="#2a2618"/>
+  <rect x="1930" y="870" width="80" height="48" rx="24" fill="#c9a040" opacity="0.7"/>
+  <text x="1970" y="903" font-family="'Sarabun', sans-serif" font-size="26" font-weight="600" fill="#faf5e8" text-anchor="middle">&#x0E43;&#x0E2B;&#x0E21;&#x0E48;</text>
   <!-- BIGGER Settings icon (gear) -->
   <g transform="translate(2071, 1120)">
-    <circle cx="0" cy="0" r="50" stroke="#e8e6e0" stroke-width="7" fill="none"/>
-    <circle cx="0" cy="0" r="100" stroke="#e8e6e0" stroke-width="6" fill="none" stroke-dasharray="32 20"/>
+    <circle cx="0" cy="0" r="50" stroke="#e8e2d0" stroke-width="7" fill="none"/>
+    <circle cx="0" cy="0" r="100" stroke="#e8e2d0" stroke-width="6" fill="none" stroke-dasharray="32 20"/>
   </g>
-  <text x="2071" y="1400" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e6e0" text-anchor="middle">&#x0E15;&#x0E31;&#x0E49;&#x0E07;&#x0E04;&#x0E48;&#x0E32;</text>
-  <text x="2071" y="1460" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a5750" text-anchor="middle">&#x0E08;&#x0E31;&#x0E14;&#x0E01;&#x0E32;&#x0E23;&#x0E1A;&#x0E31;&#x0E0D;&#x0E0A;&#x0E35;</text>
+  <text x="2071" y="1400" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">&#x0E15;&#x0E31;&#x0E49;&#x0E07;&#x0E04;&#x0E48;&#x0E32;</text>
+  <text x="2071" y="1460" font-family="'Sarabun', sans-serif" font-size="36" font-weight="400" fill="#5a4a30" text-anchor="middle">&#x0E08;&#x0E31;&#x0E14;&#x0E01;&#x0E32;&#x0E23;&#x0E1A;&#x0E31;&#x0E0D;&#x0E0A;&#x0E35;</text>
 
   <!-- Subtle decorations -->
   <g opacity="0.15" transform="translate(2380, 50)">
-    <path d="M0,-15 L4,-4 L15,-4 L6,3 L9,15 L0,8 L-9,15 L-6,3 L-15,-4 L-4,-4 Z" stroke="#6aab8e" stroke-width="2" fill="none"/>
+    <path d="M0,-15 L4,-4 L15,-4 L6,3 L9,15 L0,8 L-9,15 L-6,3 L-15,-4 L-4,-4 Z" stroke="#c9a040" stroke-width="2" fill="none"/>
   </g>
   <g opacity="0.12" transform="translate(870, 1630)">
-    <circle cx="0" cy="0" r="20" stroke="#6aab8e" stroke-width="2" fill="none"/>
+    <circle cx="0" cy="0" r="20" stroke="#c9a040" stroke-width="2" fill="none"/>
   </g>
 </svg>

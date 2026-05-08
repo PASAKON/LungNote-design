@@ -20,7 +20,7 @@
               "weight": "bold"
             }
           ],
-          "backgroundColor": "#fdf6dc",
+          "backgroundColor": "#f0e4c4",
           "cornerRadius": "sm",
           "paddingAll": "4px",
           "paddingStart": "8px",
@@ -33,13 +33,13 @@
           "weight": "bold",
           "size": "xl",
           "margin": "md",
-          "color": "#2c2a25"
+          "color": "#3a3020"
         },
         {
           "type": "text",
           "text": "2 รายการต้องทำภายในสัปดาห์นี้",
           "size": "xs",
-          "color": "#8a8578",
+          "color": "#a08050",
           "margin": "sm"
         }
       ],
@@ -52,7 +52,7 @@
       "contents": [
         {
           "type": "separator",
-          "color": "#e0ddd4"
+          "color": "#d4c4a0"
         },
         {
           "type": "box",
@@ -67,13 +67,13 @@
                   "text": "⚠ ทบทวนศัพท์ Unit 8",
                   "size": "sm",
                   "weight": "bold",
-                  "color": "#2c2a25"
+                  "color": "#3a3020"
                 },
                 {
                   "type": "text",
                   "text": "อังกฤษ · กำหนด: พรุ่งนี้",
                   "size": "xxs",
-                  "color": "#8a8578",
+                  "color": "#a08050",
                   "margin": "xs"
                 }
               ],
@@ -95,7 +95,7 @@
         },
         {
           "type": "separator",
-          "color": "#e0ddd4"
+          "color": "#d4c4a0"
         },
         {
           "type": "box",
@@ -110,13 +110,13 @@
                   "text": "🔴 รายงาน Lab ฟิสิกส์ 4",
                   "size": "sm",
                   "weight": "bold",
-                  "color": "#2c2a25"
+                  "color": "#3a3020"
                 },
                 {
                   "type": "text",
                   "text": "ฟิสิกส์ · กำหนด: 5 พ.ค.",
                   "size": "xxs",
-                  "color": "#8a8578",
+                  "color": "#a08050",
                   "margin": "xs"
                 }
               ],
@@ -127,7 +127,7 @@
               "text": "เลย 3 วัน",
               "size": "xxs",
               "weight": "bold",
-              "color": "#d4685a",
+              "color": "#c45a3a",
               "align": "end",
               "flex": 2,
               "gravity": "center"
@@ -147,7 +147,7 @@
         {
           "type": "button",
           "style": "primary",
-          "color": "#6aab8e",
+          "color": "#c9a040",
           "action": {
             "type": "uri",
             "label": "ดูรายละเอียด",
@@ -158,7 +158,7 @@
         {
           "type": "button",
           "style": "link",
-          "color": "#8a8578",
+          "color": "#a08050",
           "action": {
             "type": "postback",
             "label": "ปิดการแจ้งเตือน",
