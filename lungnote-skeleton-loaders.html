@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote — Skeleton &amp; Loading States</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#faf8f4;--surface:#fffef9;--border:#e0ddd4;--muted:#8a8578;--fg:#2c2a25;
+      --accent:#6aab8e;--accent-light:#e8f4ed;--yellow:#f0d87a;--yellow-light:#fdf6dc;
+      --red:#d4685a;--red-light:#fce8e5;--orange:#e8a946;
+      --skel-base:#e8e5de;--skel-shine:#f5f3ee;
+      --font-display:'Caveat',cursive;
+      --font-body:'Sarabun',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    }
+    [data-theme="dark"] {
+      --bg:#1e1e1c;--surface:#2a2a28;--border:#3a3835;--muted:#8a8578;--fg:#e8e6e0;
+      --accent:#6aab8e;--accent-light:#1a3328;--yellow:#b8a550;--yellow-light:#3d3a2a;
+      --red:#e07868;--red-light:#3d2525;--orange:#e8a946;
+      --skel-base:#333330;--skel-shine:#3e3e3a;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;padding:40px 24px;transition:background .3s,color .3s}
+
+    /* Page header */
+    .page-header{max-width:1100px;margin:0 auto 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .page-label{font-family:var(--font-display);font-size:20px;color:var(--accent);font-weight:600;margin-bottom:4px}
+    .page-title{font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:700;line-height:1.1}
+    .highlight-tape{display:inline;background:linear-gradient(to bottom,transparent 55%,var(--yellow) 55%,var(--yellow) 90%,transparent 90%);padding:0 4px}
+    .theme-toggle{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+    .toggle-track{width:44px;height:24px;border-radius:12px;border:2.5px solid var(--fg);background:var(--surface);position:relative;cursor:pointer;transition:background .3s}
+    .toggle-thumb{width:16px;height:16px;border-radius:50%;background:var(--fg);position:absolute;top:2px;left:2px;transition:transform .3s}
+    [data-theme="dark"] .toggle-thumb{transform:translateX(20px)}
+    [data-theme="dark"] .toggle-track{background:var(--accent-light)}
+
+    /* Section */
+    .section{max-width:1100px;margin:0 auto 56px}
+    .section-head{font-family:var(--font-display);font-size:32px;font-weight:700;margin-bottom:8px}
+    .section-desc{font-size:14px;color:var(--muted);margin-bottom:24px;max-width:500px}
+    .mono-label{font-family:var(--font-mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);display:block;margin-bottom:12px;margin-top:32px}
+
+    /* Demo grid */
+    .demo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+    .demo-card{background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:24px;transition:background .3s,border-color .3s}
+    .demo-card-title{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+    .demo-card-desc{font-size:12px;color:var(--muted);margin-bottom:16px;font-family:var(--font-mono)}
+
+    /* ═══ SKELETON ANIMATIONS ═══ */
+    @keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+    .skel{background:var(--skel-base);border-radius:4px;position:relative;overflow:hidden;transition:background .3s}
+    .skel.shimmer::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--skel-shine) 50%,transparent 100%);background-size:400px 100%;animation:shimmer 1.5s ease-in-out infinite}
+    .skel.pulse{animation:pulse 1.5s ease-in-out infinite}
+
+    .skel-circle{border-radius:50%}
+    .skel-text{height:14px;margin-bottom:8px}
+    .skel-text.xs{height:8px}
+    .skel-text.sm{height:10px}
+    .skel-text.lg{height:20px}
+    .skel-text.xl{height:28px}
+
+    /* ── Note List Skeleton ── */
+    .skel-note-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+    .skel-note-row:last-child{border-bottom:none}
+    .skel-note-color{width:6px;height:40px;border-radius:3px}
+    .skel-note-info{flex:1;display:flex;flex-direction:column;gap:6px}
+
+    /* ── Stats Skeleton ── */
+    .skel-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .skel-stat{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--surface);border:1.5px solid var(--border);border-radius:6px}
+
+    /* ── Todo Skeleton ── */
+    .skel-todo{display:flex;align-items:center;gap:10px;padding:8px 0}
+    .skel-todo-box{width:18px;height:18px;border-radius:3px}
+
+    /* ── Card Image Skeleton ── */
+    .skel-card-img{height:120px;border-radius:6px;margin-bottom:12px}
+
+    /* ── Full Page Skeleton ── */
+    .skel-page{background:var(--surface);border:2px solid var(--border);border-radius:8px;overflow:hidden;transition:background .3s}
+    .skel-page-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1.5px solid var(--border)}
+    .skel-page-body{padding:20px}
+
+    /* ═══ SPINNERS ═══ */
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes dots{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+    @keyframes bounce{0%,80%,100%{transform:scaleY(.4)}40%{transform:scaleY(1)}}
+    @keyframes check-draw{0%{stroke-dashoffset:30}100%{stroke-dashoffset:0}}
+    @keyframes fade-text{0%,100%{opacity:.3}50%{opacity:1}}
+    @keyframes progress-fill{0%{width:0;margin-left:0}50%{width:60%}100%{width:0;margin-left:100%}}
+
+    .spinner-ring{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    .spinner-ring.sm{width:24px;height:24px;border-width:2.5px}
+    .spinner-ring.lg{width:56px;height:56px;border-width:4px}
+    .spinner-ring.xl{width:72px;height:72px;border-width:5px}
+
+    .spinner-dots{display:flex;gap:8px;align-items:center;justify-content:center}
+    .spinner-dots .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);animation:dots 1.4s ease-in-out infinite}
+    .spinner-dots .dot:nth-child(1){animation-delay:0s}
+    .spinner-dots .dot:nth-child(2){animation-delay:.16s}
+    .spinner-dots .dot:nth-child(3){animation-delay:.32s}
+
+    .spinner-bars{display:flex;gap:4px;align-items:center;justify-content:center;height:32px}
+    .spinner-bars .bar{width:5px;height:100%;border-radius:3px;background:var(--accent);animation:bounce 1.2s ease-in-out infinite}
+    .spinner-bars .bar:nth-child(1){animation-delay:0s}
+    .spinner-bars .bar:nth-child(2){animation-delay:.1s}
+    .spinner-bars .bar:nth-child(3){animation-delay:.2s}
+    .spinner-bars .bar:nth-child(4){animation-delay:.3s}
+    .spinner-bars .bar:nth-child(5){animation-delay:.4s}
+
+    .spinner-check{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .spinner-check svg circle{stroke:var(--border);fill:none;stroke-width:3}
+    .spinner-check svg path{stroke:var(--accent);fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;animation:check-draw 1.5s ease-in-out infinite}
+    .spinner-check span{font-family:var(--font-display);font-size:18px;color:var(--muted);animation:fade-text 1.5s ease-in-out infinite}
+
+    .spinner-notebook{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .notebook-lines{display:flex;flex-direction:column;gap:6px;width:60px}
+    .notebook-lines .nline{height:3px;background:var(--accent);border-radius:2px;animation:shimmer 2s ease-in-out infinite;background-size:400px 100%;background-image:linear-gradient(90deg,var(--accent),var(--accent-light),var(--accent))}
+    .notebook-lines .nline:nth-child(1){width:100%;animation-delay:0s}
+    .notebook-lines .nline:nth-child(2){width:75%;animation-delay:.2s}
+    .notebook-lines .nline:nth-child(3){width:50%;animation-delay:.4s}
+    .spinner-notebook span{font-family:var(--font-display);font-size:16px;color:var(--muted);animation:fade-text 1.5s ease-in-out infinite}
+
+    /* ── Full-screen loader ── */
+    .fullscreen-loader{background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:60px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;min-height:300px;transition:background .3s}
+    .loader-title{font-family:var(--font-display);font-size:28px;font-weight:700}
+    .loader-desc{font-size:14px;color:var(--muted);max-width:280px}
+    .loader-progress{width:200px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;position:relative}
+    .loader-progress-fill{height:100%;background:var(--accent);border-radius:3px;animation:progress-fill 2s ease-in-out infinite}
+
+    /* ── Inline loader ── */
+    .inline-loader{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+
+    /* ── Button loader ── */
+    .btn-loading{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-display);font-size:20px;font-weight:600;padding:12px 32px;border:2.5px solid var(--border);border-radius:6px;background:var(--accent);color:#fffef9;cursor:not-allowed;opacity:.8;transition:background .3s}
+    .btn-loading .spinner-ring{width:18px;height:18px;border-width:2.5px;border-color:rgba(255,255,255,.3);border-top-color:#fff}
+
+    /* ── Code block ── */
+    .code-block{background:var(--bg);border:1.5px solid var(--border);border-radius:4px;padding:16px;margin-top:12px;overflow-x:auto;position:relative;transition:background .3s}
+    .code-block pre{font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--fg);white-space:pre}
+    .copy-btn{position:absolute;top:8px;right:8px;font-family:var(--font-mono);font-size:10px;padding:4px 8px;border:1.5px solid var(--border);border-radius:3px;background:var(--surface);color:var(--muted);cursor:pointer;transition:background .15s}
+    .copy-btn:hover{background:var(--accent-light);color:var(--accent)}
+
+    /* Responsive */
+    @media(max-width:768px){
+      body{padding:24px 16px}
+      .page-header{flex-direction:column;align-items:flex-start}
+      .demo-grid{grid-template-columns:1fr}
+      .skel-stats{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="page-label">LungNote Components</div>
+    <h1 class="page-title"><span class="highlight-tape">Skeleton &amp; Loaders</span></h1>
+  </div>
+  <div class="theme-toggle">
+    <span>Light</span>
+    <div class="toggle-track" id="themeToggle" role="switch" tabindex="0"><div class="toggle-thumb"></div></div>
+    <span>Dark</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 1: SPINNERS
+     ═══════════════════════════════ -->
+<div class="section">
+  <h2 class="section-head">Spinners</h2>
+  <p class="section-desc">Animated indicators for loading states. Use ring for general, dots for content, bars for audio/data, check for saving, notebook for syncing.</p>
+
+  <div class="demo-grid">
+    <!-- Ring spinner sizes -->
+    <div class="demo-card">
+      <div class="demo-card-title">Ring Spinner</div>
+      <div class="demo-card-desc">.spinner-ring .sm | default | .lg | .xl</div>
+      <div style="display:flex;gap:24px;align-items:center;justify-content:center;padding:20px 0;">
+        <div class="spinner-ring sm"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring lg"></div>
+        <div class="spinner-ring xl"></div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="demo-card">
+      <div class="demo-card-title">Bouncing Dots</div>
+      <div class="demo-card-desc">.spinner-dots</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 0;">
+        <div class="spinner-dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bars -->
+    <div class="demo-card">
+      <div class="demo-card-title">Bars</div>
+      <div class="demo-card-desc">.spinner-bars</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:24px 0;">
+        <div class="spinner-bars">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkbox animation -->
+    <div class="demo-card">
+      <div class="demo-card-title">Checkbox Save</div>
+      <div class="demo-card-desc">.spinner-check</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:16px 0;">
+        <div class="spinner-check">
+          <svg width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M14 24 L21 31 L34 17"/>
+          </svg>
+          <span>Saving...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notebook sync -->
+    <div class="demo-card">
+      <div class="demo-card-title">Notebook Sync</div>
+      <div class="demo-card-desc">.spinner-notebook</div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:16px 0;">
+        <div class="spinner-notebook">
+          <div class="notebook-lines">
+            <div class="nline"></div><div class="nline"></div><div class="nline"></div>
+          </div>
+          <span>Syncing notes...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button with spinner -->
+    <div class="demo-card">
+      <div class="demo-card-title">Button Loading</div>
+      <div class="demo-card-desc">.btn-loading</div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;padding:16px 0;">
+        <button class="btn-loading"><div class="spinner-ring"></div>Saving...</button>
+        <span class="inline-loader"><div class="spinner-ring sm"></div>Loading notes...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 2: SKELETON SCREENS
+     ═══════════════════════════════ -->
+<div class="section">
+  <h2 class="section-head">Skeleton Screens</h2>
+  <p class="section-desc">Content placeholders that show layout structure before data loads. Two animation modes: shimmer (recommended) and pulse.</p>
+
+  <span class="mono-label">Shimmer Animation</span>
+  <div class="demo-grid">
+    <!-- Note List Skeleton -->
+    <div class="demo-card">
+      <div class="demo-card-title">Note List</div>
+      <div class="demo-card-desc">.skel-note-row (shimmer)</div>
+      <div class="skel-note-row">
+        <div class="skel skel-note-color shimmer" style="width:6px;height:40px;"></div>
+        <div class="skel-note-info">
+          <div class="skel shimmer skel-text lg" style="width:70%"></div>
+          <div class="skel shimmer skel-text sm" style="width:40%"></div>
+        </div>
+      </div>
+      <div class="skel-note-row">
+        <div class="skel skel-note-color shimmer" style="width:6px;height:40px;"></div>
+        <div class="skel-note-info">
+          <div class="skel shimmer skel-text lg" style="width:85%"></div>
+          <div class="skel shimmer skel-text sm" style="width:50%"></div>
+        </div>
+      </div>
+      <div class="skel-note-row">
+        <div class="skel skel-note-color shimmer" style="width:6px;height:40px;"></div>
+        <div class="skel-note-info">
+          <div class="skel shimmer skel-text lg" style="width:60%"></div>
+          <div class="skel shimmer skel-text sm" style="width:35%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Skeleton -->
+    <div class="demo-card">
+      <div class="demo-card-title">Dashboard Stats</div>
+      <div class="demo-card-desc">.skel-stats (shimmer)</div>
+      <div class="skel-stats">
+        <div class="skel-stat">
+          <div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div class="skel shimmer skel-text xl" style="width:50%"></div>
+            <div class="skel shimmer skel-text sm" style="width:70%"></div>
+          </div>
+        </div>
+        <div class="skel-stat">
+          <div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div class="skel shimmer skel-text xl" style="width:40%"></div>
+            <div class="skel shimmer skel-text sm" style="width:60%"></div>
+          </div>
+        </div>
+        <div class="skel-stat">
+          <div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div class="skel shimmer skel-text xl" style="width:35%"></div>
+            <div class="skel shimmer skel-text sm" style="width:55%"></div>
+          </div>
+        </div>
+        <div class="skel-stat">
+          <div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+            <div class="skel shimmer skel-text xl" style="width:30%"></div>
+            <div class="skel shimmer skel-text sm" style="width:65%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todo Skeleton -->
+    <div class="demo-card">
+      <div class="demo-card-title">Todo List</div>
+      <div class="demo-card-desc">.skel-todo (shimmer)</div>
+      <div class="skel-todo"><div class="skel shimmer skel-todo-box" style="width:18px;height:18px;"></div><div class="skel shimmer skel-text" style="flex:1;width:auto;margin:0;height:16px;"></div></div>
+      <div class="skel-todo"><div class="skel shimmer skel-todo-box" style="width:18px;height:18px;"></div><div class="skel shimmer skel-text" style="flex:1;width:auto;margin:0;height:16px;max-width:80%;"></div></div>
+      <div class="skel-todo"><div class="skel shimmer skel-todo-box" style="width:18px;height:18px;"></div><div class="skel shimmer skel-text" style="flex:1;width:auto;margin:0;height:16px;max-width:65%;"></div></div>
+      <div class="skel-todo"><div class="skel shimmer skel-todo-box" style="width:18px;height:18px;"></div><div class="skel shimmer skel-text" style="flex:1;width:auto;margin:0;height:16px;max-width:90%;"></div></div>
+    </div>
+
+    <!-- Card with Image Skeleton -->
+    <div class="demo-card">
+      <div class="demo-card-title">Content Card</div>
+      <div class="demo-card-desc">.skel-card-img (shimmer)</div>
+      <div class="skel shimmer skel-card-img" style="width:100%;"></div>
+      <div class="skel shimmer skel-text lg" style="width:75%;"></div>
+      <div class="skel shimmer skel-text" style="width:100%;"></div>
+      <div class="skel shimmer skel-text" style="width:85%;"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <div class="skel shimmer" style="width:60px;height:28px;border-radius:4px;"></div>
+        <div class="skel shimmer" style="width:60px;height:28px;border-radius:4px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="mono-label">Pulse Animation</span>
+  <div class="demo-grid">
+    <!-- Note List Pulse -->
+    <div class="demo-card">
+      <div class="demo-card-title">Note List (Pulse)</div>
+      <div class="demo-card-desc">.skel.pulse</div>
+      <div class="skel-note-row">
+        <div class="skel pulse skel-note-color" style="width:6px;height:40px;"></div>
+        <div class="skel-note-info">
+          <div class="skel pulse skel-text lg" style="width:70%"></div>
+          <div class="skel pulse skel-text sm" style="width:40%"></div>
+        </div>
+      </div>
+      <div class="skel-note-row">
+        <div class="skel pulse skel-note-color" style="width:6px;height:40px;"></div>
+        <div class="skel-note-info">
+          <div class="skel pulse skel-text lg" style="width:60%"></div>
+          <div class="skel pulse skel-text sm" style="width:50%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatar + Text Pulse -->
+    <div class="demo-card">
+      <div class="demo-card-title">User Profile (Pulse)</div>
+      <div class="demo-card-desc">.skel.pulse + .skel-circle</div>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div class="skel pulse skel-circle" style="width:56px;height:56px;flex-shrink:0;"></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+          <div class="skel pulse skel-text lg" style="width:50%"></div>
+          <div class="skel pulse skel-text sm" style="width:70%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 3: FULL SCREEN LOADERS
+     ═══════════════════════════════ -->
+<div class="section">
+  <h2 class="section-head">Full-screen Loaders</h2>
+  <p class="section-desc">Overlay states for page transitions, login flows, and initial data fetches.</p>
+
+  <div class="demo-grid">
+    <!-- Connecting -->
+    <div class="demo-card">
+      <div class="demo-card-title">Connecting LINE</div>
+      <div class="demo-card-desc">Login / auth flow</div>
+      <div class="fullscreen-loader">
+        <div class="spinner-ring xl"></div>
+        <div class="loader-title">Connecting LINE...</div>
+        <div class="loader-desc">Verifying your account</div>
+        <div class="loader-progress"><div class="loader-progress-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- Loading Dashboard -->
+    <div class="demo-card">
+      <div class="demo-card-title">Loading Dashboard</div>
+      <div class="demo-card-desc">Initial page load</div>
+      <div class="fullscreen-loader">
+        <div class="spinner-check">
+          <svg width="64" height="64" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M14 24 L21 31 L34 17"/>
+          </svg>
+        </div>
+        <div class="loader-title">Loading LungNote</div>
+        <div class="loader-desc">Fetching your notes...</div>
+        <div class="spinner-dots" style="margin-top:8px;">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saving -->
+    <div class="demo-card">
+      <div class="demo-card-title">Saving Note</div>
+      <div class="demo-card-desc">After edit / create</div>
+      <div class="fullscreen-loader">
+        <div class="spinner-notebook">
+          <div class="notebook-lines">
+            <div class="nline"></div><div class="nline"></div><div class="nline"></div>
+          </div>
+        </div>
+        <div class="loader-title">Saving...</div>
+        <div class="loader-desc">Almost done</div>
+        <div class="loader-progress"><div class="loader-progress-fill"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 4: PAGE SKELETONS
+     ═══════════════════════════════ -->
+<div class="section">
+  <h2 class="section-head">Page-level Skeletons</h2>
+  <p class="section-desc">Complete page skeleton layouts for Dashboard and Note editor. Copy the structure directly into your components.</p>
+
+  <span class="mono-label">Dashboard Skeleton</span>
+  <div class="skel-page" style="margin-bottom:24px;">
+    <div class="skel-page-nav">
+      <div class="skel shimmer" style="width:120px;height:28px;border-radius:4px;"></div>
+      <div style="display:flex;gap:12px;">
+        <div class="skel shimmer skel-circle" style="width:32px;height:32px;"></div>
+        <div class="skel shimmer skel-circle" style="width:32px;height:32px;"></div>
+      </div>
+    </div>
+    <div class="skel-page-body">
+      <!-- Stats -->
+      <div class="skel-stats" style="margin-bottom:20px;">
+        <div class="skel-stat"><div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:6px;"><div class="skel shimmer skel-text xl" style="width:45%"></div><div class="skel shimmer skel-text sm" style="width:60%"></div></div></div>
+        <div class="skel-stat"><div class="skel shimmer skel-circle" style="width:44px;height:44px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:6px;"><div class="skel shimmer skel-text xl" style="width:40%"></div><div class="skel shimmer skel-text sm" style="width:55%"></div></div></div>
+      </div>
+      <!-- Note list -->
+      <div class="skel shimmer skel-text lg" style="width:140px;margin-bottom:12px;"></div>
+      <div class="skel-note-row"><div class="skel shimmer skel-note-color" style="width:6px;height:40px;"></div><div class="skel-note-info"><div class="skel shimmer skel-text lg" style="width:75%"></div><div class="skel shimmer skel-text sm" style="width:40%"></div></div></div>
+      <div class="skel-note-row"><div class="skel shimmer skel-note-color" style="width:6px;height:40px;"></div><div class="skel-note-info"><div class="skel shimmer skel-text lg" style="width:60%"></div><div class="skel shimmer skel-text sm" style="width:50%"></div></div></div>
+      <div class="skel-note-row"><div class="skel shimmer skel-note-color" style="width:6px;height:40px;"></div><div class="skel-note-info"><div class="skel shimmer skel-text lg" style="width:85%"></div><div class="skel shimmer skel-text sm" style="width:35%"></div></div></div>
+    </div>
+  </div>
+
+  <span class="mono-label">Note Editor Skeleton</span>
+  <div class="skel-page">
+    <div class="skel-page-nav">
+      <div style="display:flex;gap:12px;align-items:center;">
+        <div class="skel shimmer" style="width:28px;height:28px;border-radius:4px;"></div>
+        <div class="skel shimmer" style="width:180px;height:24px;border-radius:4px;"></div>
+      </div>
+      <div class="skel shimmer" style="width:80px;height:32px;border-radius:6px;"></div>
+    </div>
+    <div class="skel-page-body">
+      <div class="skel shimmer skel-text xl" style="width:50%;margin-bottom:20px;"></div>
+      <div class="skel shimmer skel-text" style="width:100%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:95%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:80%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:100%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:70%;margin-bottom:20px;"></div>
+      <div class="skel shimmer skel-text" style="width:100%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:90%;margin-bottom:6px;"></div>
+      <div class="skel shimmer skel-text" style="width:60%;margin-bottom:6px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 5: CSS REFERENCE
+     ═══════════════════════════════ -->
+<div class="section">
+  <h2 class="section-head">CSS Tokens Reference</h2>
+  <p class="section-desc">Copy these CSS variables into your project. All skeleton/loader components use these tokens.</p>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<pre>/* ── LungNote Skeleton Tokens ── */
+
+/* Light mode */
+:root {
+  --skel-base: #e8e5de;
+  --skel-shine: #f5f3ee;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --skel-base: #333330;
+  --skel-shine: #3e3e3a;
+}
+
+/* ── Animations ── */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes dots {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+@keyframes bounce {
+  0%, 80%, 100% { transform: scaleY(0.4); }
+  40% { transform: scaleY(1); }
+}
+
+/* ── Base skeleton ── */
+.skel {
+  background: var(--skel-base);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.skel.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg, transparent 0%,
+    var(--skel-shine) 50%,
+    transparent 100%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+.skel.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Spinner ── */
+.spinner-ring {
+  width: 40px; height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.spinner-ring.sm { width: 24px; height: 24px; border-width: 2.5px; }
+.spinner-ring.lg { width: 56px; height: 56px; border-width: 4px; }
+.spinner-ring.xl { width: 72px; height: 72px; border-width: 5px; }
+
+/* ── Dots ── */
+.spinner-dots { display: flex; gap: 8px; }
+.spinner-dots .dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dots 1.4s ease-in-out infinite;
+}
+.spinner-dots .dot:nth-child(2) { animation-delay: .16s; }
+.spinner-dots .dot:nth-child(3) { animation-delay: .32s; }</pre>
+  </div>
+</div>
+
+<script>
+  // Theme toggle
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  if (localStorage.getItem('lungnote-skel-theme') === 'dark') html.setAttribute('data-theme', 'dark');
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) { html.removeAttribute('data-theme'); localStorage.setItem('lungnote-skel-theme', 'light'); }
+    else { html.setAttribute('data-theme', 'dark'); localStorage.setItem('lungnote-skel-theme', 'dark'); }
+  });
+
+  // Copy code
+  function copyCode(btn) {
+    const pre = btn.parentElement.querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.style.background = 'var(--accent-light)';
+      btn.style.color = 'var(--accent)';
+      setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = ''; btn.style.color = ''; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
