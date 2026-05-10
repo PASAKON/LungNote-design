@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2500 843" width="2500" height="843">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d3420"/>
+      <stop offset="50%" stop-color="#4a3c20"/>
+      <stop offset="100%" stop-color="#5a4a28"/>
+    </linearGradient>
+  </defs>
+  <rect width="2500" height="843" fill="url(#bg)"/>
+
+  <!-- Mascot -->
+  <g transform="translate(950,421)">
+    <svg viewBox="0 0 200 200" width="240" height="240" x="-120" y="-120" fill="none" stroke="#c9a040" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M42 38 Q44 35 52 34 Q100 32 148 34 Q156 35 158 38 Q163 70 163 128 Q158 156 148 162 Q100 164 52 162 Q42 156 38 128 Q38 70 42 38Z"/>
+      <path d="M54 30 Q56 26 64 24 Q100 22 136 24 Q144 26 146 30 Q148 38 146 44 Q136 48 100 48 Q64 46 54 42 Q54 38 54 30Z" stroke-width="2.5"/>
+      <circle cx="74" cy="78" r="12" fill="#c9a040" stroke="none"/>
+      <circle cx="126" cy="76" r="10" fill="#c9a040" stroke="none"/>
+      <path d="M76 114 Q90 128 90 128 Q100 118 126 92" stroke-width="5"/>
+      <path d="M36 82 Q20 72 6 82"/>
+      <path d="M164 80 Q180 70 194 80"/>
+      <path d="M62 162 Q68 172 76 178 Q84 172 86 162"/>
+      <path d="M114 162 Q120 172 128 178 Q136 172 138 162"/>
+    </svg>
+  </g>
+
+  <!-- Text -->
+  <text x="1380" y="380" font-family="'Caveat',cursive" font-size="96" font-weight="700" fill="#c9a040">จดเลย →</text>
+  <text x="1380" y="480" font-family="'Sarabun',sans-serif" font-size="44" fill="#8a7850">เริ่มต้นใช้ LungNote ฟรี</text>
+</svg>
