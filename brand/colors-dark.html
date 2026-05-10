@@ -9,15 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:      #1e1e1c;
-      --surface: #2a2a28;
-      --border:  #3a3835;
-      --muted:   #8a8578;
-      --fg:      #e8e6e0;
-      --accent:  #6aab8e;
-      --accent-light: #1a3328;
-      --yellow:  #b8a550;
-      --yellow-light: #3d3a2a;
+      --bg:      #1a1810;
+      --surface: #2a2618;
+      --border:  #3d3828;
+      --muted:   #a08050;
+      --fg:      #e8e2d0;
+      --accent:  #c9a040;
+      --accent-light: #3d3420;
+      --yellow:  #b89030;
+      --yellow-light: #3d3420;
 
       --font-display: 'Caveat', cursive;
       --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -298,9 +298,9 @@
       transition: transform 0.15s;
     }
     .demo-btn:hover { transform: translate(-1px, -1px); }
-    .demo-btn.primary { background: #6aab8e; color: #1e1e1c; }
-    .demo-btn.secondary { background: #3d3a2a; color: #e8e6e0; }
-    .demo-btn.ghost { background: transparent; color: #e8e6e0; }
+    .demo-btn.primary { background: #c9a040; color: #1a1810; }
+    .demo-btn.secondary { background: #3d3420; color: #e8e2d0; }
+    .demo-btn.ghost { background: transparent; color: #e8e2d0; }
 
     .demo-tag {
       display: inline-block;
@@ -322,10 +322,10 @@
       width: 260px;
       max-width: 100%;
       
-      background: #2a2a28;
-      color: #e8e6e0;
+      background: #2a2618;
+      color: #e8e2d0;
     }
-    .demo-input::placeholder { color: #5a5750; }
+    .demo-input::placeholder { color: #5a4a30; }
 
     .demo-card {
       padding: 20px;
@@ -333,7 +333,7 @@
       border-radius: 3px;
       
       max-width: 300px;
-      background: #2a2a28;
+      background: #2a2618;
     }
     .demo-card h4 {
       font-family: var(--font-display);
@@ -341,7 +341,7 @@
       font-weight: 700;
       margin-bottom: 4px;
     }
-    .demo-card p { font-size: 14px; line-height: 1.6; color: #8a8578; }
+    .demo-card p { font-size: 14px; line-height: 1.6; color: #a08050; }
 
     .demo-todo {
       display: flex;
@@ -352,27 +352,27 @@
     }
     .demo-todo-box {
       width: 18px; height: 18px;
-      border: 2.5px solid #5a5750;
+      border: 2.5px solid #5a4a30;
       border-radius: 2px;
       flex-shrink: 0;
       
       position: relative;
     }
-    .demo-todo-box.checked { background: #1a3328; }
+    .demo-todo-box.checked { background: #3d3420; }
     .demo-todo-box.checked::after {
       content: '';
       position: absolute;
       left: 2px; top: -1px;
       width: 10px; height: 14px;
-      border: solid #6aab8e;
+      border: solid #c9a040;
       border-width: 0 3px 3px 0;
       transform: rotate(42deg);
     }
     .demo-todo .done-text {
       text-decoration: line-through;
       text-decoration-style: wavy;
-      text-decoration-color: #5a5750;
-      color: #5a5750;
+      text-decoration-color: #5a4a30;
+      color: #5a4a30;
     }
 
     /* ── Contrast ── */
@@ -445,23 +445,23 @@
       <!-- Primary mint scale (dark context) -->
       <h2 class="section-head">Primary — Mint (Dark Context)</h2>
       <div class="primary-strip">
-        <div class="strip-cell" style="background:#1a3328;color:#6aab8e;">
+        <div class="strip-cell" style="background:#3d3420;color:#c9a040;">
           <span class="strip-label">50</span>
           <span class="strip-hex">#1A3328</span>
         </div>
-        <div class="strip-cell" style="background:#2d5a45;color:#e8e6e0;">
+        <div class="strip-cell" style="background:#2d5a45;color:#e8e2d0;">
           <span class="strip-label">200</span>
           <span class="strip-hex">#2D5A45</span>
         </div>
-        <div class="strip-cell" style="background:#6aab8e;color:#1e1e1c;">
+        <div class="strip-cell" style="background:#c9a040;color:#1a1810;">
           <span class="strip-label">500 — Primary</span>
           <span class="strip-hex">#6AAB8E</span>
         </div>
-        <div class="strip-cell" style="background:#8ec4ab;color:#1e1e1c;">
+        <div class="strip-cell" style="background:#8ec4ab;color:#1a1810;">
           <span class="strip-label">700</span>
           <span class="strip-hex">#8EC4AB</span>
         </div>
-        <div class="strip-cell" style="background:#b5dcc8;color:#1e1e1c;">
+        <div class="strip-cell" style="background:#b5dcc8;color:#1a1810;">
           <span class="strip-label">900</span>
           <span class="strip-hex">#B5DCC8</span>
         </div>
@@ -471,7 +471,7 @@
       <h2 class="section-head">Core Palette — Dark</h2>
       <div class="swatch-grid large">
         <div class="sketch-box swatch-card">
-          <div class="swatch-color tall" style="background:#1e1e1c;"></div>
+          <div class="swatch-color tall" style="background:#1a1810;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Charcoal</div>
             <div class="swatch-role">Page background</div>
@@ -483,7 +483,7 @@
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color tall" style="background:#2a2a28;"></div>
+          <div class="swatch-color tall" style="background:#2a2618;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Surface</div>
             <div class="swatch-role">Cards, panels, inputs</div>
@@ -495,7 +495,7 @@
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color tall" style="background:#6aab8e;"></div>
+          <div class="swatch-color tall" style="background:#c9a040;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Mint</div>
             <div class="swatch-role">Primary brand / CTA / links</div>
@@ -507,7 +507,7 @@
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color tall" style="background:#e8e6e0;"></div>
+          <div class="swatch-color tall" style="background:#e8e2d0;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Chalk</div>
             <div class="swatch-role">Primary text / headings</div>
@@ -524,7 +524,7 @@
       <h2 class="section-head">Neutrals — Dark</h2>
       <div class="swatch-grid">
         <div class="sketch-box swatch-card">
-          <div class="swatch-color" style="background:#2a2a28;"></div>
+          <div class="swatch-color" style="background:#2a2618;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Surface</div>
             <div class="swatch-values"><span class="swatch-val">#2A2A28</span></div>
@@ -538,28 +538,28 @@
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color" style="background:#3a3835;"></div>
+          <div class="swatch-color" style="background:#3d3828;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Border</div>
             <div class="swatch-values"><span class="swatch-val">#3A3835</span></div>
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color" style="background:#5a5750;"></div>
+          <div class="swatch-color" style="background:#5a4a30;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Placeholder</div>
             <div class="swatch-values"><span class="swatch-val">#5A5750</span></div>
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color" style="background:#8a8578;"></div>
+          <div class="swatch-color" style="background:#a08050;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Muted</div>
             <div class="swatch-values"><span class="swatch-val">#8A8578</span></div>
           </div>
         </div>
         <div class="sketch-box swatch-card">
-          <div class="swatch-color" style="background:#c5c0b6;"></div>
+          <div class="swatch-color" style="background:#c4b490;"></div>
           <div class="swatch-info">
             <div class="swatch-name">Secondary</div>
             <div class="swatch-values"><span class="swatch-val">#C5C0B6</span></div>
@@ -589,37 +589,37 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="token-dot" style="background:#1e1e1c;"></span></td>
+            <td><span class="token-dot" style="background:#1a1810;"></span></td>
             <td class="token-name">--bg</td>
             <td class="token-hex">#1E1E1C</td>
             <td style="color:var(--muted);">Page background</td>
           </tr>
           <tr>
-            <td><span class="token-dot" style="background:#2a2a28;"></span></td>
+            <td><span class="token-dot" style="background:#2a2618;"></span></td>
             <td class="token-name">--surface</td>
             <td class="token-hex">#2A2A28</td>
             <td style="color:var(--muted);">Cards, inputs, panels</td>
           </tr>
           <tr>
-            <td><span class="token-dot" style="background:#3a3835;"></span></td>
+            <td><span class="token-dot" style="background:#3d3828;"></span></td>
             <td class="token-name">--border</td>
             <td class="token-hex">#3A3835</td>
             <td style="color:var(--muted);">Borders, dividers</td>
           </tr>
           <tr>
-            <td><span class="token-dot" style="background:#8a8578;"></span></td>
+            <td><span class="token-dot" style="background:#a08050;"></span></td>
             <td class="token-name">--muted</td>
             <td class="token-hex">#8A8578</td>
             <td style="color:var(--muted);">Secondary text</td>
           </tr>
           <tr>
-            <td><span class="token-dot" style="background:#e8e6e0;"></span></td>
+            <td><span class="token-dot" style="background:#e8e2d0;"></span></td>
             <td class="token-name">--fg</td>
             <td class="token-hex">#E8E6E0</td>
             <td style="color:var(--muted);">Primary text, headings</td>
           </tr>
           <tr>
-            <td><span class="token-dot" style="background:#6aab8e;"></span></td>
+            <td><span class="token-dot" style="background:#c9a040;"></span></td>
             <td class="token-name">--accent</td>
             <td class="token-hex">#6AAB8E</td>
             <td style="color:var(--muted);">CTA, links, active states</td>
@@ -638,10 +638,10 @@
 
       <div class="demo-row">
         <span class="demo-label">Tags</span>
-        <span class="demo-tag" style="background:#1a3328;color:#6aab8e;border-color:#2d6a4e;">ฟิสิกส์</span>
-        <span class="demo-tag" style="background:#3d3a2a;color:#f0d87a;border-color:#a67520;">ด่วน</span>
-        <span class="demo-tag" style="background:#3d2525;color:#e07868;border-color:#a34435;">ยังไม่เสร็จ</span>
-        <span class="demo-tag" style="background:#2a2a28;color:#8a8578;border-color:#3a3835;">ทั่วไป</span>
+        <span class="demo-tag" style="background:#3d3420;color:#c9a040;border-color:#6a5010;">ฟิสิกส์</span>
+        <span class="demo-tag" style="background:#3d3420;color:#d4a855;border-color:#a67520;">ด่วน</span>
+        <span class="demo-tag" style="background:#3d2520;color:#c45a3a;border-color:#8a3020;">ยังไม่เสร็จ</span>
+        <span class="demo-tag" style="background:#2a2618;color:#a08050;border-color:#3d3828;">ทั่วไป</span>
       </div>
 
       <div class="demo-row">
@@ -652,11 +652,11 @@
       <div class="demo-row">
         <span class="demo-label">Todo</span>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <div class="demo-todo" style="color:#e8e6e0;">
+          <div class="demo-todo" style="color:#e8e2d0;">
             <span class="demo-todo-box checked"></span>
             <span class="done-text">อ่านบท 5 ฟิสิกส์</span>
           </div>
-          <div class="demo-todo" style="color:#e8e6e0;">
+          <div class="demo-todo" style="color:#e8e2d0;">
             <span class="demo-todo-box"></span>
             <span>ทบทวนศัพท์ 20 คำ</span>
           </div>
@@ -666,9 +666,9 @@
       <div class="demo-row">
         <span class="demo-label">Card</span>
         <div class="demo-card">
-          <h4 style="color:#e8e6e0;">บันทึกวิชาเคมี</h4>
+          <h4 style="color:#e8e2d0;">บันทึกวิชาเคมี</h4>
           <p>สรุปบทที่ 3 เรื่องพันธะเคมี พร้อมสูตรที่ต้องจำ</p>
-          <span style="font-family:var(--font-mono);font-size:11px;color:#5a5750;margin-top:8px;display:block;">7 พ.ค. 2569</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:#5a4a30;margin-top:8px;display:block;">7 พ.ค. 2569</span>
         </div>
       </div>
     </div>
@@ -687,13 +687,13 @@
       <h2 class="section-head">Semantic — Dark</h2>
       <div class="semantic-grid">
         <div class="sketch-box semantic-card">
-          <div class="semantic-bar" style="background:#6aab8e;"></div>
+          <div class="semantic-bar" style="background:#c9a040;"></div>
           <div class="semantic-body">
             <div class="sem-label">Success</div>
             <div class="sem-desc">เสร็จสิ้น สำเร็จ บันทึกแล้ว</div>
             <div class="sem-values">
-              <span class="sem-chip"><span class="sem-dot" style="background:#1a3328;"></span>BG</span>
-              <span class="sem-chip"><span class="sem-dot" style="background:#6aab8e;"></span>FG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#3d3420;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#c9a040;"></span>FG</span>
               <span class="sem-chip"><span class="sem-dot" style="background:#8ec4ab;"></span>Light</span>
             </div>
           </div>
@@ -704,20 +704,20 @@
             <div class="sem-label">Warning</div>
             <div class="sem-desc">แจ้งเตือน ใกล้ครบกำหนด</div>
             <div class="sem-values">
-              <span class="sem-chip"><span class="sem-dot" style="background:#3d3a2a;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#3d3420;"></span>BG</span>
               <span class="sem-chip"><span class="sem-dot" style="background:#e8a946;"></span>FG</span>
-              <span class="sem-chip"><span class="sem-dot" style="background:#f0d87a;"></span>Light</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#d4a855;"></span>Light</span>
             </div>
           </div>
         </div>
         <div class="sketch-box semantic-card">
-          <div class="semantic-bar" style="background:#e07868;"></div>
+          <div class="semantic-bar" style="background:#c45a3a;"></div>
           <div class="semantic-body">
             <div class="sem-label">Error</div>
             <div class="sem-desc">ผิดพลาด ลบ เตือนภัย</div>
             <div class="sem-values">
-              <span class="sem-chip"><span class="sem-dot" style="background:#3d2525;"></span>BG</span>
-              <span class="sem-chip"><span class="sem-dot" style="background:#e07868;"></span>FG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#3d2520;"></span>BG</span>
+              <span class="sem-chip"><span class="sem-dot" style="background:#c45a3a;"></span>FG</span>
               <span class="sem-chip"><span class="sem-dot" style="background:#f0a090;"></span>Light</span>
             </div>
           </div>
@@ -727,25 +727,25 @@
       <!-- Contrast Ratios -->
       <h2 class="section-head">Contrast Ratios</h2>
       <div class="contrast-grid">
-        <div class="contrast-cell" style="background:#1e1e1c;color:#e8e6e0;border-color:#3a3835;">
+        <div class="contrast-cell" style="background:#1a1810;color:#e8e2d0;border-color:#3d3828;">
           <span class="ratio">13.1:1</span>
           <span class="pair-label">fg on bg</span>
-          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AAA</span>
+          <span class="wcag-badge" style="background:#3d3420;color:#c9a040;">AAA</span>
         </div>
-        <div class="contrast-cell" style="background:#2a2a28;color:#8a8578;border-color:#3a3835;">
+        <div class="contrast-cell" style="background:#2a2618;color:#a08050;border-color:#3d3828;">
           <span class="ratio">4.2:1</span>
           <span class="pair-label">muted on surface</span>
-          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+          <span class="wcag-badge" style="background:#3d3420;color:#c9a040;">AA</span>
         </div>
-        <div class="contrast-cell" style="background:#2a2a28;color:#6aab8e;border-color:#3a3835;">
+        <div class="contrast-cell" style="background:#2a2618;color:#c9a040;border-color:#3d3828;">
           <span class="ratio">5.1:1</span>
           <span class="pair-label">accent on surface</span>
-          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+          <span class="wcag-badge" style="background:#3d3420;color:#c9a040;">AA</span>
         </div>
-        <div class="contrast-cell" style="background:#6aab8e;color:#1e1e1c;border-color:#4a8a6e;">
+        <div class="contrast-cell" style="background:#c9a040;color:#1a1810;border-color:#a07820;">
           <span class="ratio">5.1:1</span>
           <span class="pair-label">bg on accent</span>
-          <span class="wcag-badge" style="background:#1a3328;color:#6aab8e;">AA</span>
+          <span class="wcag-badge" style="background:#3d3420;color:#c9a040;">AA</span>
         </div>
       </div>
 

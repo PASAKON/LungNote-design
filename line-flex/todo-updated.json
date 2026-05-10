@@ -1,0 +1,68 @@
+{
+  "type": "flex",
+  "altText": "แก้ '{{text}}' — {{change_summary}}",
+  "contents": {
+    "type": "bubble",
+    "size": "kilo",
+    "header": {
+      "type": "box",
+      "layout": "horizontal",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            { "type": "text", "text": "แก้ไขสำเร็จ ✏️", "weight": "bold", "size": "lg", "color": "#3a3020" },
+            { "type": "text", "text": "รายการถูกอัพเดทเรียบร้อยแล้ว", "size": "xxs", "color": "#a08050", "margin": "sm" }
+          ],
+          "flex": 3
+        }
+      ],
+      "paddingAll": "20px",
+      "paddingBottom": "12px",
+      "background": { "type": "linearGradient", "angle": "135deg", "startColor": "#f0e4c4", "endColor": "#faf5e8" }
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                { "type": "text", "text": "📁", "size": "xs", "flex": 0 },
+                { "type": "text", "text": "{{folder_name}}", "size": "xxs", "color": "#a07820", "weight": "bold", "margin": "xs" }
+              ],
+              "backgroundColor": "#f0e4c4", "cornerRadius": "sm", "paddingAll": "4px", "paddingStart": "6px", "paddingEnd": "8px", "flex": 0
+            }
+          ]
+        },
+        { "type": "text", "text": "{{text}}", "weight": "bold", "size": "md", "color": "#3a3020", "margin": "md", "wrap": true },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            { "type": "text", "text": "{{old_value}}", "size": "sm", "color": "#a08050", "decoration": "line-through", "flex": 0 },
+            { "type": "text", "text": "→", "size": "sm", "color": "#c9a040", "weight": "bold", "margin": "sm", "flex": 0 },
+            { "type": "text", "text": "{{new_value}}", "size": "sm", "color": "#3a3020", "weight": "bold", "margin": "sm", "flex": 1 }
+          ],
+          "margin": "md", "paddingAll": "10px", "backgroundColor": "#f0e4c4", "cornerRadius": "md"
+        },
+        { "type": "text", "text": "{{change_summary}}", "size": "xxs", "color": "#a08050", "margin": "md" }
+      ],
+      "paddingAll": "16px"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        { "type": "button", "style": "primary", "color": "#c9a040", "action": { "type": "uri", "label": "ดูใน Dashboard", "uri": "{{open_url}}" }, "height": "sm" }
+      ],
+      "paddingAll": "16px"
+    }
+  }
+}
