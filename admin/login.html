@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LungNote Admin — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fdf8f6;
+      --surface: #fff;
+      --border: #f0ddd8;
+      --muted: #8a6e64;
+      --fg: #3a2018;
+      --accent: #a23b2a;
+      --accent-light: #f5e0dc;
+      --accent-hover: #8a2e20;
+      --error-bg: #fef2f0;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--fg); font: 400 14px/1.6 var(--font-body); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+
+    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px 36px; width: 100%; max-width: 440px; box-shadow: 0 2px 12px rgba(162,59,42,.04); }
+    .login-header { text-align: center; margin-bottom: 28px; }
+    .login-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
+    .login-brand-text { font-size: 20px; font-weight: 700; }
+    .login-brand .admin-badge { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; background: var(--accent); color: #fff; padding: 2px 6px; border-radius: 3px; }
+    .login-warning { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--fg); margin-bottom: 6px; }
+    .form-input { width: 100%; font-size: 14px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); outline: none; transition: border-color .15s; font-family: var(--font-body); }
+    .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(162,59,42,.08); }
+    .form-input::placeholder { color: #c4a8a0; }
+    .input-wrap { position: relative; }
+    .input-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 500; }
+    .input-toggle:hover { color: var(--fg); }
+
+    .btn-submit { width: 100%; padding: 12px; font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--accent-hover); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-submit .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-banner { background: var(--error-bg); border: 1px solid #f0c4be; border-radius: 6px; padding: 10px 14px; margin-bottom: 18px; font-size: 13px; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+    .error-banner svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .forgot-link { display: block; text-align: center; margin-top: 16px; font-size: 13px; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .forgot-link:hover { color: var(--accent); }
+
+    /* State demos */
+    .state-tabs { display: flex; gap: 8px; margin-bottom: 24px; justify-content: center; }
+    .state-tab { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--muted); cursor: pointer; }
+    .state-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div style="width:100%;max-width:440px;">
+  <!-- State tabs for demo -->
+  <div class="state-tabs">
+    <button class="state-tab active" onclick="setState('empty')">Empty</button>
+    <button class="state-tab" onclick="setState('loading')">Loading</button>
+    <button class="state-tab" onclick="setState('error')">Error</button>
+  </div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-brand">
+        <span class="login-brand-text">LungNote</span>
+        <span class="admin-badge">Admin</span>
+      </div>
+      <p class="login-warning">Internal access only</p>
+    </div>
+
+    <!-- Error banner (hidden by default) -->
+    <div class="error-banner" id="errorBanner" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <span id="errorText">Invalid email or password</span>
+    </div>
+
+    <form onsubmit="return false;">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="admin@lungnote.app" id="emailInput" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-wrap">
+          <input class="form-input" type="password" placeholder="Enter password" id="passInput" />
+          <button class="input-toggle" type="button" onclick="togglePass()">Show</button>
+        </div>
+      </div>
+      <button class="btn-submit" id="submitBtn" type="submit">
+        <span id="btnText">Sign in</span>
+        <span class="spinner" id="btnSpinner" style="display:none;"></span>
+      </button>
+    </form>
+    <a class="forgot-link">Forgot password?</a>
+  </div>
+</div>
+
+<script>
+  function setState(state) {
+    document.querySelectorAll('.state-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    const error = document.getElementById('errorBanner');
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('btnSpinner');
+    const email = document.getElementById('emailInput');
+    const pass = document.getElementById('passInput');
+
+    if (state === 'empty') {
+      error.style.display = 'none';
+      btn.disabled = false;
+      btnText.textContent = 'Sign in';
+      spinner.style.display = 'none';
+      email.value = '';
+      pass.value = '';
+    } else if (state === 'loading') {
+      error.style.display = 'none';
+      btn.disabled = true;
+      btnText.textContent = 'Signing in...';
+      spinner.style.display = 'block';
+      email.value = 'admin@lungnote.app';
+      pass.value = 'password123';
+    } else if (state === 'error') {
+      error.style.display = 'flex';
+      btn.disabled = false;
+      btnText.textContent = 'Sign in';
+      spinner.style.display = 'none';
+      email.value = 'admin@lungnote.app';
+      pass.value = 'wrongpass';
+    }
+  }
+  function togglePass() {
+    const p = document.getElementById('passInput');
+    const t = event.target;
+    if (p.type === 'password') { p.type = 'text'; t.textContent = 'Hide'; }
+    else { p.type = 'password'; t.textContent = 'Show'; }
+  }
+</script>
+</body>
+</html>
