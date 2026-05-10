@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2500 843" width="2500" height="843">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5ead4"/>
+      <stop offset="50%" stop-color="#f0e4c4"/>
+      <stop offset="100%" stop-color="#e8dcc0"/>
+    </linearGradient>
+  </defs>
+  <rect width="2500" height="843" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <line x1="833" y1="0" x2="833" y2="843" stroke="#d4c4a0" stroke-width="2"/>
+  <line x1="1667" y1="0" x2="1667" y2="843" stroke="#d4c4a0" stroke-width="2"/>
+
+  <!-- Cell 1: Todo -->
+  <g transform="translate(416,320)">
+    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#3a3020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 20 Q22 18 28 18 L52 18 Q58 18 60 20 L60 52 Q60 56 56 58 L24 58 Q20 58 18 54 Z"/>
+      <path d="M30 30 Q32 28 36 30 L36 42 Q34 44 30 42 Z"/>
+      <path d="M42 34 Q48 32 56 34"/><path d="M42 42 Q46 40 52 42"/>
+    </svg>
+  </g>
+  <text x="416" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#3a3020" text-anchor="middle">Todo</text>
+
+  <!-- Cell 2: โน้ต -->
+  <g transform="translate(1250,320)">
+    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#3a3020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 12 Q22 10 28 10 L52 10 Q58 10 60 12 L60 68 Q60 72 56 72 L24 72 Q20 72 18 68 Z"/>
+      <path d="M28 24 Q36 22 48 24"/><path d="M28 34 Q40 32 52 34"/><path d="M28 44 Q34 42 42 44"/>
+      <path d="M52 58 L58 52 L62 56 L56 62 L52 64 Z" stroke-width="2.5"/>
+    </svg>
+  </g>
+  <text x="1250" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#3a3020" text-anchor="middle">โน้ต</text>
+
+  <!-- Cell 3: ตั้งค่า -->
+  <g transform="translate(2083,320)">
+    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#3a3020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="40" cy="40" r="16"/><circle cx="40" cy="40" r="6"/>
+      <path d="M40 20 L40 24"/><path d="M40 56 L40 60"/><path d="M20 40 L24 40"/><path d="M56 40 L60 40"/>
+      <path d="M26 26 L29 29"/><path d="M51 51 L54 54"/><path d="M54 26 L51 29"/><path d="M29 51 L26 54"/>
+    </svg>
+  </g>
+  <text x="2083" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#3a3020" text-anchor="middle">ตั้งค่า</text>
+</svg>
