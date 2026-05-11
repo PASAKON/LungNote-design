@@ -1,0 +1,61 @@
+<svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="640" height="640" fill="#f5ead4"/>
+
+  <!-- Outer circle border — hand-drawn wobbly, 4px stroke -->
+  <path d="M320 40
+    Q460 38 540 120
+    Q608 195 604 320
+    Q608 445 540 520
+    Q460 602 320 600
+    Q180 602 100 520
+    Q32 445 36 320
+    Q32 195 100 120
+    Q180 38 320 40Z"
+    fill="none" stroke="#3a3020" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Second pass for sketch feel -->
+  <path d="M320 42
+    Q458 40 538 122
+    Q606 198 602 320
+    Q606 442 538 518
+    Q458 600 320 598
+    Q182 600 102 518
+    Q34 442 38 320
+    Q34 198 102 122
+    Q182 40 320 42Z"
+    fill="none" stroke="#3a3020" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Mascot centered — scaled up from 200x200 viewBox to fit ~380px -->
+  <g transform="translate(130, 140) scale(1.9)">
+    <!-- Square box — wobbly edges -->
+    <path d="M42 38 Q44 35 52 34 Q80 32 100 32 Q130 31 148 34 Q156 35 158 38 Q162 48 163 70 Q164 100 163 128 Q162 148 158 156 Q156 160 148 162 Q130 164 100 164 Q70 164 52 162 Q44 160 42 156 Q38 148 38 128 Q37 100 38 70 Q38 48 42 38Z" fill="none" stroke="#3a3020" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Second pass -->
+    <path d="M43 39 Q45 36 54 35 Q82 33 102 33 Q132 32 150 35 Q157 36 159 39 Q163 50 164 72 Q165 102 164 130 Q163 150 159 157 Q157 161 150 163 Q132 165 102 165 Q72 165 54 163 Q45 161 43 157 Q39 150 39 130 Q38 102 39 72 Q39 50 43 39Z" fill="none" stroke="#3a3020" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+
+    <!-- Tape -->
+    <path d="M54 30 Q56 26 64 24 Q80 22 100 22 Q120 22 136 24 Q144 26 146 30 Q148 34 148 38 Q146 44 144 46 Q136 48 120 48 Q100 48 80 48 Q64 46 56 44 Q54 42 54 38 Q54 34 54 30Z" fill="none" stroke="#3a3020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Tape lines -->
+    <path d="M68 30 Q70 26 72 34 Q74 42 72 46" fill="none" stroke="#3a3020" stroke-width="1" opacity="0.25"/>
+    <path d="M100 28 Q102 24 104 34 Q106 44 104 48" fill="none" stroke="#3a3020" stroke-width="1" opacity="0.25"/>
+    <path d="M132 30 Q134 26 136 34 Q138 42 136 46" fill="none" stroke="#3a3020" stroke-width="1" opacity="0.25"/>
+
+    <!-- Eyes -->
+    <circle cx="74" cy="78" r="12" fill="#3a3020"/>
+    <circle cx="126" cy="76" r="10" fill="#3a3020"/>
+
+    <!-- Check mark mouth -->
+    <path d="M76 114 Q78 116 80 118 Q84 122 90 128 Q94 126 100 118 Q108 108 118 98 Q122 94 126 92" fill="none" stroke="#3a3020" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Second pass -->
+    <path d="M77 115 Q80 118 84 122 Q88 126 91 129 Q95 125 102 116 Q112 104 120 96 Q124 92 127 91" fill="none" stroke="#3a3020" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+
+    <!-- Arms -->
+    <path d="M36 82 Q28 76 20 74 Q12 72 6 78 Q2 84 4 90" fill="none" stroke="#3a3020" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M2 86 Q4 82 8 84 Q10 88 6 92" fill="none" stroke="#3a3020" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M164 80 Q172 74 180 72 Q188 70 194 76 Q198 82 196 88" fill="none" stroke="#3a3020" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M198 84 Q196 80 192 82 Q190 86 194 90" fill="none" stroke="#3a3020" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Feet -->
+    <path d="M62 162 Q64 168 66 172 Q68 176 76 178 Q84 176 86 172 Q88 168 86 162" fill="none" stroke="#3a3020" stroke-width="3" stroke-linecap="round"/>
+    <path d="M114 162 Q116 168 118 172 Q120 176 128 178 Q136 176 138 172 Q140 168 138 162" fill="none" stroke="#3a3020" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

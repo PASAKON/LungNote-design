@@ -7,36 +7,49 @@
     </linearGradient>
   </defs>
   <rect width="2500" height="843" fill="url(#bg)"/>
-  <line x1="833" y1="0" x2="833" y2="843" stroke="#3d3828" stroke-width="2"/>
-  <line x1="1667" y1="0" x2="1667" y2="843" stroke="#3d3828" stroke-width="2"/>
+  <line x1="833" y1="60" x2="833" y2="783" stroke="#3d3828" stroke-width="2"/>
+  <line x1="1667" y1="60" x2="1667" y2="783" stroke="#3d3828" stroke-width="2"/>
 
   <!-- Cell 1: Todo -->
-  <g transform="translate(416,320)">
-    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#e8e2d0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 20 Q22 18 28 18 L52 18 Q58 18 60 20 L60 52 Q60 56 56 58 L24 58 Q20 58 18 54 Z"/>
-      <path d="M30 30 Q32 28 36 30 L36 42 Q34 44 30 42 Z"/>
-      <path d="M42 34 Q48 32 56 34"/><path d="M42 42 Q46 40 52 42"/>
-    </svg>
+  <g transform="translate(416,310)" fill="none" stroke="#e8e2d0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-90 -120 Q-86 -130 -70 -132 L70 -132 Q86 -130 90 -120 L90 120 Q86 130 70 132 L-70 132 Q-86 130 -90 120 Z"/>
+    <path d="M-40 -132 Q-38 -148 -20 -150 L20 -150 Q38 -148 40 -132"/>
+    <rect x="-60" y="-80" width="40" height="40" rx="6"/>
+    <path d="M-50 -58 L-40 -48 L-24 -68" stroke-width="8"/>
+    <path d="M0 -65 Q30 -70 60 -65"/>
+    <path d="M0 -45 Q20 -50 50 -45"/>
+    <rect x="-60" y="-10" width="40" height="40" rx="6"/>
+    <path d="M0 -5 Q30 -10 60 -5"/>
+    <path d="M0 15 Q20 10 50 15"/>
+    <rect x="-60" y="60" width="40" height="40" rx="6"/>
+    <path d="M-50 82 L-40 92 L-24 72" stroke-width="8"/>
+    <path d="M0 65 Q30 60 60 65"/>
   </g>
-  <text x="416" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">Todo</text>
+  <text x="416" y="560" font-family="'Caveat',cursive" font-size="80" font-weight="700" fill="#e8e2d0" text-anchor="middle">Todo</text>
 
-  <!-- Cell 2: โน้ต -->
-  <g transform="translate(1250,320)">
-    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#e8e2d0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 12 Q22 10 28 10 L52 10 Q58 10 60 12 L60 68 Q60 72 56 72 L24 72 Q20 72 18 68 Z"/>
-      <path d="M28 24 Q36 22 48 24"/><path d="M28 34 Q40 32 52 34"/><path d="M28 44 Q34 42 42 44"/>
-      <path d="M52 58 L58 52 L62 56 L56 62 L52 64 Z" stroke-width="2.5"/>
-    </svg>
+  <!-- Cell 2: ภาพรวม -->
+  <g transform="translate(1250,310)" fill="none" stroke="#e8e2d0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-100" y="-110" width="85" height="85" rx="10"/>
+    <rect x="15" y="-110" width="85" height="85" rx="10"/>
+    <rect x="-100" y="5" width="85" height="85" rx="10"/>
+    <rect x="15" y="5" width="85" height="85" rx="10"/>
+    <path d="M-65 -70 L-65 -40" stroke-width="8"/>
+    <path d="M-80 -55 L-50 -55" stroke-width="8"/>
+    <circle cx="57" cy="-67" r="18" stroke-width="7"/>
+    <path d="M-60 45 L-60 70 L-40 70" stroke-width="7"/>
+    <path d="M55 25 L55 70" stroke-width="7"/>
+    <path d="M40 55 L70 55" stroke-width="7"/>
   </g>
-  <text x="1250" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">โน้ต</text>
+  <text x="1250" y="560" font-family="'Caveat',cursive" font-size="80" font-weight="700" fill="#e8e2d0" text-anchor="middle">ภาพรวม</text>
 
   <!-- Cell 3: ตั้งค่า -->
-  <g transform="translate(2083,320)">
-    <svg viewBox="0 0 80 80" width="160" height="160" x="-80" y="-80" fill="none" stroke="#e8e2d0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="40" cy="40" r="16"/><circle cx="40" cy="40" r="6"/>
-      <path d="M40 20 L40 24"/><path d="M40 56 L40 60"/><path d="M20 40 L24 40"/><path d="M56 40 L60 40"/>
-      <path d="M26 26 L29 29"/><path d="M51 51 L54 54"/><path d="M54 26 L51 29"/><path d="M29 51 L26 54"/>
-    </svg>
+  <g transform="translate(2083,310)" fill="none" stroke="#e8e2d0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="0" cy="0" r="55"/>
+    <circle cx="0" cy="0" r="22"/>
+    <line x1="0" y1="-72" x2="0" y2="-55"/><line x1="0" y1="55" x2="0" y2="72"/>
+    <line x1="-72" y1="0" x2="-55" y2="0"/><line x1="55" y1="0" x2="72" y2="0"/>
+    <line x1="-51" y1="-51" x2="-39" y2="-39"/><line x1="39" y1="39" x2="51" y2="51"/>
+    <line x1="51" y1="-51" x2="39" y2="-39"/><line x1="-39" y1="39" x2="-51" y2="51"/>
   </g>
-  <text x="2083" y="520" font-family="'Caveat',cursive" font-size="64" font-weight="700" fill="#e8e2d0" text-anchor="middle">ตั้งค่า</text>
+  <text x="2083" y="560" font-family="'Caveat',cursive" font-size="80" font-weight="700" fill="#e8e2d0" text-anchor="middle">ตั้งค่า</text>
 </svg>
