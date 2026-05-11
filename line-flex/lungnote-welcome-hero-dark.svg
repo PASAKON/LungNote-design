@@ -1,0 +1,57 @@
+<svg viewBox="0 0 1040 585" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d3420"/>
+      <stop offset="50%" stop-color="#4a3c20"/>
+      <stop offset="100%" stop-color="#5a4a28"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1040" height="585" fill="url(#bg)" rx="0"/>
+
+  <!-- Subtle texture lines -->
+  <path d="M0 120 Q260 100 520 120 T1040 110" fill="none" stroke="#8a7850" stroke-width="1" opacity="0.15"/>
+  <path d="M0 240 Q260 220 520 245 T1040 230" fill="none" stroke="#8a7850" stroke-width="1" opacity="0.12"/>
+  <path d="M0 360 Q260 345 520 365 T1040 350" fill="none" stroke="#8a7850" stroke-width="1" opacity="0.1"/>
+  <path d="M0 480 Q260 465 520 485 T1040 470" fill="none" stroke="#8a7850" stroke-width="1" opacity="0.08"/>
+
+  <!-- Mascot (centered, big) -->
+  <g transform="translate(520, 220) scale(2.2)" fill="none" stroke="#c9a040" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Box body -->
+    <path d="M-58 -62 Q-56 -66 -48 -68 Q0 -72 48 -68 Q56 -66 58 -62 Q63 -30 63 28 Q58 56 48 62 Q0 64 -48 62 Q-58 56 -62 28 Q-62 -30 -58 -62Z"/>
+    <!-- Tape/flap -->
+    <path d="M-46 -70 Q-44 -76 -36 -78 Q0 -82 36 -78 Q44 -76 46 -70 Q48 -62 46 -56 Q36 -52 0 -52 Q-36 -54 -46 -58 Q-46 -64 -46 -70Z" stroke-width="2.5"/>
+    <!-- Eyes -->
+    <circle cx="-26" cy="-22" r="12" fill="#c9a040" stroke="none"/>
+    <circle cx="26" cy="-24" r="10" fill="#c9a040" stroke="none"/>
+    <!-- Check mouth -->
+    <path d="M-24 14 Q-10 28 -10 28 Q0 18 26 -8" stroke-width="5"/>
+    <!-- Arms -->
+    <path d="M-64 -18 Q-80 -28 -94 -18"/>
+    <path d="M64 -20 Q80 -30 94 -20"/>
+    <!-- Feet -->
+    <path d="M-38 62 Q-32 72 -24 78 Q-16 72 -14 62"/>
+    <path d="M14 62 Q20 72 28 78 Q36 72 38 62"/>
+  </g>
+
+  <!-- Small doodle elements -->
+  <g fill="none" stroke="#c9a040" stroke-width="2" opacity="0.2" stroke-linecap="round">
+    <path d="M150 100 L155 85 L160 100 L175 95 L163 105 L170 118 L157 112 L152 125 L148 112 L135 118 L143 105 L130 95 Z"/>
+    <path d="M880 130 L884 118 L888 130 L900 126 L891 134 L896 144 L886 139 L883 150 L880 139 L870 144 L876 134 L865 126 Z"/>
+  </g>
+  <circle cx="180" cy="380" r="8" fill="none" stroke="#c9a040" stroke-width="2" opacity="0.15"/>
+  <circle cx="860" cy="350" r="12" fill="none" stroke="#c9a040" stroke-width="2" opacity="0.12"/>
+  <circle cx="120" cy="250" r="6" fill="none" stroke="#c9a040" stroke-width="1.5" opacity="0.15"/>
+  <path d="M900 200 L908 208 L920 192" fill="none" stroke="#c9a040" stroke-width="2.5" opacity="0.18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M140 450 L146 456 L156 442" fill="none" stroke="#c9a040" stroke-width="2" opacity="0.15" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wavy underline -->
+  <path d="M320 440 Q370 430 420 440 T520 440 T620 440 T720 440" fill="none" stroke="#c9a040" stroke-width="2" opacity="0.12"/>
+
+  <!-- LungNote text -->
+  <text x="520" y="490" font-family="'Caveat', cursive" font-size="64" font-weight="700" fill="#c9a040" text-anchor="middle" opacity="0.9">LungNote</text>
+
+  <!-- Tagline -->
+  <text x="520" y="540" font-family="'Sarabun', sans-serif" font-size="28" fill="#8a7850" text-anchor="middle" opacity="0.7">จดทุกอย่าง ด้วยลายมือของคุณ</text>
+</svg>

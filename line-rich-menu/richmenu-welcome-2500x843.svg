@@ -7,23 +7,19 @@
     </linearGradient>
   </defs>
   <rect width="2500" height="843" fill="url(#bg)"/>
-
   <!-- Mascot -->
-  <g transform="translate(950,421)">
-    <svg viewBox="0 0 200 200" width="240" height="240" x="-120" y="-120" fill="none" stroke="#3a3020" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M42 38 Q44 35 52 34 Q100 32 148 34 Q156 35 158 38 Q163 70 163 128 Q158 156 148 162 Q100 164 52 162 Q42 156 38 128 Q38 70 42 38Z"/>
-      <path d="M54 30 Q56 26 64 24 Q100 22 136 24 Q144 26 146 30 Q148 38 146 44 Q136 48 100 48 Q64 46 54 42 Q54 38 54 30Z" stroke-width="2.5"/>
-      <circle cx="74" cy="78" r="12" fill="#3a3020" stroke="none"/>
-      <circle cx="126" cy="76" r="10" fill="#3a3020" stroke="none"/>
-      <path d="M76 114 Q90 128 90 128 Q100 118 126 92" stroke-width="5"/>
-      <path d="M36 82 Q20 72 6 82"/>
-      <path d="M164 80 Q180 70 194 80"/>
-      <path d="M62 162 Q68 172 76 178 Q84 172 86 162"/>
-      <path d="M114 162 Q120 172 128 178 Q136 172 138 162"/>
-    </svg>
+  <g transform="translate(950,421) scale(2.8)" fill="none" stroke="#3a3020" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-58 -62 Q-56 -66 -48 -68 Q0 -72 48 -68 Q56 -66 58 -62 Q63 -30 63 28 Q58 56 48 62 Q0 64 -48 62 Q-58 56 -62 28 Q-62 -30 -58 -62Z"/>
+    <path d="M-46 -70 Q-44 -76 -36 -78 Q0 -82 36 -78 Q44 -76 46 -70 Q48 -62 46 -56 Q36 -52 0 -52 Q-36 -54 -46 -58 Q-46 -64 -46 -70Z" stroke-width="2.5"/>
+    <circle cx="-26" cy="-22" r="12" fill="#3a3020" stroke="none"/>
+    <circle cx="26" cy="-24" r="10" fill="#3a3020" stroke="none"/>
+    <path d="M-24 14 Q-10 28 -10 28 Q0 18 26 -8" stroke-width="5"/>
+    <path d="M-64 -18 Q-80 -28 -94 -18"/><path d="M64 -20 Q80 -30 94 -20"/>
+    <path d="M-38 62 Q-32 72 -24 78 Q-16 72 -14 62"/>
+    <path d="M14 62 Q20 72 28 78 Q36 72 38 62"/>
   </g>
-
   <!-- Text -->
-  <text x="1380" y="380" font-family="'Caveat',cursive" font-size="96" font-weight="700" fill="#3a3020">จดเลย →</text>
-  <text x="1380" y="480" font-family="'Sarabun',sans-serif" font-size="44" fill="rgba(58,48,32,0.6)">เริ่มต้นใช้ LungNote ฟรี</text>
+  <text x="1450" y="380" font-family="'Caveat',cursive" font-size="140" font-weight="700" fill="#3a3020">จดเลย</text>
+  <text x="1900" y="380" font-family="'Caveat',cursive" font-size="140" font-weight="700" fill="#3a3020">&#x2192;</text>
+  <text x="1450" y="500" font-family="'Sarabun',sans-serif" font-size="56" fill="rgba(58,48,32,.55)">เริ่มต้นใช้ LungNote ฟรี</text>
 </svg>
